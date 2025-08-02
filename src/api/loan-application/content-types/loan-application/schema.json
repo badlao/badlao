@@ -1,0 +1,124 @@
+{
+  "kind": "collectionType",
+  "collectionName": "loan_applications",
+  "info": {
+    "singularName": "loan-application",
+    "pluralName": "loan-applications",
+    "displayName": "Loan Application"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "applicant_name": {
+      "type": "string"
+    },
+    "father_or_husband_name": {
+      "type": "string"
+    },
+    "national_id": {
+      "type": "string",
+      "required": true
+    },
+    "birth_date": {
+      "type": "date"
+    },
+    "mobile_number": {
+      "type": "string",
+      "maxLength": 13,
+      "required": true
+    },
+    "marital_status": {
+      "type": "enumeration",
+      "required": true,
+      "enum": [
+        "single",
+        "married",
+        "widow"
+      ]
+    },
+    "gender": {
+      "type": "enumeration",
+      "enum": [
+        "male",
+        "female",
+        "other"
+      ]
+    },
+    "permanent_address": {
+      "type": "text"
+    },
+    "present_address": {
+      "type": "text"
+    },
+    "education_level": {
+      "type": "enumeration",
+      "enum": [
+        "Primary",
+        "Secondary",
+        "HSC",
+        "Honors"
+      ]
+    },
+    "monthly_income": {
+      "type": "integer",
+      "required": true
+    },
+    "loan_amount_requested": {
+      "type": "integer",
+      "required": true
+    },
+    "loan_purpose": {
+      "type": "enumeration",
+      "conditions": {
+        "visible": {
+          "==": [
+            {
+              "var": ""
+            },
+            ""
+          ]
+        }
+      },
+      "required": true,
+      "enum": [
+        "Agriculture",
+        "Business",
+        "Other"
+      ]
+    },
+    "number_of_dependents": {
+      "type": "integer"
+    },
+    "occupation": {
+      "type": "string"
+    },
+    "applicant_photo": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "national_id_scan": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "installments": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::installment.installment",
+      "mappedBy": "loan_application"
+    }
+  }
+}

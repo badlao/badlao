@@ -2,7 +2,7 @@ import path from 'path';
 
 export default ({ env }) => {
   const client = env('DATABASE_CLIENT', 'sqlite');
-
+  console.log('Loaded DATABASE_CLIENT:', env('DATABASE_CLIENT'));
   const connections = {
     mysql: {
       connection: {
@@ -12,15 +12,15 @@ export default ({ env }) => {
         user: env('DATABASE_USERNAME', 'strapi'),
         password: env('DATABASE_PASSWORD', 'strapi'),
         ssl: env.bool('DATABASE_SSL', false) && {
-          key: env('DATABASE_SSL_KEY', undefined),
-          cert: env('DATABASE_SSL_CERT', undefined),
-          ca: env('DATABASE_SSL_CA', undefined),
-          capath: env('DATABASE_SSL_CAPATH', undefined),
-          cipher: env('DATABASE_SSL_CIPHER', undefined),
+          key: env('DATABASE_SSL_KEY'),
+          cert: env('DATABASE_SSL_CERT'),
+          ca: env('DATABASE_SSL_CA'),
+          capath: env('DATABASE_SSL_CAPATH'),
+          cipher: env('DATABASE_SSL_CIPHER'),
           rejectUnauthorized: env.bool('DATABASE_SSL_REJECT_UNAUTHORIZED', true),
         },
       },
-      pool: { min: env.int('DATABASE_POOL_MIN', 2), max: env.int('DATABASE_POOL_MAX', 10) },
+      pool: { min: 2, max: 10 },
     },
     postgres: {
       connection: {
@@ -31,16 +31,11 @@ export default ({ env }) => {
         user: env('DATABASE_USERNAME', 'strapi'),
         password: env('DATABASE_PASSWORD', 'strapi'),
         ssl: env.bool('DATABASE_SSL', false) && {
-          key: env('DATABASE_SSL_KEY', undefined),
-          cert: env('DATABASE_SSL_CERT', undefined),
-          ca: env('DATABASE_SSL_CA', undefined),
-          capath: env('DATABASE_SSL_CAPATH', undefined),
-          cipher: env('DATABASE_SSL_CIPHER', undefined),
           rejectUnauthorized: env.bool('DATABASE_SSL_REJECT_UNAUTHORIZED', true),
         },
         schema: env('DATABASE_SCHEMA', 'public'),
       },
-      pool: { min: env.int('DATABASE_POOL_MIN', 2), max: env.int('DATABASE_POOL_MAX', 10) },
+      pool: { min: 2, max: 10 },
     },
     sqlite: {
       connection: {
@@ -50,6 +45,11 @@ export default ({ env }) => {
     },
   };
 
+  if (!connections[client]) {
+    throw new Error(`Unsupported database client: ${client}`);
+  }
+  console.log('Using DB client:', client);
+  console.log('Resolved config:', connections[client]);
   return {
     connection: {
       client,

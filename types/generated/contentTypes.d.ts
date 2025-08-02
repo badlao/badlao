@@ -538,6 +538,110 @@ export interface ApiGlobalGlobal extends Struct.SingleTypeSchema {
   };
 }
 
+export interface ApiInstallmentInstallment extends Struct.CollectionTypeSchema {
+  collectionName: 'installments';
+  info: {
+    displayName: 'Installment';
+    pluralName: 'installments';
+    singularName: 'installment';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    amount_due: Schema.Attribute.BigInteger;
+    amount_paid: Schema.Attribute.Integer & Schema.Attribute.Required;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    is_final_payment: Schema.Attribute.Boolean &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<false>;
+    loan_application: Schema.Attribute.Relation<
+      'manyToOne',
+      'api::loan-application.loan-application'
+    >;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::installment.installment'
+    > &
+      Schema.Attribute.Private;
+    payment_date: Schema.Attribute.Date;
+    payment_status: Schema.Attribute.Enumeration<['Paid', 'Late', 'Pending']>;
+    publishedAt: Schema.Attribute.DateTime;
+    remarks: Schema.Attribute.Text;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiLoanApplicationLoanApplication
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'loan_applications';
+  info: {
+    displayName: 'Loan Application';
+    pluralName: 'loan-applications';
+    singularName: 'loan-application';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    applicant_name: Schema.Attribute.String;
+    applicant_photo: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
+    birth_date: Schema.Attribute.Date;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    education_level: Schema.Attribute.Enumeration<
+      ['Primary', 'Secondary', 'HSC', 'Honors']
+    >;
+    father_or_husband_name: Schema.Attribute.String;
+    gender: Schema.Attribute.Enumeration<['male', 'female', 'other']>;
+    installments: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::installment.installment'
+    >;
+    loan_amount_requested: Schema.Attribute.Integer & Schema.Attribute.Required;
+    loan_purpose: Schema.Attribute.Enumeration<
+      ['Agriculture', 'Business', 'Other']
+    > &
+      Schema.Attribute.Required;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::loan-application.loan-application'
+    > &
+      Schema.Attribute.Private;
+    marital_status: Schema.Attribute.Enumeration<
+      ['single', 'married', 'widow']
+    > &
+      Schema.Attribute.Required;
+    mobile_number: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 13;
+      }>;
+    monthly_income: Schema.Attribute.Integer & Schema.Attribute.Required;
+    national_id: Schema.Attribute.String & Schema.Attribute.Required;
+    national_id_scan: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
+    number_of_dependents: Schema.Attribute.Integer;
+    occupation: Schema.Attribute.String;
+    permanent_address: Schema.Attribute.Text;
+    present_address: Schema.Attribute.Text;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface PluginContentReleasesRelease
   extends Struct.CollectionTypeSchema {
   collectionName: 'strapi_releases';
@@ -1052,6 +1156,8 @@ declare module '@strapi/strapi' {
       'api::author.author': ApiAuthorAuthor;
       'api::category.category': ApiCategoryCategory;
       'api::global.global': ApiGlobalGlobal;
+      'api::installment.installment': ApiInstallmentInstallment;
+      'api::loan-application.loan-application': ApiLoanApplicationLoanApplication;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;

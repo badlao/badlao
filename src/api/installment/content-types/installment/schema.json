@@ -1,0 +1,59 @@
+{
+  "kind": "collectionType",
+  "collectionName": "installments",
+  "info": {
+    "singularName": "installment",
+    "pluralName": "installments",
+    "displayName": "Installment"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "amount_paid": {
+      "type": "integer",
+      "required": true
+    },
+    "remarks": {
+      "type": "text"
+    },
+    "amount_due": {
+      "type": "biginteger",
+      "required": false,
+      "unique": false
+    },
+    "payment_date": {
+      "type": "date"
+    },
+    "payment_status": {
+      "type": "enumeration",
+      "enum": [
+        "Paid",
+        "Late",
+        "Pending"
+      ]
+    },
+    "is_final_payment": {
+      "type": "boolean",
+      "conditions": {
+        "visible": {
+          "==": [
+            {
+              "var": ""
+            },
+            ""
+          ]
+        }
+      },
+      "required": true,
+      "default": false
+    },
+    "loan_application": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::loan-application.loan-application",
+      "inversedBy": "installments"
+    }
+  }
+}
