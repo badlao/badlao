@@ -541,22 +541,20 @@ export interface ApiGlobalGlobal extends Struct.SingleTypeSchema {
 export interface ApiInstallmentInstallment extends Struct.CollectionTypeSchema {
   collectionName: 'installments';
   info: {
+    description: '';
     displayName: 'Installment';
     pluralName: 'installments';
     singularName: 'installment';
   };
   options: {
-    draftAndPublish: true;
+    draftAndPublish: false;
   };
   attributes: {
-    amount_due: Schema.Attribute.BigInteger;
-    amount_paid: Schema.Attribute.Integer & Schema.Attribute.Required;
+    amount_due: Schema.Attribute.Integer;
+    amount_paid: Schema.Attribute.Integer;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    is_final_payment: Schema.Attribute.Boolean &
-      Schema.Attribute.Required &
-      Schema.Attribute.DefaultTo<false>;
     loan_application: Schema.Attribute.Relation<
       'manyToOne',
       'api::loan-application.loan-application'
@@ -568,7 +566,9 @@ export interface ApiInstallmentInstallment extends Struct.CollectionTypeSchema {
     > &
       Schema.Attribute.Private;
     payment_date: Schema.Attribute.Date;
-    payment_status: Schema.Attribute.Enumeration<['Paid', 'Late', 'Pending']>;
+    payment_status: Schema.Attribute.Enumeration<
+      ['paid', 'pending', 'late', 'skipped']
+    >;
     publishedAt: Schema.Attribute.DateTime;
     remarks: Schema.Attribute.Text;
     updatedAt: Schema.Attribute.DateTime;
@@ -581,36 +581,47 @@ export interface ApiLoanApplicationLoanApplication
   extends Struct.CollectionTypeSchema {
   collectionName: 'loan_applications';
   info: {
+    description: '';
     displayName: 'Loan Application';
     pluralName: 'loan-applications';
     singularName: 'loan-application';
   };
   options: {
-    draftAndPublish: true;
+    draftAndPublish: false;
   };
   attributes: {
+    age: Schema.Attribute.Integer;
     applicant_name: Schema.Attribute.String;
-    applicant_photo: Schema.Attribute.Media<
-      'images' | 'files' | 'videos' | 'audios'
-    >;
-    birth_date: Schema.Attribute.Date;
+    applicant_photo: Schema.Attribute.Media;
+    application_date: Schema.Attribute.Date;
+    bank_account_number: Schema.Attribute.String;
+    bank_account_title: Schema.Attribute.String;
+    bank_branch: Schema.Attribute.String;
+    bank_name: Schema.Attribute.String;
+    bkash_account_number: Schema.Attribute.String;
+    business_type: Schema.Attribute.Enumeration<['new', 'old']>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    current_address: Schema.Attribute.Text;
     education_level: Schema.Attribute.Enumeration<
-      ['Primary', 'Secondary', 'HSC', 'Honors']
+      ['primary', 'secondary', 'hsc', 'graduate', 'postgraduate', 'none']
     >;
-    father_or_husband_name: Schema.Attribute.String;
+    father_or_spouse_name: Schema.Attribute.String;
     gender: Schema.Attribute.Enumeration<['male', 'female', 'other']>;
+    guarantor_document: Schema.Attribute.Media;
+    has_bank_account: Schema.Attribute.Boolean;
+    has_bkash_account: Schema.Attribute.Boolean;
+    installment_amount: Schema.Attribute.Integer;
+    installment_type: Schema.Attribute.Enumeration<['weekly', 'monthly']>;
     installments: Schema.Attribute.Relation<
       'oneToMany',
       'api::installment.installment'
     >;
-    loan_amount_requested: Schema.Attribute.Integer & Schema.Attribute.Required;
-    loan_purpose: Schema.Attribute.Enumeration<
-      ['Agriculture', 'Business', 'Other']
-    > &
-      Schema.Attribute.Required;
+    loan_amount_requested: Schema.Attribute.Integer;
+    loan_duration_days: Schema.Attribute.Integer;
+    loan_generation: Schema.Attribute.Integer;
+    loan_purpose: Schema.Attribute.Text;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -619,26 +630,25 @@ export interface ApiLoanApplicationLoanApplication
       Schema.Attribute.Private;
     marital_status: Schema.Attribute.Enumeration<
       ['single', 'married', 'widow']
-    > &
-      Schema.Attribute.Required;
-    mobile_number: Schema.Attribute.String &
-      Schema.Attribute.Required &
-      Schema.Attribute.SetMinMaxLength<{
-        maxLength: 13;
-      }>;
-    monthly_income: Schema.Attribute.Integer & Schema.Attribute.Required;
-    national_id: Schema.Attribute.String & Schema.Attribute.Required;
-    national_id_scan: Schema.Attribute.Media<
-      'images' | 'files' | 'videos' | 'audios'
     >;
-    number_of_dependents: Schema.Attribute.Integer;
-    occupation: Schema.Attribute.String;
+    mother_name: Schema.Attribute.String;
+    national_id: Schema.Attribute.String;
     permanent_address: Schema.Attribute.Text;
-    present_address: Schema.Attribute.Text;
+    phone_number: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
+    social_evaluation: Schema.Attribute.Component<
+      'shared.social-evaluation',
+      false
+    >;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    user_name: Schema.Attribute.String;
+    user_nid: Schema.Attribute.String;
+    user_nid_photo: Schema.Attribute.Media;
+    user_of_loan: Schema.Attribute.Enumeration<
+      ['self', 'spouse', 'child', 'other']
+    >;
   };
 }
 

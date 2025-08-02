@@ -62,6 +62,37 @@ export interface SharedSlider extends Struct.ComponentSchema {
   };
 }
 
+export interface SharedSocialEvaluation extends Struct.ComponentSchema {
+  collectionName: 'components_shared_social_evaluations';
+  info: {
+    displayName: 'Social Evaluation';
+    icon: 'walk';
+  };
+  attributes: {
+    disease_details: Schema.Attribute.Text;
+    earners_in_family: Schema.Attribute.Integer;
+    education_cost: Schema.Attribute.Integer;
+    female_members: Schema.Attribute.Integer;
+    financial_behavior_rating: Schema.Attribute.Enumeration<
+      ['good', 'average', 'bad']
+    >;
+    food_cost: Schema.Attribute.Integer;
+    has_chronic_disease: Schema.Attribute.Boolean;
+    has_legal_or_social_problem: Schema.Attribute.Boolean;
+    has_other_loan: Schema.Attribute.Boolean;
+    house_rent: Schema.Attribute.Integer;
+    house_type: Schema.Attribute.Enumeration<['own', 'rented']>;
+    main_income_source: Schema.Attribute.Enumeration<['job', 'business']>;
+    male_members: Schema.Attribute.Integer;
+    medical_cost: Schema.Attribute.Integer;
+    monthly_income: Schema.Attribute.Integer;
+    other_cost: Schema.Attribute.Integer;
+    total_expense: Schema.Attribute.Integer;
+    total_family_members: Schema.Attribute.Integer;
+    utility_bill: Schema.Attribute.Integer;
+  };
+}
+
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
@@ -70,6 +101,7 @@ declare module '@strapi/strapi' {
       'shared.rich-text': SharedRichText;
       'shared.seo': SharedSeo;
       'shared.slider': SharedSlider;
+      'shared.social-evaluation': SharedSocialEvaluation;
     }
   }
 }

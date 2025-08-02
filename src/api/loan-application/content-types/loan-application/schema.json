@@ -4,38 +4,47 @@
   "info": {
     "singularName": "loan-application",
     "pluralName": "loan-applications",
-    "displayName": "Loan Application"
+    "displayName": "Loan Application",
+    "description": ""
   },
   "options": {
-    "draftAndPublish": true
+    "draftAndPublish": false
   },
   "pluginOptions": {},
   "attributes": {
     "applicant_name": {
       "type": "string"
     },
-    "father_or_husband_name": {
+    "mother_name": {
       "type": "string"
     },
+    "father_or_spouse_name": {
+      "type": "string"
+    },
+    "current_address": {
+      "type": "text"
+    },
+    "permanent_address": {
+      "type": "text"
+    },
     "national_id": {
-      "type": "string",
-      "required": true
+      "type": "string"
     },
-    "birth_date": {
-      "type": "date"
+    "phone_number": {
+      "type": "string"
     },
-    "mobile_number": {
-      "type": "string",
-      "maxLength": 13,
-      "required": true
+    "age": {
+      "type": "integer"
     },
-    "marital_status": {
+    "education_level": {
       "type": "enumeration",
-      "required": true,
       "enum": [
-        "single",
-        "married",
-        "widow"
+        "primary",
+        "secondary",
+        "hsc",
+        "graduate",
+        "postgraduate",
+        "none"
       ]
     },
     "gender": {
@@ -46,79 +55,107 @@
         "other"
       ]
     },
-    "permanent_address": {
-      "type": "text"
-    },
-    "present_address": {
-      "type": "text"
-    },
-    "education_level": {
+    "marital_status": {
       "type": "enumeration",
       "enum": [
-        "Primary",
-        "Secondary",
-        "HSC",
-        "Honors"
+        "single",
+        "married",
+        "widow"
       ]
-    },
-    "monthly_income": {
-      "type": "integer",
-      "required": true
-    },
-    "loan_amount_requested": {
-      "type": "integer",
-      "required": true
     },
     "loan_purpose": {
-      "type": "enumeration",
-      "conditions": {
-        "visible": {
-          "==": [
-            {
-              "var": ""
-            },
-            ""
-          ]
-        }
-      },
-      "required": true,
-      "enum": [
-        "Agriculture",
-        "Business",
-        "Other"
-      ]
+      "type": "text"
     },
-    "number_of_dependents": {
+    "loan_generation": {
       "type": "integer"
     },
-    "occupation": {
+    "user_of_loan": {
+      "type": "enumeration",
+      "enum": [
+        "self",
+        "spouse",
+        "child",
+        "other"
+      ]
+    },
+    "business_type": {
+      "type": "enumeration",
+      "enum": [
+        "new",
+        "old"
+      ]
+    },
+    "user_name": {
       "type": "string"
+    },
+    "user_nid": {
+      "type": "string"
+    },
+    "loan_amount_requested": {
+      "type": "integer"
+    },
+    "loan_duration_days": {
+      "type": "integer"
+    },
+    "installment_type": {
+      "type": "enumeration",
+      "enum": [
+        "weekly",
+        "monthly"
+      ]
+    },
+    "installment_amount": {
+      "type": "integer"
+    },
+    "has_bkash_account": {
+      "type": "boolean"
+    },
+    "bkash_account_number": {
+      "type": "string"
+    },
+    "has_bank_account": {
+      "type": "boolean"
+    },
+    "bank_name": {
+      "type": "string"
+    },
+    "bank_branch": {
+      "type": "string"
+    },
+    "bank_account_title": {
+      "type": "string"
+    },
+    "bank_account_number": {
+      "type": "string"
+    },
+    "application_date": {
+      "type": "date"
     },
     "applicant_photo": {
       "type": "media",
       "multiple": false,
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ]
+      "required": false
     },
-    "national_id_scan": {
+    "user_nid_photo": {
       "type": "media",
       "multiple": false,
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ]
+      "required": false
+    },
+    "guarantor_document": {
+      "type": "media",
+      "multiple": false,
+      "required": false
     },
     "installments": {
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::installment.installment",
       "mappedBy": "loan_application"
+    },
+    "social_evaluation": {
+      "type": "component",
+      "component": "shared.social-evaluation",
+      "repeatable": false
     }
   }
 }

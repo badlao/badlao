@@ -1,0 +1,81 @@
+{
+  "collectionName": "components_shared_social_evaluations",
+  "info": {
+    "displayName": "Social Evaluation",
+    "icon": "walk"
+  },
+  "options": {},
+  "attributes": {
+    "house_type": {
+      "type": "enumeration",
+      "enum": [
+        "own",
+        "rented"
+      ]
+    },
+    "house_rent": {
+      "type": "integer"
+    },
+    "has_other_loan": {
+      "type": "boolean"
+    },
+    "total_family_members": {
+      "type": "integer"
+    },
+    "male_members": {
+      "type": "integer"
+    },
+    "female_members": {
+      "type": "integer"
+    },
+    "main_income_source": {
+      "type": "enumeration",
+      "enum": [
+        "job",
+        "business"
+      ]
+    },
+    "earners_in_family": {
+      "type": "integer"
+    },
+    "monthly_income": {
+      "type": "integer"
+    },
+    "utility_bill": {
+      "type": "integer"
+    },
+    "food_cost": {
+      "type": "integer"
+    },
+    "education_cost": {
+      "type": "integer"
+    },
+    "medical_cost": {
+      "type": "integer"
+    },
+    "other_cost": {
+      "type": "integer"
+    },
+    "total_expense": {
+      "type": "integer"
+    },
+    "has_chronic_disease": {
+      "type": "boolean"
+    },
+    "disease_details": {
+      "type": "text"
+    },
+    "has_legal_or_social_problem": {
+      "type": "boolean"
+    },
+    "financial_behavior_rating": {
+      "type": "enumeration",
+      "enum": [
+        "good",
+        "average",
+        "bad"
+      ]
+    }
+  },
+  "config": {}
+}
