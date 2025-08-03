@@ -474,6 +474,339 @@ export interface ApiAuthorAuthor extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiBusinessValuationBusinessValuation
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'business_valuations';
+  info: {
+    displayName: 'Business Valuation';
+    pluralName: 'business-valuations';
+    singularName: 'business-valuation';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    accountsReceivable: Schema.Attribute.Decimal &
+      Schema.Attribute.SetMinMax<
+        {
+          min: 0;
+        },
+        number
+      >;
+    adjustedBookValue: Schema.Attribute.Decimal;
+    annualRevenue: Schema.Attribute.Decimal &
+      Schema.Attribute.SetMinMax<
+        {
+          min: 0;
+        },
+        number
+      >;
+    assetApproachUsed: Schema.Attribute.Boolean &
+      Schema.Attribute.DefaultTo<false>;
+    assumptionsAndLimitations: Schema.Attribute.Text;
+    bookValue: Schema.Attribute.Decimal;
+    brandStrength: Schema.Attribute.Enumeration<
+      ['very_strong', 'strong', 'moderate', 'weak', 'very_weak']
+    >;
+    businessAddress: Schema.Attribute.Text;
+    businessRegistrationNumber: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 100;
+      }>;
+    businessStrengths: Schema.Attribute.Text;
+    businessType: Schema.Attribute.Enumeration<
+      [
+        'sole_proprietorship',
+        'partnership',
+        'corporation',
+        'llc',
+        'cooperative',
+      ]
+    > &
+      Schema.Attribute.Required;
+    businessWeaknesses: Schema.Attribute.Text;
+    capitalizationRate: Schema.Attribute.Decimal &
+      Schema.Attribute.SetMinMax<
+        {
+          max: 100;
+          min: 0;
+        },
+        number
+      >;
+    capitalizedEarnings: Schema.Attribute.Decimal;
+    cashAndEquivalents: Schema.Attribute.Decimal &
+      Schema.Attribute.SetMinMax<
+        {
+          min: 0;
+        },
+        number
+      >;
+    clientNotes: Schema.Attribute.Text;
+    companyName: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 255;
+      }>;
+    companySpecificRisk: Schema.Attribute.Enumeration<
+      ['low', 'moderate', 'high', 'very_high']
+    >;
+    comparableCompanyMultiple: Schema.Attribute.Decimal;
+    competitiveAdvantages: Schema.Attribute.Text;
+    competitivePosition: Schema.Attribute.Enumeration<
+      ['market_leader', 'strong_competitor', 'average', 'weak', 'struggling']
+    >;
+    contactEmail: Schema.Attribute.Email;
+    contactPerson: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 255;
+      }>;
+    contactPhone: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 20;
+      }>;
+    controlPremium: Schema.Attribute.Decimal &
+      Schema.Attribute.SetMinMax<
+        {
+          max: 100;
+          min: 0;
+        },
+        number
+      >;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    customerBase: Schema.Attribute.Enumeration<
+      [
+        'highly_diversified',
+        'moderately_diversified',
+        'concentrated',
+        'very_concentrated',
+      ]
+    >;
+    customerDependency: Schema.Attribute.Text;
+    customerRelationships: Schema.Attribute.Enumeration<
+      ['excellent', 'good', 'average', 'below_average', 'poor']
+    >;
+    dataReliability: Schema.Attribute.Enumeration<
+      ['high', 'moderate', 'low', 'very_low']
+    >;
+    discountedCashFlow: Schema.Attribute.Decimal;
+    discountRate: Schema.Attribute.Decimal &
+      Schema.Attribute.SetMinMax<
+        {
+          max: 100;
+          min: 0;
+        },
+        number
+      >;
+    ebitda: Schema.Attribute.Decimal;
+    establishedDate: Schema.Attribute.Date;
+    evEbitdaRatio: Schema.Attribute.Decimal;
+    finalValuationConclusion: Schema.Attribute.Decimal &
+      Schema.Attribute.Required;
+    financialRisk: Schema.Attribute.Enumeration<
+      ['low', 'moderate', 'high', 'very_high']
+    >;
+    financialStatements: Schema.Attribute.Media<'files', true>;
+    fixedAssets: Schema.Attribute.Decimal &
+      Schema.Attribute.SetMinMax<
+        {
+          min: 0;
+        },
+        number
+      >;
+    futureProspects: Schema.Attribute.Text;
+    goodwill: Schema.Attribute.Decimal &
+      Schema.Attribute.SetMinMax<
+        {
+          min: 0;
+        },
+        number
+      >;
+    grossProfit: Schema.Attribute.Decimal;
+    incomeApproachUsed: Schema.Attribute.Boolean &
+      Schema.Attribute.DefaultTo<false>;
+    indicatedValueAssetApproach: Schema.Attribute.Decimal;
+    indicatedValueIncomeApproach: Schema.Attribute.Decimal;
+    indicatedValueMarketApproach: Schema.Attribute.Decimal;
+    industry: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 100;
+      }>;
+    industryRisk: Schema.Attribute.Enumeration<
+      ['low', 'moderate', 'high', 'very_high']
+    >;
+    intangibleAssets: Schema.Attribute.Decimal &
+      Schema.Attribute.SetMinMax<
+        {
+          min: 0;
+        },
+        number
+      >;
+    internalNotes: Schema.Attribute.Text;
+    inventory: Schema.Attribute.Decimal &
+      Schema.Attribute.SetMinMax<
+        {
+          min: 0;
+        },
+        number
+      >;
+    keyPersonDiscount: Schema.Attribute.Decimal &
+      Schema.Attribute.SetMinMax<
+        {
+          max: 100;
+          min: 0;
+        },
+        number
+      >;
+    liquidationValue: Schema.Attribute.Decimal;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::business-valuation.business-valuation'
+    > &
+      Schema.Attribute.Private;
+    longTermDebt: Schema.Attribute.Decimal &
+      Schema.Attribute.SetMinMax<
+        {
+          min: 0;
+        },
+        number
+      >;
+    managementQuality: Schema.Attribute.Enumeration<
+      ['excellent', 'good', 'average', 'below_average', 'poor']
+    >;
+    managementRisk: Schema.Attribute.Enumeration<
+      ['low', 'moderate', 'high', 'very_high']
+    >;
+    marketabilityDiscount: Schema.Attribute.Decimal &
+      Schema.Attribute.SetMinMax<
+        {
+          max: 100;
+          min: 0;
+        },
+        number
+      >;
+    marketApproachUsed: Schema.Attribute.Boolean &
+      Schema.Attribute.DefaultTo<false>;
+    marketConditions: Schema.Attribute.Enumeration<
+      ['excellent', 'good', 'fair', 'poor', 'declining']
+    >;
+    minorityDiscount: Schema.Attribute.Decimal &
+      Schema.Attribute.SetMinMax<
+        {
+          max: 100;
+          min: 0;
+        },
+        number
+      >;
+    netIncome: Schema.Attribute.Decimal;
+    numberOfEmployees: Schema.Attribute.Integer &
+      Schema.Attribute.SetMinMax<
+        {
+          min: 0;
+        },
+        number
+      >;
+    operationalRisk: Schema.Attribute.Enumeration<
+      ['low', 'moderate', 'high', 'very_high']
+    >;
+    precedentTransactionMultiple: Schema.Attribute.Decimal;
+    premiseOfValue: Schema.Attribute.Enumeration<
+      ['going_concern', 'liquidation']
+    > &
+      Schema.Attribute.Required;
+    priceToBookRatio: Schema.Attribute.Decimal;
+    priceToEarningsRatio: Schema.Attribute.Decimal;
+    priceToSalesRatio: Schema.Attribute.Decimal;
+    publishedAt: Schema.Attribute.DateTime;
+    reportDate: Schema.Attribute.Date & Schema.Attribute.Required;
+    reviewerCredentials: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 255;
+      }>;
+    reviewerName: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 255;
+      }>;
+    shortTermDebt: Schema.Attribute.Decimal &
+      Schema.Attribute.SetMinMax<
+        {
+          min: 0;
+        },
+        number
+      >;
+    sourcesOfInformation: Schema.Attribute.Text;
+    specialConsiderations: Schema.Attribute.Text;
+    standardOfValue: Schema.Attribute.Enumeration<
+      ['fair_market_value', 'fair_value', 'investment_value', 'intrinsic_value']
+    > &
+      Schema.Attribute.Required;
+    supportingDocuments: Schema.Attribute.Media<'files', true>;
+    terminalGrowthRate: Schema.Attribute.Decimal;
+    totalAssets: Schema.Attribute.Decimal &
+      Schema.Attribute.SetMinMax<
+        {
+          min: 0;
+        },
+        number
+      >;
+    totalDebt: Schema.Attribute.Decimal &
+      Schema.Attribute.SetMinMax<
+        {
+          min: 0;
+        },
+        number
+      >;
+    totalLiabilities: Schema.Attribute.Decimal &
+      Schema.Attribute.SetMinMax<
+        {
+          min: 0;
+        },
+        number
+      >;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    valuationDate: Schema.Attribute.Date & Schema.Attribute.Required;
+    valuationPurpose: Schema.Attribute.Enumeration<
+      [
+        'merger_acquisition',
+        'tax_compliance',
+        'financial_reporting',
+        'litigation',
+        'estate_planning',
+        'divorce',
+        'buy_sell_agreement',
+        'employee_stock_ownership',
+        'other',
+      ]
+    > &
+      Schema.Attribute.Required;
+    valuationPurposeOther: Schema.Attribute.Text;
+    valuationRange: Schema.Attribute.JSON;
+    valuationReport: Schema.Attribute.Media<'files'>;
+    valuationStatus: Schema.Attribute.Enumeration<
+      ['draft', 'under_review', 'completed', 'approved', 'archived']
+    > &
+      Schema.Attribute.DefaultTo<'draft'>;
+    valuatorCompany: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 255;
+      }>;
+    valuatorCredentials: Schema.Attribute.String &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 255;
+      }>;
+    valuatorName: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 255;
+      }>;
+  };
+}
+
 export interface ApiCategoryCategory extends Struct.CollectionTypeSchema {
   collectionName: 'categories';
   info: {
@@ -1164,6 +1497,7 @@ declare module '@strapi/strapi' {
       'api::about.about': ApiAboutAbout;
       'api::article.article': ApiArticleArticle;
       'api::author.author': ApiAuthorAuthor;
+      'api::business-valuation.business-valuation': ApiBusinessValuationBusinessValuation;
       'api::category.category': ApiCategoryCategory;
       'api::global.global': ApiGlobalGlobal;
       'api::installment.installment': ApiInstallmentInstallment;
