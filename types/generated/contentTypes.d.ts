@@ -501,6 +501,8 @@ export interface ApiBusinessValuationBusinessValuation
         },
         number
       >;
+    applicantName: Schema.Attribute.String;
+    appraiserName: Schema.Attribute.String;
     assetApproachUsed: Schema.Attribute.Boolean &
       Schema.Attribute.DefaultTo<false>;
     assumptionsAndLimitations: Schema.Attribute.Text;
