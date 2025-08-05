@@ -650,13 +650,14 @@ export interface ApiLoanApplicationLoanApplication
     singularName: 'loan-application';
   };
   options: {
-    draftAndPublish: false;
+    draftAndPublish: true;
   };
   attributes: {
     age: Schema.Attribute.Integer;
     applicant_name: Schema.Attribute.String;
     applicant_photo: Schema.Attribute.Media;
     application_date: Schema.Attribute.Date;
+    approved_by: Schema.Attribute.Relation<'oneToOne', 'admin::user'>;
     bank_account_number: Schema.Attribute.String;
     bank_account_title: Schema.Attribute.String;
     bank_branch: Schema.Attribute.String;
@@ -685,6 +686,9 @@ export interface ApiLoanApplicationLoanApplication
     loan_duration_days: Schema.Attribute.Integer;
     loan_generation: Schema.Attribute.Integer;
     loan_purpose: Schema.Attribute.Text;
+    loan_status: Schema.Attribute.Enumeration<
+      ['Draft', 'Pending', 'In Progress', 'Approved']
+    >;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -1170,7 +1174,6 @@ export interface PluginUsersPermissionsUser
   };
   options: {
     draftAndPublish: false;
-    timestamps: true;
   };
   attributes: {
     blocked: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
