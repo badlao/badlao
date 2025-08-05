@@ -516,6 +516,10 @@ export interface ApiBusinessValuationBusinessValuation
       true
     >;
     placeOfBusiness: Schema.Attribute.String;
+    programManagerSignature: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
+    programName: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
     reasonForLoan: Schema.Attribute.Enumeration<
       ['new-business', 'business-extension']
@@ -523,6 +527,9 @@ export interface ApiBusinessValuationBusinessValuation
     requiredMaterialsForBusinessExtension: Schema.Attribute.Component<
       'shared.required-materials',
       true
+    >;
+    unitManagerSignature: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
     >;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &

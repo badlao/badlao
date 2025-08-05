@@ -54,6 +54,29 @@
       "type": "component",
       "component": "shared.required-materials",
       "repeatable": true
+    },
+    "unitManagerSignature": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "programManagerSignature": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "programName": {
+      "type": "string"
     }
   }
 }
