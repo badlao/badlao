@@ -474,6 +474,69 @@ export interface ApiAuthorAuthor extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiBusinessValuationBusinessValuation
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'business_valuations';
+  info: {
+    displayName: 'Business Valuation';
+    pluralName: 'business-valuations';
+    singularName: 'business-valuation';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    applicantName: Schema.Attribute.String;
+    appraiserName: Schema.Attribute.String;
+    businessDescription: Schema.Attribute.Text;
+    businessExpense: Schema.Attribute.Component<
+      'shared.business-expense',
+      true
+    >;
+    companyName: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMaxLength<{
+        maxLength: 255;
+      }>;
+    continuedInvestment: Schema.Attribute.Component<
+      'shared.continued-investment',
+      true
+    >;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::business-valuation.business-valuation'
+    > &
+      Schema.Attribute.Private;
+    permanentBusinessAsset: Schema.Attribute.Component<
+      'shared.permanent-business-asset',
+      true
+    >;
+    placeOfBusiness: Schema.Attribute.String;
+    programManagerSignature: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
+    programName: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    reasonForLoan: Schema.Attribute.Enumeration<
+      ['new-business', 'business-extension']
+    >;
+    requiredMaterialsForBusinessExtension: Schema.Attribute.Component<
+      'shared.required-materials',
+      true
+    >;
+    unitManagerSignature: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiCategoryCategory extends Struct.CollectionTypeSchema {
   collectionName: 'categories';
   info: {
@@ -1167,6 +1230,7 @@ declare module '@strapi/strapi' {
       'api::about.about': ApiAboutAbout;
       'api::article.article': ApiArticleArticle;
       'api::author.author': ApiAuthorAuthor;
+      'api::business-valuation.business-valuation': ApiBusinessValuationBusinessValuation;
       'api::category.category': ApiCategoryCategory;
       'api::global.global': ApiGlobalGlobal;
       'api::installment.installment': ApiInstallmentInstallment;
