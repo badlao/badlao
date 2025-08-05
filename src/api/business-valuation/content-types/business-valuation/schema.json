@@ -55,6 +55,11 @@
       "component": "shared.required-materials",
       "repeatable": true
     },
+    "businessPossibleIncome": {
+      "type": "component",
+      "component": "shared.possible-income",
+      "repeatable": true
+    },
     "unitManagerSignature": {
       "type": "media",
       "multiple": false,

@@ -57,6 +57,19 @@ export interface SharedPermanentBusinessAsset extends Struct.ComponentSchema {
   };
 }
 
+export interface SharedPossibleIncome extends Struct.ComponentSchema {
+  collectionName: 'components_shared_possible_incomes';
+  info: {
+    displayName: 'Possible Income';
+  };
+  attributes: {
+    previousBusinessIncome: Schema.Attribute.Integer;
+    totalBusinessCost: Schema.Attribute.Integer;
+    totalBusinessExpense: Schema.Attribute.Integer;
+    totalBusinessIncome: Schema.Attribute.Integer;
+  };
+}
+
 export interface SharedQuote extends Struct.ComponentSchema {
   collectionName: 'components_shared_quotes';
   info: {
@@ -159,6 +172,7 @@ declare module '@strapi/strapi' {
       'shared.continued-investment': SharedContinuedInvestment;
       'shared.media': SharedMedia;
       'shared.permanent-business-asset': SharedPermanentBusinessAsset;
+      'shared.possible-income': SharedPossibleIncome;
       'shared.quote': SharedQuote;
       'shared.required-materials': SharedRequiredMaterials;
       'shared.rich-text': SharedRichText;
