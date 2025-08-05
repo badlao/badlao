@@ -1,0 +1,87 @@
+{
+  "kind": "collectionType",
+  "collectionName": "business_valuations",
+  "info": {
+    "singularName": "business-valuation",
+    "pluralName": "business-valuations",
+    "displayName": "Business Valuation"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "applicantName": {
+      "type": "string"
+    },
+    "appraiserName": {
+      "type": "string"
+    },
+    "companyName": {
+      "type": "string",
+      "maxLength": 255,
+      "required": true
+    },
+    "reasonForLoan": {
+      "type": "enumeration",
+      "enum": [
+        "new-business",
+        "business-extension"
+      ]
+    },
+    "placeOfBusiness": {
+      "type": "string"
+    },
+    "permanentBusinessAsset": {
+      "type": "component",
+      "component": "shared.permanent-business-asset",
+      "repeatable": true
+    },
+    "continuedInvestment": {
+      "type": "component",
+      "component": "shared.continued-investment",
+      "repeatable": true
+    },
+    "businessExpense": {
+      "type": "component",
+      "component": "shared.business-expense",
+      "repeatable": true
+    },
+    "businessDescription": {
+      "type": "text"
+    },
+    "requiredMaterialsForBusinessExtension": {
+      "type": "component",
+      "component": "shared.required-materials",
+      "repeatable": true
+    },
+    "businessPossibleIncome": {
+      "type": "component",
+      "component": "shared.possible-income",
+      "repeatable": true
+    },
+    "unitManagerSignature": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "programManagerSignature": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "programName": {
+      "type": "string"
+    }
+  }
+}

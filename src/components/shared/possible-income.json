@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_shared_possible_incomes",
+  "info": {
+    "displayName": "Possible Income"
+  },
+  "options": {},
+  "attributes": {
+    "totalBusinessCost": {
+      "type": "integer"
+    },
+    "totalBusinessExpense": {
+      "type": "integer"
+    },
+    "previousBusinessIncome": {
+      "type": "integer"
+    },
+    "totalBusinessIncome": {
+      "type": "integer"
+    }
+  },
+  "config": {}
+}

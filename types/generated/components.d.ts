@@ -1,5 +1,39 @@
 import type { Schema, Struct } from '@strapi/strapi';
 
+export interface SharedBusinessExpense extends Struct.ComponentSchema {
+  collectionName: 'components_shared_business_expenses';
+  info: {
+    displayName: 'Business Expense';
+  };
+  attributes: {
+    expenseDetails: Schema.Attribute.String;
+    number: Schema.Attribute.Integer;
+    quantity: Schema.Attribute.Integer;
+  };
+}
+
+export interface SharedBusinessMonthlyIncome extends Struct.ComponentSchema {
+  collectionName: 'components_shared_business_monthly_incomes';
+  info: {
+    displayName: 'Business Monthly Income';
+  };
+  attributes: {
+    monthlyIncome: Schema.Attribute.Integer;
+    sourceOfIncome: Schema.Attribute.String;
+  };
+}
+
+export interface SharedContinuedInvestment extends Struct.ComponentSchema {
+  collectionName: 'components_shared_continued_investments';
+  info: {
+    displayName: 'Continued Investment';
+  };
+  attributes: {
+    productNameAndAmount: Schema.Attribute.String;
+    purchasePrice: Schema.Attribute.Integer;
+  };
+}
+
 export interface SharedMedia extends Struct.ComponentSchema {
   collectionName: 'components_shared_media';
   info: {
@@ -8,6 +42,31 @@ export interface SharedMedia extends Struct.ComponentSchema {
   };
   attributes: {
     file: Schema.Attribute.Media<'images' | 'files' | 'videos'>;
+  };
+}
+
+export interface SharedPermanentBusinessAsset extends Struct.ComponentSchema {
+  collectionName: 'components_shared_permanent_business_assets';
+  info: {
+    displayName: 'Permanent Business Asset';
+  };
+  attributes: {
+    assetDescription: Schema.Attribute.String;
+    assetNumber: Schema.Attribute.Integer;
+    assetPrice: Schema.Attribute.Integer;
+  };
+}
+
+export interface SharedPossibleIncome extends Struct.ComponentSchema {
+  collectionName: 'components_shared_possible_incomes';
+  info: {
+    displayName: 'Possible Income';
+  };
+  attributes: {
+    previousBusinessIncome: Schema.Attribute.Integer;
+    totalBusinessCost: Schema.Attribute.Integer;
+    totalBusinessExpense: Schema.Attribute.Integer;
+    totalBusinessIncome: Schema.Attribute.Integer;
   };
 }
 
@@ -20,6 +79,18 @@ export interface SharedQuote extends Struct.ComponentSchema {
   attributes: {
     body: Schema.Attribute.Text;
     title: Schema.Attribute.String;
+  };
+}
+
+export interface SharedRequiredMaterials extends Struct.ComponentSchema {
+  collectionName: 'components_shared_required_materials';
+  info: {
+    displayName: 'Required Materials';
+  };
+  attributes: {
+    materialName: Schema.Attribute.String;
+    price: Schema.Attribute.Integer;
+    quantity: Schema.Attribute.Integer;
   };
 }
 
@@ -96,8 +167,14 @@ export interface SharedSocialEvaluation extends Struct.ComponentSchema {
 declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
+      'shared.business-expense': SharedBusinessExpense;
+      'shared.business-monthly-income': SharedBusinessMonthlyIncome;
+      'shared.continued-investment': SharedContinuedInvestment;
       'shared.media': SharedMedia;
+      'shared.permanent-business-asset': SharedPermanentBusinessAsset;
+      'shared.possible-income': SharedPossibleIncome;
       'shared.quote': SharedQuote;
+      'shared.required-materials': SharedRequiredMaterials;
       'shared.rich-text': SharedRichText;
       'shared.seo': SharedSeo;
       'shared.slider': SharedSlider;

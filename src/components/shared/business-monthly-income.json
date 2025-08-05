@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_shared_business_monthly_incomes",
+  "info": {
+    "displayName": "Business Monthly Income"
+  },
+  "options": {},
+  "attributes": {
+    "sourceOfIncome": {
+      "type": "string"
+    },
+    "monthlyIncome": {
+      "type": "integer"
+    }
+  },
+  "config": {}
+}

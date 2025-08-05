@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_shared_business_expenses",
+  "info": {
+    "displayName": "Business Expense"
+  },
+  "options": {},
+  "attributes": {
+    "expenseDetails": {
+      "type": "string"
+    },
+    "number": {
+      "type": "integer"
+    },
+    "quantity": {
+      "type": "integer"
+    }
+  },
+  "config": {}
+}

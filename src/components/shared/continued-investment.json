@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_shared_continued_investments",
+  "info": {
+    "displayName": "Continued Investment"
+  },
+  "options": {},
+  "attributes": {
+    "productNameAndAmount": {
+      "type": "string"
+    },
+    "purchasePrice": {
+      "type": "integer"
+    }
+  },
+  "config": {}
+}
