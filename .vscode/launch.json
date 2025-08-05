@@ -1,23 +1,15 @@
 {
   "version": "0.2.0",
   "configurations": [
-    
     {
-      "type": "node",
+      "command": "npm run develop",
+      "name": "Run npm develop",
       "request": "launch",
-      "name": "Strapi Debug (ts-node)",
-      "cwd": "${workspaceFolder}",
-      "runtimeExecutable": "npx",
-      "runtimeArgs": [
-        "-r", "ts-node/register",
-        "strapi",
-        "develop"
-      ],
+      "type": "node-terminal",
       "env": {
-        "NODE_ENV": "development"
-      },
-      "skipFiles": ["<node_internals>/**"],
-      "console": "integratedTerminal"
+        "DATABASE_SSL": "false",
+        "NODE_ENV": "development",
+      }
     }
   ]
 }

@@ -1,0 +1,106 @@
+{
+  "kind": "collectionType",
+  "collectionName": "loan_acceptances",
+  "info": {
+    "singularName": "loan-acceptance",
+    "pluralName": "loan-acceptances",
+    "displayName": "Loan Acceptance"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "group_id": {
+      "type": "string",
+      "required": false
+    },
+    "program_name": {
+      "type": "string",
+      "required": false
+    },
+    "group_leader_name": {
+      "type": "string",
+      "required": false
+    },
+    "education_level": {
+      "type": "string",
+      "required": false
+    },
+    "district": {
+      "type": "string",
+      "required": false
+    },
+    "previous_loan_amount": {
+      "type": "decimal",
+      "required": false
+    },
+    "repayable_loan_amount": {
+      "type": "decimal",
+      "required": false
+    },
+    "loan_approval_no": {
+      "type": "string",
+      "required": false
+    },
+    "recipient_name": {
+      "type": "string",
+      "required": false
+    },
+    "national_id": {
+      "type": "string",
+      "required": false
+    },
+    "loan_amount": {
+      "type": "decimal",
+      "required": false
+    },
+    "cheque_no": {
+      "type": "string",
+      "required": false
+    },
+    "repayment_method": {
+      "type": "string",
+      "required": false
+    },
+    "repayment_duration_days": {
+      "type": "integer",
+      "required": false
+    },
+    "committee_chair_name": {
+      "type": "string",
+      "required": false
+    },
+    "approval_meeting_date": {
+      "type": "date",
+      "required": false
+    },
+    "coordinator_signature": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "program_manager_signature": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "accounts_officer_signature": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "loan_application": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::loan-application.loan-application",
+      "inversedBy": "loan_acceptance"
+    }
+  }
+}

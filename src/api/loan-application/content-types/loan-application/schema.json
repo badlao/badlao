@@ -170,6 +170,12 @@
         "In Progress",
         "Approved"
       ]
+    },
+    "loan_acceptance": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::loan-acceptance.loan-acceptance",
+      "mappedBy": "loan_application"
     }
   }
 }
