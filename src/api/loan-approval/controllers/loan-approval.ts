@@ -1,7 +1,6 @@
 /**
  * A set of functions called "actions" for `loan-approval`
  */
-
 export default {
   async approve(ctx) {
     console.log('Approving loan application...');

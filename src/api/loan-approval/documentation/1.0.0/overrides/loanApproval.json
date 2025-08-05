@@ -1,0 +1,35 @@
+{
+  "paths": {
+    "/api/loan-applications/{id}/approve": {
+      "post": {
+        "tags": ["Loan Application"],
+        "summary": "Approve a loan application",
+        "operationId": "approveLoanApplication",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Loan approved",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": { "type": "string" },
+                    "loan": { "type": "object" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
