@@ -493,6 +493,10 @@ export interface ApiBusinessValuationBusinessValuation
       'shared.business-expense',
       true
     >;
+    businessPossibleIncome: Schema.Attribute.Component<
+      'shared.possible-income',
+      true
+    >;
     companyName: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.SetMinMaxLength<{
