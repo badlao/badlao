@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_shared_permanent_business_assets",
+  "info": {
+    "displayName": "Permanent Business Asset"
+  },
+  "options": {},
+  "attributes": {
+    "assetDescription": {
+      "type": "string"
+    },
+    "assetNumber": {
+      "type": "integer"
+    },
+    "assetPrice": {
+      "type": "integer"
+    }
+  },
+  "config": {}
+}

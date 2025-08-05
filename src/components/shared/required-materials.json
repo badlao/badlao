@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_shared_required_materials",
+  "info": {
+    "displayName": "Required Materials"
+  },
+  "options": {},
+  "attributes": {
+    "materialName": {
+      "type": "string"
+    },
+    "quantity": {
+      "type": "integer"
+    },
+    "price": {
+      "type": "integer"
+    }
+  },
+  "config": {}
+}
