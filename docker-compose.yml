@@ -22,8 +22,8 @@ services:
       - ./:/srv/app
     # ports:
     #   - "1337:1337"
-    depends_on:
-      - db
+    # depends_on:
+    #   - db
     network_mode: host
 
 # volumes:
