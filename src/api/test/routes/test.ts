@@ -1,13 +1,7 @@
-export default {
-  routes: [
-    {
-     method: 'GET',
-     path: '/test',
-     handler: 'test.exampleAction',
-     config: {
-       policies: [],
-       middlewares: [],
-     },
-    },
-  ],
-};
+/**
+ * test router
+ */
+
+import { factories } from '@strapi/strapi';
+
+export default factories.createCoreRouter('api::test.test');
