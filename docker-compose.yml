@@ -1,18 +1,18 @@
 version: '3.8'
 
 services:
-  db:
-    image: postgres
-    restart: unless-stopped
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: 123456
-      POSTGRES_DB: postgres
-    volumes:
-      - ./db-data:/var/lib/postgresql/data
-    # ports:
-    #   - "5432:5432"
-    network_mode: host
+  # db:
+  #   image: postgres
+  #   restart: unless-stopped
+  #   environment:
+  #     POSTGRES_USER: postgres
+  #     POSTGRES_PASSWORD: 123456
+  #     POSTGRES_DB: postgres
+  #   volumes:
+  #     - ./db-data:/var/lib/postgresql/data
+  #   # ports:
+  #   #   - "5432:5432"
+  #   network_mode: host
 
   strapi:
     image: node:20
@@ -26,5 +26,5 @@ services:
       - db
     network_mode: host
 
-volumes:
-  db-data:
+# volumes:
+#   db-data:
