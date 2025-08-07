@@ -10,9 +10,15 @@ module.exports = {
 
     // REST API sends directly as number
     if (typeof data.loan_application === 'number') {
-      loanId = data.loan_application;
+      loanId = data.loan_application.id;
     }
-
+    else if (Array.isArray(data.loan_applicatio)) {
+      return data.loan_applicatio[0]?.id;
+    }
+    else if (data.loan_applicatio instanceof Set) {
+      const first = data.loan_applicatio.values().next().value;
+      return first?.id;
+    }
     // Admin Panel (Content Manager) sends { connect: [{ id: 1 }] }
     else if (
       typeof data.loan_application === 'object' &&

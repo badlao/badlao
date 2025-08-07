@@ -483,7 +483,7 @@ export interface ApiBusinessValuationBusinessValuation
     singularName: 'business-valuation';
   };
   options: {
-    draftAndPublish: true;
+    draftAndPublish: false;
   };
   attributes: {
     applicantName: Schema.Attribute.String;
@@ -653,7 +653,7 @@ export interface ApiLoanAcceptanceLoanAcceptance
     singularName: 'loan-acceptance';
   };
   options: {
-    draftAndPublish: true;
+    draftAndPublish: false;
   };
   attributes: {
     accounts_officer_signature: Schema.Attribute.Media<'images'>;
@@ -705,7 +705,7 @@ export interface ApiLoanApplicationLoanApplication
     singularName: 'loan-application';
   };
   options: {
-    draftAndPublish: true;
+    draftAndPublish: false;
   };
   attributes: {
     age: Schema.Attribute.Integer;

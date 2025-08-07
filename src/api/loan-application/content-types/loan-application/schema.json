@@ -8,7 +8,7 @@
     "description": ""
   },
   "options": {
-    "draftAndPublish": true
+    "draftAndPublish": false
   },
   "pluginOptions": {},
   "attributes": {
@@ -146,12 +146,6 @@
       "multiple": false,
       "required": false
     },
-    "installments": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::installment.installment",
-      "mappedBy": "loan_application"
-    },
     "social_evaluation": {
       "type": "component",
       "component": "shared.social-evaluation",
@@ -175,6 +169,12 @@
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::loan-acceptance.loan-acceptance",
+      "mappedBy": "loan_application"
+    },
+    "installments": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::installment.installment",
       "mappedBy": "loan_application"
     }
   }
