@@ -7,7 +7,7 @@
     "displayName": "Loan Application"
   },
   "options": {
-    "draftAndPublish": true
+    "draftAndPublish": false
   },
   "pluginOptions": {},
   "attributes": {

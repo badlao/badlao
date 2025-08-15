@@ -6,6 +6,7 @@
       "name": "Run npm develop",
       "request": "launch",
       "type": "node-terminal",
+      "nodeVersionHint": 20,
       "env": {
         "DATABASE_SSL": "false",
         "NODE_ENV": "development",
