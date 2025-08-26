@@ -94,15 +94,8 @@
     "loan_amount_requested": {
       "type": "integer"
     },
-    "loan_duration_days": {
+    "loan_duration": {
       "type": "integer"
-    },
-    "installment_type": {
-      "type": "enumeration",
-      "enum": [
-        "weekly",
-        "monthly"
-      ]
     },
     "installment_amount": {
       "type": "integer"
@@ -162,7 +155,8 @@
         "Draft",
         "Pending",
         "In Progress",
-        "Approved"
+        "Approved",
+        "Rejected"
       ]
     },
     "loan_acceptance": {
@@ -176,6 +170,25 @@
       "relation": "oneToMany",
       "target": "api::installment.installment",
       "mappedBy": "loan_application"
+    },
+    "loan_duration_unit": {
+      "type": "enumeration",
+      "enum": [
+        "DAYS",
+        "WEEKLY",
+        "MONTHLY",
+        "YEARLY"
+      ]
+    },
+    "with_multiple_installments": {
+      "type": "boolean",
+      "default": false
+    },
+    "installment_duration": {
+      "type": "integer"
+    },
+    "total_installments": {
+      "type": "integer"
     }
   }
 }

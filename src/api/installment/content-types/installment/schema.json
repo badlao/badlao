@@ -15,6 +15,9 @@
     "payment_date": {
       "type": "date"
     },
+    "amount_to_pay": {
+      "type": "integer"
+    },
     "amount_paid": {
       "type": "integer"
     },
@@ -28,9 +31,11 @@
       "type": "enumeration",
       "enum": [
         "paid",
-        "pending",
+        "unpaid",
+        "partial",
+        "overdue",
         "late",
-        "skipped"
+        "invalid"
       ]
     },
     "loan_application": {
@@ -38,6 +43,31 @@
       "relation": "manyToOne",
       "target": "api::loan-application.loan-application",
       "inversedBy": "installments"
+    },
+    "payment_type": {
+      "type": "enumeration",
+      "enum": [
+        "BKASH",
+        "NOGOD",
+        "CASH",
+        "BANK"
+      ]
+    },
+    "payment_doc": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files"
+      ]
+    },
+    "comment": {
+      "type": "text"
+    },
+    "bank": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::bank.bank"
     }
   }
 }

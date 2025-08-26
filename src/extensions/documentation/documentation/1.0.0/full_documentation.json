@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2025-08-13T08:24:44.597Z"
+    "x-generation-date": "2025-08-26T10:24:50.741Z"
   },
   "x-strapi-config": {
     "plugins": [
@@ -359,6 +359,512 @@
         ],
         "parameters": [],
         "operationId": "delete/about"
+      }
+    },
+    "/banks": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BankListResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Bank"
+        ],
+        "parameters": [
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "Sort by attributes ascending (asc) or descending (desc)",
+            "deprecated": false,
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pagination[withCount]",
+            "in": "query",
+            "description": "Return page/pageSize (default: true)",
+            "deprecated": false,
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "pagination[page]",
+            "in": "query",
+            "description": "Page number (default: 0)",
+            "deprecated": false,
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "pagination[pageSize]",
+            "in": "query",
+            "description": "Page size (default: 25)",
+            "deprecated": false,
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "pagination[start]",
+            "in": "query",
+            "description": "Offset value (default: 0)",
+            "deprecated": false,
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "pagination[limit]",
+            "in": "query",
+            "description": "Number of entities to return (default: 25)",
+            "deprecated": false,
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "Fields to return (ex: title,author)",
+            "deprecated": false,
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "populate",
+            "in": "query",
+            "description": "Relations to return",
+            "deprecated": false,
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "filters",
+            "in": "query",
+            "description": "Filters to apply",
+            "deprecated": false,
+            "required": false,
+            "schema": {
+              "type": "object",
+              "additionalProperties": true
+            },
+            "style": "deepObject"
+          },
+          {
+            "name": "locale",
+            "in": "query",
+            "description": "Locale to apply",
+            "deprecated": false,
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "operationId": "get/banks"
+      },
+      "post": {
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BankResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Bank"
+        ],
+        "parameters": [],
+        "operationId": "post/banks",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BankRequest"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/banks/{id}": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BankResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Bank"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "",
+            "deprecated": false,
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "operationId": "get/banks/{id}"
+      },
+      "put": {
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BankResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Bank"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "",
+            "deprecated": false,
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "operationId": "put/banks/{id}",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BankRequest"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int64"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Bank"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "",
+            "deprecated": false,
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "operationId": "delete/banks/{id}"
       }
     },
     "/business-valuations": {
@@ -4768,6 +5274,456 @@
           }
         }
       },
+      "BankRequest": {
+        "type": "object",
+        "required": [
+          "data"
+        ],
+        "properties": {
+          "data": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "locale": {
+                "type": "string"
+              },
+              "localizations": {
+                "type": "array",
+                "items": {
+                  "oneOf": [
+                    {
+                      "type": "integer"
+                    },
+                    {
+                      "type": "string"
+                    }
+                  ],
+                  "example": "string or id"
+                }
+              }
+            }
+          }
+        }
+      },
+      "BankListResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Bank"
+            }
+          },
+          "meta": {
+            "type": "object",
+            "properties": {
+              "pagination": {
+                "type": "object",
+                "properties": {
+                  "page": {
+                    "type": "integer"
+                  },
+                  "pageSize": {
+                    "type": "integer",
+                    "minimum": 25
+                  },
+                  "pageCount": {
+                    "type": "integer",
+                    "maximum": 1
+                  },
+                  "total": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "Bank": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "documentId": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "publishedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "createdBy": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "number"
+              },
+              "documentId": {
+                "type": "string"
+              },
+              "firstname": {
+                "type": "string"
+              },
+              "lastname": {
+                "type": "string"
+              },
+              "username": {
+                "type": "string"
+              },
+              "email": {
+                "type": "string",
+                "format": "email"
+              },
+              "resetPasswordToken": {
+                "type": "string"
+              },
+              "registrationToken": {
+                "type": "string"
+              },
+              "isActive": {
+                "type": "boolean"
+              },
+              "roles": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "number"
+                    },
+                    "documentId": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    },
+                    "description": {
+                      "type": "string"
+                    },
+                    "users": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "number"
+                          },
+                          "documentId": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    "permissions": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "number"
+                          },
+                          "documentId": {
+                            "type": "string"
+                          },
+                          "action": {
+                            "type": "string"
+                          },
+                          "actionParameters": {},
+                          "subject": {
+                            "type": "string"
+                          },
+                          "properties": {},
+                          "conditions": {},
+                          "role": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "number"
+                              },
+                              "documentId": {
+                                "type": "string"
+                              }
+                            }
+                          },
+                          "createdAt": {
+                            "type": "string",
+                            "format": "date-time"
+                          },
+                          "updatedAt": {
+                            "type": "string",
+                            "format": "date-time"
+                          },
+                          "publishedAt": {
+                            "type": "string",
+                            "format": "date-time"
+                          },
+                          "createdBy": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "number"
+                              },
+                              "documentId": {
+                                "type": "string"
+                              }
+                            }
+                          },
+                          "updatedBy": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "number"
+                              },
+                              "documentId": {
+                                "type": "string"
+                              }
+                            }
+                          },
+                          "locale": {
+                            "type": "string"
+                          },
+                          "localizations": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "number"
+                                },
+                                "documentId": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "createdAt": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "updatedAt": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "publishedAt": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "createdBy": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "number"
+                        },
+                        "documentId": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "updatedBy": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "number"
+                        },
+                        "documentId": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "locale": {
+                      "type": "string"
+                    },
+                    "localizations": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "number"
+                          },
+                          "documentId": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "blocked": {
+                "type": "boolean"
+              },
+              "preferedLanguage": {
+                "type": "string"
+              },
+              "createdAt": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "updatedAt": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "publishedAt": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "createdBy": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "number"
+                  },
+                  "documentId": {
+                    "type": "string"
+                  }
+                }
+              },
+              "updatedBy": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "number"
+                  },
+                  "documentId": {
+                    "type": "string"
+                  }
+                }
+              },
+              "locale": {
+                "type": "string"
+              },
+              "localizations": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "number"
+                    },
+                    "documentId": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "updatedBy": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "number"
+              },
+              "documentId": {
+                "type": "string"
+              }
+            }
+          },
+          "locale": {
+            "type": "string"
+          },
+          "localizations": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "number"
+                },
+                "documentId": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "createdAt": {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "updatedAt": {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "publishedAt": {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "createdBy": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "number"
+                    },
+                    "documentId": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "updatedBy": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "number"
+                    },
+                    "documentId": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "locale": {
+                  "type": "string"
+                },
+                "localizations": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "number"
+                      },
+                      "documentId": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "BankResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/Bank"
+          },
+          "meta": {
+            "type": "object"
+          }
+        }
+      },
       "BusinessValuationRequest": {
         "type": "object",
         "required": [
@@ -7338,6 +8294,9 @@
                 "type": "string",
                 "format": "date"
               },
+              "amount_to_pay": {
+                "type": "integer"
+              },
               "amount_paid": {
                 "type": "integer"
               },
@@ -7351,12 +8310,48 @@
                 "type": "string",
                 "enum": [
                   "paid",
-                  "pending",
+                  "unpaid",
+                  "partial",
+                  "overdue",
                   "late",
-                  "skipped"
+                  "invalid"
                 ]
               },
               "loan_application": {
+                "oneOf": [
+                  {
+                    "type": "integer"
+                  },
+                  {
+                    "type": "string"
+                  }
+                ],
+                "example": "string or id"
+              },
+              "payment_type": {
+                "type": "string",
+                "enum": [
+                  "BKASH",
+                  "NOGOD",
+                  "CASH",
+                  "BANK"
+                ]
+              },
+              "payment_doc": {
+                "oneOf": [
+                  {
+                    "type": "integer"
+                  },
+                  {
+                    "type": "string"
+                  }
+                ],
+                "example": "string or id"
+              },
+              "comment": {
+                "type": "string"
+              },
+              "bank": {
                 "oneOf": [
                   {
                     "type": "integer"
@@ -7436,6 +8431,9 @@
             "type": "string",
             "format": "date"
           },
+          "amount_to_pay": {
+            "type": "integer"
+          },
           "amount_paid": {
             "type": "integer"
           },
@@ -7449,9 +8447,11 @@
             "type": "string",
             "enum": [
               "paid",
-              "pending",
+              "unpaid",
+              "partial",
+              "overdue",
               "late",
-              "skipped"
+              "invalid"
             ]
           },
           "loan_application": {
@@ -7545,15 +8545,8 @@
               "loan_amount_requested": {
                 "type": "integer"
               },
-              "loan_duration_days": {
+              "loan_duration": {
                 "type": "integer"
-              },
-              "installment_type": {
-                "type": "string",
-                "enum": [
-                  "weekly",
-                  "monthly"
-                ]
               },
               "installment_amount": {
                 "type": "integer"
@@ -8459,7 +9452,8 @@
                   "Draft",
                   "Pending",
                   "In Progress",
-                  "Approved"
+                  "Approved",
+                  "Rejected"
                 ]
               },
               "loan_acceptance": {
@@ -8989,6 +9983,9 @@
                       "type": "string",
                       "format": "date"
                     },
+                    "amount_to_pay": {
+                      "type": "integer"
+                    },
                     "amount_paid": {
                       "type": "integer"
                     },
@@ -9002,9 +9999,11 @@
                       "type": "string",
                       "enum": [
                         "paid",
-                        "pending",
+                        "unpaid",
+                        "partial",
+                        "overdue",
                         "late",
-                        "skipped"
+                        "invalid"
                       ]
                     },
                     "loan_application": {
@@ -9015,6 +10014,212 @@
                         },
                         "documentId": {
                           "type": "string"
+                        }
+                      }
+                    },
+                    "payment_type": {
+                      "type": "string",
+                      "enum": [
+                        "BKASH",
+                        "NOGOD",
+                        "CASH",
+                        "BANK"
+                      ]
+                    },
+                    "payment_doc": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "number"
+                        },
+                        "documentId": {
+                          "type": "string"
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "alternativeText": {
+                          "type": "string"
+                        },
+                        "caption": {
+                          "type": "string"
+                        },
+                        "width": {
+                          "type": "integer"
+                        },
+                        "height": {
+                          "type": "integer"
+                        },
+                        "formats": {},
+                        "hash": {
+                          "type": "string"
+                        },
+                        "ext": {
+                          "type": "string"
+                        },
+                        "mime": {
+                          "type": "string"
+                        },
+                        "size": {
+                          "type": "number",
+                          "format": "float"
+                        },
+                        "url": {
+                          "type": "string"
+                        },
+                        "previewUrl": {
+                          "type": "string"
+                        },
+                        "provider": {
+                          "type": "string"
+                        },
+                        "provider_metadata": {},
+                        "related": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "number"
+                              },
+                              "documentId": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        },
+                        "folder": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "number"
+                            },
+                            "documentId": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "folderPath": {
+                          "type": "string"
+                        },
+                        "createdAt": {
+                          "type": "string",
+                          "format": "date-time"
+                        },
+                        "updatedAt": {
+                          "type": "string",
+                          "format": "date-time"
+                        },
+                        "publishedAt": {
+                          "type": "string",
+                          "format": "date-time"
+                        },
+                        "createdBy": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "number"
+                            },
+                            "documentId": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "updatedBy": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "number"
+                            },
+                            "documentId": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "locale": {
+                          "type": "string"
+                        },
+                        "localizations": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "number"
+                              },
+                              "documentId": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "comment": {
+                      "type": "string"
+                    },
+                    "bank": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "number"
+                        },
+                        "documentId": {
+                          "type": "string"
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "createdAt": {
+                          "type": "string",
+                          "format": "date-time"
+                        },
+                        "updatedAt": {
+                          "type": "string",
+                          "format": "date-time"
+                        },
+                        "publishedAt": {
+                          "type": "string",
+                          "format": "date-time"
+                        },
+                        "createdBy": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "number"
+                            },
+                            "documentId": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "updatedBy": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "number"
+                            },
+                            "documentId": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "locale": {
+                          "type": "string"
+                        },
+                        "localizations": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "number"
+                              },
+                              "documentId": {
+                                "type": "string"
+                              }
+                            }
+                          }
                         }
                       }
                     },
@@ -9072,6 +10277,24 @@
                   }
                 }
               },
+              "loan_duration_unit": {
+                "type": "string",
+                "enum": [
+                  "DAYS",
+                  "WEEKLY",
+                  "MONTHLY",
+                  "YEARLY"
+                ]
+              },
+              "with_multiple_installments": {
+                "type": "boolean"
+              },
+              "installment_duration": {
+                "type": "integer"
+              },
+              "total_installments": {
+                "type": "integer"
+              },
               "createdAt": {
                 "type": "string",
                 "format": "date-time"
@@ -9122,6 +10345,158 @@
                     }
                   }
                 }
+              }
+            }
+          },
+          "payment_type": {
+            "type": "string",
+            "enum": [
+              "BKASH",
+              "NOGOD",
+              "CASH",
+              "BANK"
+            ]
+          },
+          "payment_doc": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "number"
+              },
+              "documentId": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "alternativeText": {
+                "type": "string"
+              },
+              "caption": {
+                "type": "string"
+              },
+              "width": {
+                "type": "integer"
+              },
+              "height": {
+                "type": "integer"
+              },
+              "formats": {},
+              "hash": {
+                "type": "string"
+              },
+              "ext": {
+                "type": "string"
+              },
+              "mime": {
+                "type": "string"
+              },
+              "size": {
+                "type": "number",
+                "format": "float"
+              },
+              "url": {
+                "type": "string"
+              },
+              "previewUrl": {
+                "type": "string"
+              },
+              "provider": {
+                "type": "string"
+              },
+              "provider_metadata": {},
+              "related": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "number"
+                    },
+                    "documentId": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "folder": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "number"
+                  },
+                  "documentId": {
+                    "type": "string"
+                  }
+                }
+              },
+              "folderPath": {
+                "type": "string"
+              },
+              "createdAt": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "updatedAt": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "publishedAt": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "createdBy": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "number"
+                  },
+                  "documentId": {
+                    "type": "string"
+                  }
+                }
+              },
+              "updatedBy": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "number"
+                  },
+                  "documentId": {
+                    "type": "string"
+                  }
+                }
+              },
+              "locale": {
+                "type": "string"
+              },
+              "localizations": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "number"
+                    },
+                    "documentId": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "comment": {
+            "type": "string"
+          },
+          "bank": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "number"
+              },
+              "documentId": {
+                "type": "string"
               }
             }
           },
@@ -10436,15 +11811,8 @@
               "loan_amount_requested": {
                 "type": "integer"
               },
-              "loan_duration_days": {
+              "loan_duration": {
                 "type": "integer"
-              },
-              "installment_type": {
-                "type": "string",
-                "enum": [
-                  "weekly",
-                  "monthly"
-                ]
               },
               "installment_amount": {
                 "type": "integer"
@@ -10881,7 +12249,8 @@
                   "Draft",
                   "Pending",
                   "In Progress",
-                  "Approved"
+                  "Approved",
+                  "Rejected"
                 ]
               },
               "loan_acceptance": {
@@ -11411,6 +12780,9 @@
                       "type": "string",
                       "format": "date"
                     },
+                    "amount_to_pay": {
+                      "type": "integer"
+                    },
                     "amount_paid": {
                       "type": "integer"
                     },
@@ -11424,9 +12796,11 @@
                       "type": "string",
                       "enum": [
                         "paid",
-                        "pending",
+                        "unpaid",
+                        "partial",
+                        "overdue",
                         "late",
-                        "skipped"
+                        "invalid"
                       ]
                     },
                     "loan_application": {
@@ -11437,6 +12811,212 @@
                         },
                         "documentId": {
                           "type": "string"
+                        }
+                      }
+                    },
+                    "payment_type": {
+                      "type": "string",
+                      "enum": [
+                        "BKASH",
+                        "NOGOD",
+                        "CASH",
+                        "BANK"
+                      ]
+                    },
+                    "payment_doc": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "number"
+                        },
+                        "documentId": {
+                          "type": "string"
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "alternativeText": {
+                          "type": "string"
+                        },
+                        "caption": {
+                          "type": "string"
+                        },
+                        "width": {
+                          "type": "integer"
+                        },
+                        "height": {
+                          "type": "integer"
+                        },
+                        "formats": {},
+                        "hash": {
+                          "type": "string"
+                        },
+                        "ext": {
+                          "type": "string"
+                        },
+                        "mime": {
+                          "type": "string"
+                        },
+                        "size": {
+                          "type": "number",
+                          "format": "float"
+                        },
+                        "url": {
+                          "type": "string"
+                        },
+                        "previewUrl": {
+                          "type": "string"
+                        },
+                        "provider": {
+                          "type": "string"
+                        },
+                        "provider_metadata": {},
+                        "related": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "number"
+                              },
+                              "documentId": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        },
+                        "folder": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "number"
+                            },
+                            "documentId": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "folderPath": {
+                          "type": "string"
+                        },
+                        "createdAt": {
+                          "type": "string",
+                          "format": "date-time"
+                        },
+                        "updatedAt": {
+                          "type": "string",
+                          "format": "date-time"
+                        },
+                        "publishedAt": {
+                          "type": "string",
+                          "format": "date-time"
+                        },
+                        "createdBy": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "number"
+                            },
+                            "documentId": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "updatedBy": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "number"
+                            },
+                            "documentId": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "locale": {
+                          "type": "string"
+                        },
+                        "localizations": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "number"
+                              },
+                              "documentId": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "comment": {
+                      "type": "string"
+                    },
+                    "bank": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "number"
+                        },
+                        "documentId": {
+                          "type": "string"
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "createdAt": {
+                          "type": "string",
+                          "format": "date-time"
+                        },
+                        "updatedAt": {
+                          "type": "string",
+                          "format": "date-time"
+                        },
+                        "publishedAt": {
+                          "type": "string",
+                          "format": "date-time"
+                        },
+                        "createdBy": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "number"
+                            },
+                            "documentId": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "updatedBy": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "number"
+                            },
+                            "documentId": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "locale": {
+                          "type": "string"
+                        },
+                        "localizations": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "number"
+                              },
+                              "documentId": {
+                                "type": "string"
+                              }
+                            }
+                          }
                         }
                       }
                     },
@@ -11493,6 +13073,24 @@
                     }
                   }
                 }
+              },
+              "loan_duration_unit": {
+                "type": "string",
+                "enum": [
+                  "DAYS",
+                  "WEEKLY",
+                  "MONTHLY",
+                  "YEARLY"
+                ]
+              },
+              "with_multiple_installments": {
+                "type": "boolean"
+              },
+              "installment_duration": {
+                "type": "integer"
+              },
+              "total_installments": {
+                "type": "integer"
               },
               "createdAt": {
                 "type": "string",
@@ -11702,15 +13300,8 @@
               "loan_amount_requested": {
                 "type": "integer"
               },
-              "loan_duration_days": {
+              "loan_duration": {
                 "type": "integer"
-              },
-              "installment_type": {
-                "type": "string",
-                "enum": [
-                  "weekly",
-                  "monthly"
-                ]
               },
               "installment_amount": {
                 "type": "integer"
@@ -11793,7 +13384,8 @@
                   "Draft",
                   "Pending",
                   "In Progress",
-                  "Approved"
+                  "Approved",
+                  "Rejected"
                 ]
               },
               "loan_acceptance": {
@@ -11820,6 +13412,24 @@
                   ],
                   "example": "string or id"
                 }
+              },
+              "loan_duration_unit": {
+                "type": "string",
+                "enum": [
+                  "DAYS",
+                  "WEEKLY",
+                  "MONTHLY",
+                  "YEARLY"
+                ]
+              },
+              "with_multiple_installments": {
+                "type": "boolean"
+              },
+              "installment_duration": {
+                "type": "integer"
+              },
+              "total_installments": {
+                "type": "integer"
               },
               "locale": {
                 "type": "string"
@@ -11968,15 +13578,8 @@
           "loan_amount_requested": {
             "type": "integer"
           },
-          "loan_duration_days": {
+          "loan_duration": {
             "type": "integer"
-          },
-          "installment_type": {
-            "type": "string",
-            "enum": [
-              "weekly",
-              "monthly"
-            ]
           },
           "installment_amount": {
             "type": "integer"
@@ -12882,7 +14485,8 @@
               "Draft",
               "Pending",
               "In Progress",
-              "Approved"
+              "Approved",
+              "Rejected"
             ]
           },
           "loan_acceptance": {
@@ -13424,15 +15028,8 @@
                   "loan_amount_requested": {
                     "type": "integer"
                   },
-                  "loan_duration_days": {
+                  "loan_duration": {
                     "type": "integer"
-                  },
-                  "installment_type": {
-                    "type": "string",
-                    "enum": [
-                      "weekly",
-                      "monthly"
-                    ]
                   },
                   "installment_amount": {
                     "type": "integer"
@@ -13869,7 +15466,8 @@
                       "Draft",
                       "Pending",
                       "In Progress",
-                      "Approved"
+                      "Approved",
+                      "Rejected"
                     ]
                   },
                   "loan_acceptance": {
@@ -13898,6 +15496,9 @@
                           "type": "string",
                           "format": "date"
                         },
+                        "amount_to_pay": {
+                          "type": "integer"
+                        },
                         "amount_paid": {
                           "type": "integer"
                         },
@@ -13911,9 +15512,11 @@
                           "type": "string",
                           "enum": [
                             "paid",
-                            "pending",
+                            "unpaid",
+                            "partial",
+                            "overdue",
                             "late",
-                            "skipped"
+                            "invalid"
                           ]
                         },
                         "loan_application": {
@@ -13924,6 +15527,212 @@
                             },
                             "documentId": {
                               "type": "string"
+                            }
+                          }
+                        },
+                        "payment_type": {
+                          "type": "string",
+                          "enum": [
+                            "BKASH",
+                            "NOGOD",
+                            "CASH",
+                            "BANK"
+                          ]
+                        },
+                        "payment_doc": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "number"
+                            },
+                            "documentId": {
+                              "type": "string"
+                            },
+                            "name": {
+                              "type": "string"
+                            },
+                            "alternativeText": {
+                              "type": "string"
+                            },
+                            "caption": {
+                              "type": "string"
+                            },
+                            "width": {
+                              "type": "integer"
+                            },
+                            "height": {
+                              "type": "integer"
+                            },
+                            "formats": {},
+                            "hash": {
+                              "type": "string"
+                            },
+                            "ext": {
+                              "type": "string"
+                            },
+                            "mime": {
+                              "type": "string"
+                            },
+                            "size": {
+                              "type": "number",
+                              "format": "float"
+                            },
+                            "url": {
+                              "type": "string"
+                            },
+                            "previewUrl": {
+                              "type": "string"
+                            },
+                            "provider": {
+                              "type": "string"
+                            },
+                            "provider_metadata": {},
+                            "related": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "id": {
+                                    "type": "number"
+                                  },
+                                  "documentId": {
+                                    "type": "string"
+                                  }
+                                }
+                              }
+                            },
+                            "folder": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "number"
+                                },
+                                "documentId": {
+                                  "type": "string"
+                                }
+                              }
+                            },
+                            "folderPath": {
+                              "type": "string"
+                            },
+                            "createdAt": {
+                              "type": "string",
+                              "format": "date-time"
+                            },
+                            "updatedAt": {
+                              "type": "string",
+                              "format": "date-time"
+                            },
+                            "publishedAt": {
+                              "type": "string",
+                              "format": "date-time"
+                            },
+                            "createdBy": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "number"
+                                },
+                                "documentId": {
+                                  "type": "string"
+                                }
+                              }
+                            },
+                            "updatedBy": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "number"
+                                },
+                                "documentId": {
+                                  "type": "string"
+                                }
+                              }
+                            },
+                            "locale": {
+                              "type": "string"
+                            },
+                            "localizations": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "id": {
+                                    "type": "number"
+                                  },
+                                  "documentId": {
+                                    "type": "string"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "comment": {
+                          "type": "string"
+                        },
+                        "bank": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "number"
+                            },
+                            "documentId": {
+                              "type": "string"
+                            },
+                            "name": {
+                              "type": "string"
+                            },
+                            "createdAt": {
+                              "type": "string",
+                              "format": "date-time"
+                            },
+                            "updatedAt": {
+                              "type": "string",
+                              "format": "date-time"
+                            },
+                            "publishedAt": {
+                              "type": "string",
+                              "format": "date-time"
+                            },
+                            "createdBy": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "number"
+                                },
+                                "documentId": {
+                                  "type": "string"
+                                }
+                              }
+                            },
+                            "updatedBy": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "number"
+                                },
+                                "documentId": {
+                                  "type": "string"
+                                }
+                              }
+                            },
+                            "locale": {
+                              "type": "string"
+                            },
+                            "localizations": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "id": {
+                                    "type": "number"
+                                  },
+                                  "documentId": {
+                                    "type": "string"
+                                  }
+                                }
+                              }
                             }
                           }
                         },
@@ -13980,6 +15789,24 @@
                         }
                       }
                     }
+                  },
+                  "loan_duration_unit": {
+                    "type": "string",
+                    "enum": [
+                      "DAYS",
+                      "WEEKLY",
+                      "MONTHLY",
+                      "YEARLY"
+                    ]
+                  },
+                  "with_multiple_installments": {
+                    "type": "boolean"
+                  },
+                  "installment_duration": {
+                    "type": "integer"
+                  },
+                  "total_installments": {
+                    "type": "integer"
                   },
                   "createdAt": {
                     "type": "string",
@@ -14100,6 +15927,24 @@
                 }
               }
             }
+          },
+          "loan_duration_unit": {
+            "type": "string",
+            "enum": [
+              "DAYS",
+              "WEEKLY",
+              "MONTHLY",
+              "YEARLY"
+            ]
+          },
+          "with_multiple_installments": {
+            "type": "boolean"
+          },
+          "installment_duration": {
+            "type": "integer"
+          },
+          "total_installments": {
+            "type": "integer"
           },
           "createdAt": {
             "type": "string",

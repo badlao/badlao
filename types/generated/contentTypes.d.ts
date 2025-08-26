@@ -402,6 +402,40 @@ export interface ApiAboutAbout extends Struct.SingleTypeSchema {
   };
 }
 
+export interface ApiBankBank extends Struct.CollectionTypeSchema {
+  collectionName: 'banks';
+  info: {
+    displayName: 'Bank';
+    pluralName: 'banks';
+    singularName: 'bank';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::bank.bank'>;
+    name: Schema.Attribute.String &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiBusinessValuationBusinessValuation
   extends Struct.CollectionTypeSchema {
   collectionName: 'business_valuations';
@@ -515,6 +549,9 @@ export interface ApiInstallmentInstallment extends Struct.CollectionTypeSchema {
   attributes: {
     amount_due: Schema.Attribute.Integer;
     amount_paid: Schema.Attribute.Integer;
+    amount_to_pay: Schema.Attribute.Integer;
+    bank: Schema.Attribute.Relation<'oneToOne', 'api::bank.bank'>;
+    comment: Schema.Attribute.Text;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -529,8 +566,12 @@ export interface ApiInstallmentInstallment extends Struct.CollectionTypeSchema {
     > &
       Schema.Attribute.Private;
     payment_date: Schema.Attribute.Date;
+    payment_doc: Schema.Attribute.Media<'images' | 'files'>;
     payment_status: Schema.Attribute.Enumeration<
-      ['paid', 'pending', 'late', 'skipped']
+      ['paid', 'unpaid', 'partial', 'overdue', 'late', 'invalid']
+    >;
+    payment_type: Schema.Attribute.Enumeration<
+      ['BKASH', 'NOGOD', 'CASH', 'BANK']
     >;
     publishedAt: Schema.Attribute.DateTime;
     remarks: Schema.Attribute.Text;
@@ -628,7 +669,7 @@ export interface ApiLoanApplicationLoanApplication
     has_bank_account: Schema.Attribute.Boolean;
     has_bkash_account: Schema.Attribute.Boolean;
     installment_amount: Schema.Attribute.Integer;
-    installment_type: Schema.Attribute.Enumeration<['weekly', 'monthly']>;
+    installment_duration: Schema.Attribute.Integer;
     installments: Schema.Attribute.Relation<
       'oneToMany',
       'api::installment.installment'
@@ -638,11 +679,14 @@ export interface ApiLoanApplicationLoanApplication
       'api::loan-acceptance.loan-acceptance'
     >;
     loan_amount_requested: Schema.Attribute.Integer;
-    loan_duration_days: Schema.Attribute.Integer;
+    loan_duration: Schema.Attribute.Integer;
+    loan_duration_unit: Schema.Attribute.Enumeration<
+      ['DAYS', 'WEEKLY', 'MONTHLY', 'YEARLY']
+    >;
     loan_generation: Schema.Attribute.Integer;
     loan_purpose: Schema.Attribute.Text;
     loan_status: Schema.Attribute.Enumeration<
-      ['Draft', 'Pending', 'In Progress', 'Approved']
+      ['Draft', 'Pending', 'In Progress', 'Approved', 'Rejected']
     >;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
@@ -662,6 +706,7 @@ export interface ApiLoanApplicationLoanApplication
       'shared.social-evaluation',
       false
     >;
+    total_installments: Schema.Attribute.Integer;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -671,6 +716,8 @@ export interface ApiLoanApplicationLoanApplication
     user_of_loan: Schema.Attribute.Enumeration<
       ['self', 'spouse', 'child', 'other']
     >;
+    with_multiple_installments: Schema.Attribute.Boolean &
+      Schema.Attribute.DefaultTo<false>;
   };
 }
 
@@ -1183,6 +1230,7 @@ declare module '@strapi/strapi' {
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
       'api::about.about': ApiAboutAbout;
+      'api::bank.bank': ApiBankBank;
       'api::business-valuation.business-valuation': ApiBusinessValuationBusinessValuation;
       'api::global.global': ApiGlobalGlobal;
       'api::installment.installment': ApiInstallmentInstallment;

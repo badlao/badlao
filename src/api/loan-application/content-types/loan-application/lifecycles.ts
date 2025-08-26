@@ -26,16 +26,25 @@ async function syncAcceptanceWithLoan(loan) {
   };
 
   if (existing) {
-    await strapi.entityService.update(
-      'api::loan-acceptance.loan-acceptance',
-      existing.id,
-      { data: acceptanceData }
-    );
+    await strapi.service('api::loan-acceptance.loan-acceptance').update(existing.id, {
+      data: acceptanceData
+    });
+    
+    // Or use entityService if you prefer:
+    // await strapi.entityService.update(
+    //   'api::loan-acceptance.loan-acceptance',
+    //   existing.id,
+    //   { data: acceptanceData }
+    // );
   } else {
-    await strapi.entityService.create(
-      'api::loan-acceptance.loan-acceptance',
-      { data: acceptanceData }
-    );
+    await strapi.service('api::loan-acceptance.loan-acceptance').create({
+      data: acceptanceData
+    });
+    // // Or use entityService if you prefer:
+    // await strapi.entityService.create(
+    //   'api::loan-acceptance.loan-acceptance',
+    //   { data: acceptanceData }
+    // );
   }
 }
 

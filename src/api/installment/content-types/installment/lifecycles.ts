@@ -18,9 +18,13 @@ module.exports = {
   async beforeCreate(event) {
 
     const { data } = event.params;
-    const { loan_application } = data;
+    const { loan_application, skipDueCalculation } = data;
     console.log('✅ Lifecycle beforeCreate triggered data: ', data);
 
+    if (skipDueCalculation) {
+      console.log('Skipping due calculation as per request.');
+      return;
+    }
     // Extract loan ID safely (Admin Panel or REST)
     let loanId = fetchLoanId(loan_application);
 
