@@ -402,6 +402,34 @@ export interface ApiAboutAbout extends Struct.SingleTypeSchema {
   };
 }
 
+export interface ApiBailBondBailBond extends Struct.CollectionTypeSchema {
+  collectionName: 'bail_bonds';
+  info: {
+    displayName: 'Bail Bond';
+    pluralName: 'bail-bonds';
+    singularName: 'bail-bond';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    borrowerName: Schema.Attribute.String & Schema.Attribute.Required;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::bail-bond.bail-bond'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiBusinessValuationBusinessValuation
   extends Struct.CollectionTypeSchema {
   collectionName: 'business_valuations';
@@ -1183,6 +1211,7 @@ declare module '@strapi/strapi' {
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
       'api::about.about': ApiAboutAbout;
+      'api::bail-bond.bail-bond': ApiBailBondBailBond;
       'api::business-valuation.business-valuation': ApiBusinessValuationBusinessValuation;
       'api::global.global': ApiGlobalGlobal;
       'api::installment.installment': ApiInstallmentInstallment;
