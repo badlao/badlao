@@ -1,0 +1,19 @@
+{
+  "kind": "collectionType",
+  "collectionName": "bail_bonds",
+  "info": {
+    "singularName": "bail-bond",
+    "pluralName": "bail-bonds",
+    "displayName": "Bail Bond"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "borrowerName": {
+      "type": "string",
+      "required": true
+    }
+  }
+}
