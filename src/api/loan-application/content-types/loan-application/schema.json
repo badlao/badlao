@@ -161,9 +161,9 @@
     },
     "loan_acceptance": {
       "type": "relation",
-      "relation": "oneToOne",
+      "relation": "manyToOne",
       "target": "api::loan-acceptance.loan-acceptance",
-      "mappedBy": "loan_application"
+      "inversedBy": "loan_applications"
     },
     "installments": {
       "type": "relation",

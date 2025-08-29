@@ -34,6 +34,24 @@ export interface SharedContinuedInvestment extends Struct.ComponentSchema {
   };
 }
 
+export interface SharedLoaneeInformation extends Struct.ComponentSchema {
+  collectionName: 'components_shared_loanee_informations';
+  info: {
+    displayName: 'Loanee Information';
+  };
+  attributes: {
+    cheque_no: Schema.Attribute.String;
+    loan_amount: Schema.Attribute.Decimal & Schema.Attribute.Required;
+    national_id: Schema.Attribute.String & Schema.Attribute.Required;
+    recipient_name: Schema.Attribute.String & Schema.Attribute.Required;
+    repayment_duration: Schema.Attribute.String;
+    repayment_duration_unit: Schema.Attribute.Enumeration<
+      ['DAYS', 'WEEKLY', 'MONTHLY', 'YEARLY']
+    >;
+    repayment_method: Schema.Attribute.String;
+  };
+}
+
 export interface SharedMedia extends Struct.ComponentSchema {
   collectionName: 'components_shared_media';
   info: {
@@ -170,6 +188,7 @@ declare module '@strapi/strapi' {
       'shared.business-expense': SharedBusinessExpense;
       'shared.business-monthly-income': SharedBusinessMonthlyIncome;
       'shared.continued-investment': SharedContinuedInvestment;
+      'shared.loanee-information': SharedLoaneeInformation;
       'shared.media': SharedMedia;
       'shared.permanent-business-asset': SharedPermanentBusinessAsset;
       'shared.possible-income': SharedPossibleIncome;

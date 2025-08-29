@@ -4,7 +4,7 @@ async function syncAcceptanceWithLoan(loan) {
 
   const [existing] = await strapi.entityService.findMany(
     'api::loan-acceptance.loan-acceptance',
-    { filters: { loan_application: loan.id }, limit: 1 }
+    { filters: { loan_applications: loan.id }, limit: 1 }
   );
 
   const acceptanceData = {
@@ -15,12 +15,19 @@ async function syncAcceptanceWithLoan(loan) {
     district: null,
     previous_loan_amount: null,
     repayable_loan_amount: null,
-    recipient_name: loan.applicant_name,
-    national_id: loan.national_id,
-    loan_amount: loan.loan_amount_requested,
-    cheque_no: '',
-    repayment_method: loan.installment_type,
-    repayment_duration_days: loan.loan_duration_days,
+
+    // NEW: loanees is an array with one object, matching the component fields
+    loanees: [
+      {
+        recipient_name: loan.applicant_name,
+        national_id: loan.national_id,
+        loan_amount: loan.loan_amount_requested,
+        cheque_no: '', // Or from loan if available
+        repayment_method: loan.installment_type,
+        repayment_duration_days: loan.loan_duration_days,
+        repayment_duration: loan.loan_duration_unit
+      }
+    ],
     approval_meeting_date: new Date(),
     loan_application: loan.id,
   };
@@ -29,22 +36,10 @@ async function syncAcceptanceWithLoan(loan) {
     await strapi.service('api::loan-acceptance.loan-acceptance').update(existing.id, {
       data: acceptanceData
     });
-    
-    // Or use entityService if you prefer:
-    // await strapi.entityService.update(
-    //   'api::loan-acceptance.loan-acceptance',
-    //   existing.id,
-    //   { data: acceptanceData }
-    // );
   } else {
     await strapi.service('api::loan-acceptance.loan-acceptance').create({
       data: acceptanceData
     });
-    // // Or use entityService if you prefer:
-    // await strapi.entityService.create(
-    //   'api::loan-acceptance.loan-acceptance',
-    //   { data: acceptanceData }
-    // );
   }
 }
 

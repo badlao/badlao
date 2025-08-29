@@ -40,8 +40,8 @@ export async function approveLoan(id: number) {
 function addInstallments(loan: any, transaction: any) {
     const installmentService = strapi.service('api::installment.installment');
     const loanDurationUnit = loan.loan_duration_unit;
-    const withMultipleInstallments = loan.with_multiple_installments;
-    const loanDuration = loan.loan_duration;
+    // const withMultipleInstallments = loan.with_multiple_installments;
+    // const loanDuration = loan.loan_duration;
     const installAmount = loan.installment_amount;
     
     const loanAmountRequested = loan.loan_amount_requested;

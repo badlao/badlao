@@ -595,7 +595,6 @@ export interface ApiLoanAcceptanceLoanAcceptance
   attributes: {
     accounts_officer_signature: Schema.Attribute.Media<'images'>;
     approval_meeting_date: Schema.Attribute.Date;
-    cheque_no: Schema.Attribute.String;
     committee_chair_name: Schema.Attribute.String;
     coordinator_signature: Schema.Attribute.Media<'images'>;
     createdAt: Schema.Attribute.DateTime;
@@ -605,27 +604,22 @@ export interface ApiLoanAcceptanceLoanAcceptance
     education_level: Schema.Attribute.String;
     group_id: Schema.Attribute.String;
     group_leader_name: Schema.Attribute.String;
-    loan_amount: Schema.Attribute.Decimal;
-    loan_application: Schema.Attribute.Relation<
-      'oneToOne',
+    loan_applications: Schema.Attribute.Relation<
+      'oneToMany',
       'api::loan-application.loan-application'
     >;
-    loan_approval_no: Schema.Attribute.String;
+    loanees: Schema.Attribute.Component<'shared.loanee-information', true>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
       'api::loan-acceptance.loan-acceptance'
     > &
       Schema.Attribute.Private;
-    national_id: Schema.Attribute.String;
     previous_loan_amount: Schema.Attribute.Decimal;
     program_manager_signature: Schema.Attribute.Media<'images'>;
     program_name: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
-    recipient_name: Schema.Attribute.String;
     repayable_loan_amount: Schema.Attribute.Decimal;
-    repayment_duration_days: Schema.Attribute.Integer;
-    repayment_method: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -675,7 +669,7 @@ export interface ApiLoanApplicationLoanApplication
       'api::installment.installment'
     >;
     loan_acceptance: Schema.Attribute.Relation<
-      'oneToOne',
+      'manyToOne',
       'api::loan-acceptance.loan-acceptance'
     >;
     loan_amount_requested: Schema.Attribute.Integer;

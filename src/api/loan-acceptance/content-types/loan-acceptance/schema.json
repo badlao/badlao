@@ -39,33 +39,10 @@
       "type": "decimal",
       "required": false
     },
-    "loan_approval_no": {
-      "type": "string",
-      "required": false
-    },
-    "recipient_name": {
-      "type": "string",
-      "required": false
-    },
-    "national_id": {
-      "type": "string",
-      "required": false
-    },
-    "loan_amount": {
-      "type": "decimal",
-      "required": false
-    },
-    "cheque_no": {
-      "type": "string",
-      "required": false
-    },
-    "repayment_method": {
-      "type": "string",
-      "required": false
-    },
-    "repayment_duration_days": {
-      "type": "integer",
-      "required": false
+    "loanees": {
+      "type": "component",
+      "component": "shared.loanee-information",
+      "repeatable": true
     },
     "committee_chair_name": {
       "type": "string",
@@ -96,11 +73,11 @@
         "images"
       ]
     },
-    "loan_application": {
+    "loan_applications": {
       "type": "relation",
-      "relation": "oneToOne",
+      "relation": "oneToMany",
       "target": "api::loan-application.loan-application",
-      "inversedBy": "loan_acceptance"
+      "mappedBy": "loan_acceptance"
     }
   }
 }
