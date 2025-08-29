@@ -12,6 +12,23 @@
   },
   "pluginOptions": {},
   "attributes": {
+    "form_no": {
+      "type": "integer"
+    },
+    "member_no": {
+      "type": "integer"
+    },
+    "group_no": {
+      "type": "integer"
+    },
+    "applicant_photos": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
     "applicant_name": {
       "type": "string"
     },
@@ -66,30 +83,34 @@
     "loan_purpose": {
       "type": "text"
     },
-    "loan_generation": {
+    "loan_no": {
       "type": "integer"
     },
     "user_of_loan": {
       "type": "enumeration",
       "enum": [
-        "self",
-        "spouse",
-        "child",
-        "other"
+        "SELF",
+        "SPOUSE",
+        "CHILD",
+        "OTHER"
       ]
     },
     "business_type": {
       "type": "enumeration",
       "enum": [
-        "new",
-        "old"
+        "NEW",
+        "OLD"
       ]
     },
-    "user_name": {
+    "loanee_name": {
       "type": "string"
     },
-    "user_nid": {
+    "loanee_nid": {
       "type": "string"
+    },
+    "with_multiple_installments": {
+      "type": "boolean",
+      "default": false
     },
     "loan_amount_requested": {
       "type": "integer"
@@ -100,17 +121,40 @@
     "installment_amount": {
       "type": "integer"
     },
-    "has_bkash_account": {
-      "type": "boolean"
+    "loan_duration_unit": {
+      "type": "enumeration",
+      "enum": [
+        "DAYS",
+        "WEEKLY",
+        "MONTHLY",
+        "YEARLY"
+      ]
     },
-    "bkash_account_number": {
+    "total_installments": {
+      "type": "integer"
+    },
+    "installment_duration": {
+      "type": "integer"
+    },
+    "mobile_banking_type": {
+      "type": "enumeration",
+      "enum": [
+        "BKASH",
+        "NAGAD",
+        "ROCKET",
+        "OTHER"
+      ]
+    },
+    "mobile_banking_acc_no": {
       "type": "string"
     },
     "has_bank_account": {
       "type": "boolean"
     },
-    "bank_name": {
-      "type": "string"
+    "bank": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::bank.bank"
     },
     "bank_branch": {
       "type": "string"
@@ -124,20 +168,36 @@
     "application_date": {
       "type": "date"
     },
-    "applicant_photo": {
+    "applicant_signature": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files"
+      ]
+    },
+    "loanee_nid_doc": {
       "type": "media",
       "multiple": false,
       "required": false
     },
-    "user_nid_photo": {
+    "applicant_nid_doc": {
       "type": "media",
       "multiple": false,
-      "required": false
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
     },
-    "guarantor_document": {
+    "guarantors_document": {
       "type": "media",
-      "multiple": false,
-      "required": false
+      "multiple": true,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
     },
     "social_evaluation": {
       "type": "component",
@@ -170,25 +230,6 @@
       "relation": "oneToMany",
       "target": "api::installment.installment",
       "mappedBy": "loan_application"
-    },
-    "loan_duration_unit": {
-      "type": "enumeration",
-      "enum": [
-        "DAYS",
-        "WEEKLY",
-        "MONTHLY",
-        "YEARLY"
-      ]
-    },
-    "with_multiple_installments": {
-      "type": "boolean",
-      "default": false
-    },
-    "installment_duration": {
-      "type": "integer"
-    },
-    "total_installments": {
-      "type": "integer"
     }
   }
 }

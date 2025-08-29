@@ -163,19 +163,28 @@ export interface SharedSocialEvaluation extends Struct.ComponentSchema {
     education_cost: Schema.Attribute.Integer;
     female_members: Schema.Attribute.Integer;
     financial_behavior_rating: Schema.Attribute.Enumeration<
-      ['good', 'average', 'bad']
+      ['GOOD', 'AVERAGE', 'BAD']
     >;
     food_cost: Schema.Attribute.Integer;
     has_chronic_disease: Schema.Attribute.Boolean;
     has_legal_or_social_problem: Schema.Attribute.Boolean;
     has_other_loan: Schema.Attribute.Boolean;
     house_rent: Schema.Attribute.Integer;
-    house_type: Schema.Attribute.Enumeration<['own', 'rented']>;
-    main_income_source: Schema.Attribute.Enumeration<['job', 'business']>;
+    house_total_expense: Schema.Attribute.Integer;
+    house_type: Schema.Attribute.Enumeration<['OWN', 'RENTED']>;
+    is_other_org_defaulter: Schema.Attribute.Boolean;
+    legal_social_problem_desc: Schema.Attribute.Text;
+    main_income_source: Schema.Attribute.Enumeration<
+      ['JOB', 'BUSINESS', 'OTHER']
+    >;
     male_members: Schema.Attribute.Integer;
     medical_cost: Schema.Attribute.Integer;
     monthly_income: Schema.Attribute.Integer;
     other_cost: Schema.Attribute.Integer;
+    other_org_exit_date: Schema.Attribute.Date;
+    other_org_monthly_installment: Schema.Attribute.Integer;
+    other_org_total_liability: Schema.Attribute.Integer;
+    personal_social_behaviour: Schema.Attribute.Text;
     total_expense: Schema.Attribute.Integer;
     total_family_members: Schema.Attribute.Integer;
     utility_bill: Schema.Attribute.Integer;

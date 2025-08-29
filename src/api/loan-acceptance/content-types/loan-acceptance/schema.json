@@ -78,6 +78,14 @@
       "relation": "oneToMany",
       "target": "api::loan-application.loan-application",
       "mappedBy": "loan_acceptance"
+    },
+    "group_photo": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files"
+      ]
     }
   }
 }

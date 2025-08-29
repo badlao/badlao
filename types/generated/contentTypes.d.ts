@@ -632,6 +632,7 @@ export interface ApiLoanAcceptanceLoanAcceptance
     education_level: Schema.Attribute.String;
     group_id: Schema.Attribute.String;
     group_leader_name: Schema.Attribute.String;
+    group_photo: Schema.Attribute.Media<'images' | 'files'>;
     loan_applications: Schema.Attribute.Relation<
       'oneToMany',
       'api::loan-application.loan-application'
@@ -669,15 +670,18 @@ export interface ApiLoanApplicationLoanApplication
   attributes: {
     age: Schema.Attribute.Integer;
     applicant_name: Schema.Attribute.String;
-    applicant_photo: Schema.Attribute.Media;
+    applicant_nid_doc: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
+    applicant_photos: Schema.Attribute.Media<'images', true>;
+    applicant_signature: Schema.Attribute.Media<'images' | 'files'>;
     application_date: Schema.Attribute.Date;
     approved_by: Schema.Attribute.Relation<'oneToOne', 'admin::user'>;
+    bank: Schema.Attribute.Relation<'oneToOne', 'api::bank.bank'>;
     bank_account_number: Schema.Attribute.String;
     bank_account_title: Schema.Attribute.String;
     bank_branch: Schema.Attribute.String;
-    bank_name: Schema.Attribute.String;
-    bkash_account_number: Schema.Attribute.String;
-    business_type: Schema.Attribute.Enumeration<['new', 'old']>;
+    business_type: Schema.Attribute.Enumeration<['NEW', 'OLD']>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -686,10 +690,11 @@ export interface ApiLoanApplicationLoanApplication
       ['primary', 'secondary', 'hsc', 'graduate', 'postgraduate', 'none']
     >;
     father_or_spouse_name: Schema.Attribute.String;
+    form_no: Schema.Attribute.Integer;
     gender: Schema.Attribute.Enumeration<['male', 'female', 'other']>;
-    guarantor_document: Schema.Attribute.Media;
+    group_no: Schema.Attribute.Integer;
+    guarantors_document: Schema.Attribute.Media<'images', true>;
     has_bank_account: Schema.Attribute.Boolean;
-    has_bkash_account: Schema.Attribute.Boolean;
     installment_amount: Schema.Attribute.Integer;
     installment_duration: Schema.Attribute.Integer;
     installments: Schema.Attribute.Relation<
@@ -705,11 +710,14 @@ export interface ApiLoanApplicationLoanApplication
     loan_duration_unit: Schema.Attribute.Enumeration<
       ['DAYS', 'WEEKLY', 'MONTHLY', 'YEARLY']
     >;
-    loan_generation: Schema.Attribute.Integer;
+    loan_no: Schema.Attribute.Integer;
     loan_purpose: Schema.Attribute.Text;
     loan_status: Schema.Attribute.Enumeration<
       ['Draft', 'Pending', 'In Progress', 'Approved', 'Rejected']
     >;
+    loanee_name: Schema.Attribute.String;
+    loanee_nid: Schema.Attribute.String;
+    loanee_nid_doc: Schema.Attribute.Media;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -718,6 +726,11 @@ export interface ApiLoanApplicationLoanApplication
       Schema.Attribute.Private;
     marital_status: Schema.Attribute.Enumeration<
       ['single', 'married', 'widow']
+    >;
+    member_no: Schema.Attribute.Integer;
+    mobile_banking_acc_no: Schema.Attribute.String;
+    mobile_banking_type: Schema.Attribute.Enumeration<
+      ['BKASH', 'NAGAD', 'ROCKET', 'OTHER']
     >;
     mother_name: Schema.Attribute.String;
     national_id: Schema.Attribute.String;
@@ -732,11 +745,8 @@ export interface ApiLoanApplicationLoanApplication
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    user_name: Schema.Attribute.String;
-    user_nid: Schema.Attribute.String;
-    user_nid_photo: Schema.Attribute.Media;
     user_of_loan: Schema.Attribute.Enumeration<
-      ['self', 'spouse', 'child', 'other']
+      ['SELF', 'SPOUSE', 'CHILD', 'OTHER']
     >;
     with_multiple_installments: Schema.Attribute.Boolean &
       Schema.Attribute.DefaultTo<false>;
