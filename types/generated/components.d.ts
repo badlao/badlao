@@ -34,6 +34,24 @@ export interface SharedContinuedInvestment extends Struct.ComponentSchema {
   };
 }
 
+export interface SharedHolofnamaChequeAck extends Struct.ComponentSchema {
+  collectionName: 'components_shared_holofnama_cheque_acks';
+  info: {
+    displayName: 'holofnama_cheque_ack';
+  };
+  attributes: {
+    loan_amount: Schema.Attribute.Integer;
+    loan_recieve_date: Schema.Attribute.Date;
+    loan_recieve_type: Schema.Attribute.Enumeration<['ONLINE', 'OFFLINE']>;
+    loan_transfer_type: Schema.Attribute.Enumeration<
+      ['BANK', 'MOBILE_BANKING']
+    >;
+    loanee_name: Schema.Attribute.String;
+    loanee_nid: Schema.Attribute.Integer;
+    loanee_signature: Schema.Attribute.Media<'images'>;
+  };
+}
+
 export interface SharedLoaneeInformation extends Struct.ComponentSchema {
   collectionName: 'components_shared_loanee_informations';
   info: {
@@ -44,6 +62,7 @@ export interface SharedLoaneeInformation extends Struct.ComponentSchema {
     loan_amount: Schema.Attribute.Decimal & Schema.Attribute.Required;
     national_id: Schema.Attribute.String & Schema.Attribute.Required;
     recipient_name: Schema.Attribute.String & Schema.Attribute.Required;
+    recipient_signature: Schema.Attribute.Media<'images'>;
     repayment_duration: Schema.Attribute.String;
     repayment_duration_unit: Schema.Attribute.Enumeration<
       ['DAYS', 'WEEKLY', 'MONTHLY', 'YEARLY']
@@ -197,6 +216,7 @@ declare module '@strapi/strapi' {
       'shared.business-expense': SharedBusinessExpense;
       'shared.business-monthly-income': SharedBusinessMonthlyIncome;
       'shared.continued-investment': SharedContinuedInvestment;
+      'shared.holofnama-cheque-ack': SharedHolofnamaChequeAck;
       'shared.loanee-information': SharedLoaneeInformation;
       'shared.media': SharedMedia;
       'shared.permanent-business-asset': SharedPermanentBusinessAsset;

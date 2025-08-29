@@ -1,0 +1,52 @@
+{
+  "kind": "collectionType",
+  "collectionName": "holofnamas",
+  "info": {
+    "singularName": "holofnama",
+    "pluralName": "holofnamas",
+    "displayName": "Holofnama"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "cheque_ack_cert": {
+      "type": "component",
+      "component": "shared.holofnama-cheque-ack",
+      "repeatable": true
+    },
+    "branch_manager_name": {
+      "type": "string"
+    },
+    "branch_manager_signature": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "unit_manager_name": {
+      "type": "string"
+    },
+    "unit_manager_signature": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "program_name": {
+      "type": "string"
+    },
+    "holofnama_date": {
+      "type": "date"
+    },
+    "loan_application": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::loan-application.loan-application",
+      "inversedBy": "holofnamas"
+    }
+  }
+}

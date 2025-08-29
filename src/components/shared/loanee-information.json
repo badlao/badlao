@@ -1,41 +1,48 @@
 {
-    "collectionName": "components_shared_loanee_informations",
-    "info": {
-        "displayName": "Loanee Information"
+  "collectionName": "components_shared_loanee_informations",
+  "info": {
+    "displayName": "Loanee Information"
+  },
+  "attributes": {
+    "recipient_name": {
+      "type": "string",
+      "required": true
     },
-    "attributes": {
-        "recipient_name": {
-            "type": "string",
-            "required": true
-        },
-        "national_id": {
-            "type": "string",
-            "required": true
-        },
-        "loan_amount": {
-            "type": "decimal",
-            "required": true
-        },
-        "cheque_no": {
-            "type": "string",
-            "required": false
-        },
-        "repayment_method": {
-            "type": "string",
-            "required": false
-        },
-        "repayment_duration": {
-            "type": "string",
-            "required": false
-        },
-        "repayment_duration_unit": {
-            "type": "enumeration",
-            "enum": [
-                "DAYS",
-                "WEEKLY",
-                "MONTHLY",
-                "YEARLY"
-            ]
-        }
+    "national_id": {
+      "type": "string",
+      "required": true
+    },
+    "loan_amount": {
+      "type": "decimal",
+      "required": true
+    },
+    "cheque_no": {
+      "type": "string",
+      "required": false
+    },
+    "repayment_method": {
+      "type": "string",
+      "required": false
+    },
+    "repayment_duration": {
+      "type": "string",
+      "required": false
+    },
+    "repayment_duration_unit": {
+      "type": "enumeration",
+      "enum": [
+        "DAYS",
+        "WEEKLY",
+        "MONTHLY",
+        "YEARLY"
+      ]
+    },
+    "recipient_signature": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
     }
+  }
 }

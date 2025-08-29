@@ -11,9 +11,40 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "borrowerName": {
+    "loanee_name": {
       "type": "string",
       "required": true
+    },
+    "loanee_nid": {
+      "type": "integer"
+    },
+    "loan_amount_requested": {
+      "type": "integer"
+    },
+    "guarantor_signature": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "guarantor_nid": {
+      "type": "integer"
+    },
+    "full_address": {
+      "type": "text"
+    },
+    "phone_no": {
+      "type": "string"
+    },
+    "loan_application": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::loan-application.loan-application",
+      "inversedBy": "bail_bonds"
     }
   }
 }

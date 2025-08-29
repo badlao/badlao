@@ -1,0 +1,43 @@
+{
+  "collectionName": "components_shared_holofnama_cheque_acks",
+  "info": {
+    "displayName": "holofnama_cheque_ack"
+  },
+  "options": {},
+  "attributes": {
+    "loanee_name": {
+      "type": "string"
+    },
+    "loanee_nid": {
+      "type": "integer"
+    },
+    "loan_amount": {
+      "type": "integer"
+    },
+    "loan_recieve_type": {
+      "type": "enumeration",
+      "enum": [
+        "ONLINE",
+        "OFFLINE"
+      ]
+    },
+    "loan_transfer_type": {
+      "type": "enumeration",
+      "enum": [
+        "BANK",
+        "MOBILE_BANKING"
+      ]
+    },
+    "loan_recieve_date": {
+      "type": "date"
+    },
+    "loanee_signature": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
+    }
+  },
+  "config": {}
+}

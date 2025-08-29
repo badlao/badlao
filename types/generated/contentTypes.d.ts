@@ -413,16 +413,28 @@ export interface ApiBailBondBailBond extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
-    borrowerName: Schema.Attribute.String & Schema.Attribute.Required;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    full_address: Schema.Attribute.Text;
+    guarantor_nid: Schema.Attribute.Integer;
+    guarantor_signature: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
+    loan_amount_requested: Schema.Attribute.Integer;
+    loan_application: Schema.Attribute.Relation<
+      'manyToOne',
+      'api::loan-application.loan-application'
+    >;
+    loanee_name: Schema.Attribute.String & Schema.Attribute.Required;
+    loanee_nid: Schema.Attribute.Integer;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
       'api::bail-bond.bail-bond'
     > &
       Schema.Attribute.Private;
+    phone_no: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -563,6 +575,47 @@ export interface ApiGlobalGlobal extends Struct.SingleTypeSchema {
   };
 }
 
+export interface ApiHolofnamaHolofnama extends Struct.CollectionTypeSchema {
+  collectionName: 'holofnamas';
+  info: {
+    displayName: 'Holofnama';
+    pluralName: 'holofnamas';
+    singularName: 'holofnama';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    branch_manager_name: Schema.Attribute.String;
+    branch_manager_signature: Schema.Attribute.Media<'images'>;
+    cheque_ack_cert: Schema.Attribute.Component<
+      'shared.holofnama-cheque-ack',
+      true
+    >;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    holofnama_date: Schema.Attribute.Date;
+    loan_application: Schema.Attribute.Relation<
+      'manyToOne',
+      'api::loan-application.loan-application'
+    >;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::holofnama.holofnama'
+    > &
+      Schema.Attribute.Private;
+    program_name: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    unit_manager_name: Schema.Attribute.String;
+    unit_manager_signature: Schema.Attribute.Media<'images'>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiInstallmentInstallment extends Struct.CollectionTypeSchema {
   collectionName: 'installments';
   info: {
@@ -677,6 +730,10 @@ export interface ApiLoanApplicationLoanApplication
     applicant_signature: Schema.Attribute.Media<'images' | 'files'>;
     application_date: Schema.Attribute.Date;
     approved_by: Schema.Attribute.Relation<'oneToOne', 'admin::user'>;
+    bail_bonds: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::bail-bond.bail-bond'
+    >;
     bank: Schema.Attribute.Relation<'oneToOne', 'api::bank.bank'>;
     bank_account_number: Schema.Attribute.String;
     bank_account_title: Schema.Attribute.String;
@@ -695,6 +752,10 @@ export interface ApiLoanApplicationLoanApplication
     group_no: Schema.Attribute.Integer;
     guarantors_document: Schema.Attribute.Media<'images', true>;
     has_bank_account: Schema.Attribute.Boolean;
+    holofnamas: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::holofnama.holofnama'
+    >;
     installment_amount: Schema.Attribute.Integer;
     installment_duration: Schema.Attribute.Integer;
     installments: Schema.Attribute.Relation<
@@ -1266,6 +1327,7 @@ declare module '@strapi/strapi' {
       'api::bank.bank': ApiBankBank;
       'api::business-valuation.business-valuation': ApiBusinessValuationBusinessValuation;
       'api::global.global': ApiGlobalGlobal;
+      'api::holofnama.holofnama': ApiHolofnamaHolofnama;
       'api::installment.installment': ApiInstallmentInstallment;
       'api::loan-acceptance.loan-acceptance': ApiLoanAcceptanceLoanAcceptance;
       'api::loan-application.loan-application': ApiLoanApplicationLoanApplication;
