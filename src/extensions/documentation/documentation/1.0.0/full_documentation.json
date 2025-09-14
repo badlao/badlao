@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2025-08-29T18:48:09.135Z"
+    "x-generation-date": "2025-09-14T15:10:17.476Z"
   },
   "x-strapi-config": {
     "plugins": [
@@ -7040,6 +7040,10 @@
               "group_no": {
                 "type": "integer"
               },
+              "date_of_becom_member": {
+                "type": "string",
+                "format": "date"
+              },
               "applicant_photos": {
                 "type": "array",
                 "items": {
@@ -7267,9 +7271,9 @@
                 "type": "string",
                 "enum": [
                   "DAYS",
-                  "WEEKLY",
-                  "MONTHLY",
-                  "YEARLY"
+                  "WEEK",
+                  "MONTH",
+                  "YEAR"
                 ]
               },
               "total_installments": {
@@ -7277,6 +7281,15 @@
               },
               "installment_duration": {
                 "type": "integer"
+              },
+              "installment_duration_unit": {
+                "type": "string",
+                "enum": [
+                  "DAYS",
+                  "WEEKLY",
+                  "MONTHLY",
+                  "YEARLY"
+                ]
               },
               "mobile_banking_type": {
                 "type": "string",
@@ -7907,11 +7920,11 @@
               "loan_status": {
                 "type": "string",
                 "enum": [
-                  "Draft",
-                  "Pending",
-                  "In Progress",
-                  "Approved",
-                  "Rejected"
+                  "DRAFT",
+                  "PENDING",
+                  "IN_PROGRESS",
+                  "APPROVED",
+                  "REJECTED"
                 ]
               },
               "loan_acceptance": {
@@ -13348,6 +13361,10 @@
               "group_no": {
                 "type": "integer"
               },
+              "date_of_becom_member": {
+                "type": "string",
+                "format": "date"
+              },
               "applicant_photos": {
                 "type": "array",
                 "items": {
@@ -13575,9 +13592,9 @@
                 "type": "string",
                 "enum": [
                   "DAYS",
-                  "WEEKLY",
-                  "MONTHLY",
-                  "YEARLY"
+                  "WEEK",
+                  "MONTH",
+                  "YEAR"
                 ]
               },
               "total_installments": {
@@ -13585,6 +13602,15 @@
               },
               "installment_duration": {
                 "type": "integer"
+              },
+              "installment_duration_unit": {
+                "type": "string",
+                "enum": [
+                  "DAYS",
+                  "WEEKLY",
+                  "MONTHLY",
+                  "YEARLY"
+                ]
               },
               "mobile_banking_type": {
                 "type": "string",
@@ -14215,11 +14241,11 @@
               "loan_status": {
                 "type": "string",
                 "enum": [
-                  "Draft",
-                  "Pending",
-                  "In Progress",
-                  "Approved",
-                  "Rejected"
+                  "DRAFT",
+                  "PENDING",
+                  "IN_PROGRESS",
+                  "APPROVED",
+                  "REJECTED"
                 ]
               },
               "loan_acceptance": {
@@ -15989,6 +16015,10 @@
               "group_no": {
                 "type": "integer"
               },
+              "date_of_becom_member": {
+                "type": "string",
+                "format": "date"
+              },
               "applicant_photos": {
                 "type": "array",
                 "items": {
@@ -16685,9 +16715,9 @@
                 "type": "string",
                 "enum": [
                   "DAYS",
-                  "WEEKLY",
-                  "MONTHLY",
-                  "YEARLY"
+                  "WEEK",
+                  "MONTH",
+                  "YEAR"
                 ]
               },
               "total_installments": {
@@ -16695,6 +16725,15 @@
               },
               "installment_duration": {
                 "type": "integer"
+              },
+              "installment_duration_unit": {
+                "type": "string",
+                "enum": [
+                  "DAYS",
+                  "WEEKLY",
+                  "MONTHLY",
+                  "YEARLY"
+                ]
               },
               "mobile_banking_type": {
                 "type": "string",
@@ -17325,11 +17364,11 @@
               "loan_status": {
                 "type": "string",
                 "enum": [
-                  "Draft",
-                  "Pending",
-                  "In Progress",
-                  "Approved",
-                  "Rejected"
+                  "DRAFT",
+                  "PENDING",
+                  "IN_PROGRESS",
+                  "APPROVED",
+                  "REJECTED"
                 ]
               },
               "loan_acceptance": {
@@ -19671,6 +19710,10 @@
                 "group_no": {
                   "type": "integer"
                 },
+                "date_of_becom_member": {
+                  "type": "string",
+                  "format": "date"
+                },
                 "applicant_photos": {
                   "type": "array",
                   "items": {
@@ -19898,9 +19941,9 @@
                   "type": "string",
                   "enum": [
                     "DAYS",
-                    "WEEKLY",
-                    "MONTHLY",
-                    "YEARLY"
+                    "WEEK",
+                    "MONTH",
+                    "YEAR"
                   ]
                 },
                 "total_installments": {
@@ -19908,6 +19951,15 @@
                 },
                 "installment_duration": {
                   "type": "integer"
+                },
+                "installment_duration_unit": {
+                  "type": "string",
+                  "enum": [
+                    "DAYS",
+                    "WEEKLY",
+                    "MONTHLY",
+                    "YEARLY"
+                  ]
                 },
                 "mobile_banking_type": {
                   "type": "string",
@@ -20538,11 +20590,11 @@
                 "loan_status": {
                   "type": "string",
                   "enum": [
-                    "Draft",
-                    "Pending",
-                    "In Progress",
-                    "Approved",
-                    "Rejected"
+                    "DRAFT",
+                    "PENDING",
+                    "IN_PROGRESS",
+                    "APPROVED",
+                    "REJECTED"
                   ]
                 },
                 "loan_acceptance": {
@@ -22269,6 +22321,10 @@
               "group_no": {
                 "type": "integer"
               },
+              "date_of_becom_member": {
+                "type": "string",
+                "format": "date"
+              },
               "applicant_photos": {
                 "type": "array",
                 "items": {
@@ -22378,9 +22434,9 @@
                 "type": "string",
                 "enum": [
                   "DAYS",
-                  "WEEKLY",
-                  "MONTHLY",
-                  "YEARLY"
+                  "WEEK",
+                  "MONTH",
+                  "YEAR"
                 ]
               },
               "total_installments": {
@@ -22388,6 +22444,15 @@
               },
               "installment_duration": {
                 "type": "integer"
+              },
+              "installment_duration_unit": {
+                "type": "string",
+                "enum": [
+                  "DAYS",
+                  "WEEKLY",
+                  "MONTHLY",
+                  "YEARLY"
+                ]
               },
               "mobile_banking_type": {
                 "type": "string",
@@ -22492,11 +22557,11 @@
               "loan_status": {
                 "type": "string",
                 "enum": [
-                  "Draft",
-                  "Pending",
-                  "In Progress",
-                  "Approved",
-                  "Rejected"
+                  "DRAFT",
+                  "PENDING",
+                  "IN_PROGRESS",
+                  "APPROVED",
+                  "REJECTED"
                 ]
               },
               "loan_acceptance": {
@@ -22625,6 +22690,10 @@
           },
           "group_no": {
             "type": "integer"
+          },
+          "date_of_becom_member": {
+            "type": "string",
+            "format": "date"
           },
           "applicant_photos": {
             "type": "array",
@@ -23322,9 +23391,9 @@
             "type": "string",
             "enum": [
               "DAYS",
-              "WEEKLY",
-              "MONTHLY",
-              "YEARLY"
+              "WEEK",
+              "MONTH",
+              "YEAR"
             ]
           },
           "total_installments": {
@@ -23332,6 +23401,15 @@
           },
           "installment_duration": {
             "type": "integer"
+          },
+          "installment_duration_unit": {
+            "type": "string",
+            "enum": [
+              "DAYS",
+              "WEEKLY",
+              "MONTHLY",
+              "YEARLY"
+            ]
           },
           "mobile_banking_type": {
             "type": "string",
@@ -23962,11 +24040,11 @@
           "loan_status": {
             "type": "string",
             "enum": [
-              "Draft",
-              "Pending",
-              "In Progress",
-              "Approved",
-              "Rejected"
+              "DRAFT",
+              "PENDING",
+              "IN_PROGRESS",
+              "APPROVED",
+              "REJECTED"
             ]
           },
           "loan_acceptance": {
@@ -24421,6 +24499,10 @@
                     "group_no": {
                       "type": "integer"
                     },
+                    "date_of_becom_member": {
+                      "type": "string",
+                      "format": "date"
+                    },
                     "applicant_photos": {
                       "type": "array",
                       "items": {
@@ -24648,9 +24730,9 @@
                       "type": "string",
                       "enum": [
                         "DAYS",
-                        "WEEKLY",
-                        "MONTHLY",
-                        "YEARLY"
+                        "WEEK",
+                        "MONTH",
+                        "YEAR"
                       ]
                     },
                     "total_installments": {
@@ -24658,6 +24740,15 @@
                     },
                     "installment_duration": {
                       "type": "integer"
+                    },
+                    "installment_duration_unit": {
+                      "type": "string",
+                      "enum": [
+                        "DAYS",
+                        "WEEKLY",
+                        "MONTHLY",
+                        "YEARLY"
+                      ]
                     },
                     "mobile_banking_type": {
                       "type": "string",
@@ -25234,11 +25325,11 @@
                     "loan_status": {
                       "type": "string",
                       "enum": [
-                        "Draft",
-                        "Pending",
-                        "In Progress",
-                        "Approved",
-                        "Rejected"
+                        "DRAFT",
+                        "PENDING",
+                        "IN_PROGRESS",
+                        "APPROVED",
+                        "REJECTED"
                       ]
                     },
                     "loan_acceptance": {

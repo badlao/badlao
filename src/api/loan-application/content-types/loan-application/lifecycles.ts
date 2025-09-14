@@ -1,6 +1,6 @@
 // Helper function defined at the top or bottom of the file.
 async function syncAcceptanceWithLoan(loan) {
-  if (loan.loan_status !== "Pending") return;
+  if (loan.loan_status !== "PENDING") return;
 
   const [existing] = await strapi.entityService.findMany(
     'api::loan-acceptance.loan-acceptance',

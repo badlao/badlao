@@ -21,6 +21,9 @@
     "group_no": {
       "type": "integer"
     },
+    "date_of_becom_member": {
+      "type": "date"
+    },
     "applicant_photos": {
       "type": "media",
       "multiple": true,
@@ -125,9 +128,9 @@
       "type": "enumeration",
       "enum": [
         "DAYS",
-        "WEEKLY",
-        "MONTHLY",
-        "YEARLY"
+        "WEEK",
+        "MONTH",
+        "YEAR"
       ]
     },
     "total_installments": {
@@ -135,6 +138,15 @@
     },
     "installment_duration": {
       "type": "integer"
+    },
+    "installment_duration_unit": {
+      "type": "enumeration",
+      "enum": [
+        "DAYS",
+        "WEEKLY",
+        "MONTHLY",
+        "YEARLY"
+      ]
     },
     "mobile_banking_type": {
       "type": "enumeration",
@@ -212,11 +224,11 @@
     "loan_status": {
       "type": "enumeration",
       "enum": [
-        "Draft",
-        "Pending",
-        "In Progress",
-        "Approved",
-        "Rejected"
+        "DRAFT",
+        "PENDING",
+        "IN_PROGRESS",
+        "APPROVED",
+        "REJECTED"
       ]
     },
     "loan_acceptance": {

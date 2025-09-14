@@ -410,7 +410,7 @@ export interface ApiBailBondBailBond extends Struct.CollectionTypeSchema {
     singularName: 'bail-bond';
   };
   options: {
-    draftAndPublish: true;
+    draftAndPublish: false;
   };
   attributes: {
     createdAt: Schema.Attribute.DateTime;
@@ -583,7 +583,7 @@ export interface ApiHolofnamaHolofnama extends Struct.CollectionTypeSchema {
     singularName: 'holofnama';
   };
   options: {
-    draftAndPublish: true;
+    draftAndPublish: false;
   };
   attributes: {
     branch_manager_name: Schema.Attribute.String;
@@ -743,6 +743,7 @@ export interface ApiLoanApplicationLoanApplication
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     current_address: Schema.Attribute.Text;
+    date_of_becom_member: Schema.Attribute.Date;
     education_level: Schema.Attribute.Enumeration<
       ['primary', 'secondary', 'hsc', 'graduate', 'postgraduate', 'none']
     >;
@@ -758,6 +759,9 @@ export interface ApiLoanApplicationLoanApplication
     >;
     installment_amount: Schema.Attribute.Integer;
     installment_duration: Schema.Attribute.Integer;
+    installment_duration_unit: Schema.Attribute.Enumeration<
+      ['DAYS', 'WEEKLY', 'MONTHLY', 'YEARLY']
+    >;
     installments: Schema.Attribute.Relation<
       'oneToMany',
       'api::installment.installment'
@@ -769,12 +773,12 @@ export interface ApiLoanApplicationLoanApplication
     loan_amount_requested: Schema.Attribute.Integer;
     loan_duration: Schema.Attribute.Integer;
     loan_duration_unit: Schema.Attribute.Enumeration<
-      ['DAYS', 'WEEKLY', 'MONTHLY', 'YEARLY']
+      ['DAYS', 'WEEK', 'MONTH', 'YEAR']
     >;
     loan_no: Schema.Attribute.Integer;
     loan_purpose: Schema.Attribute.Text;
     loan_status: Schema.Attribute.Enumeration<
-      ['Draft', 'Pending', 'In Progress', 'Approved', 'Rejected']
+      ['DRAFT', 'PENDING', 'IN_PROGRESS', 'APPROVED', 'REJECTED']
     >;
     loanee_name: Schema.Attribute.String;
     loanee_nid: Schema.Attribute.String;

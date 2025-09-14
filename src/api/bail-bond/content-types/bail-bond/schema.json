@@ -7,7 +7,7 @@
     "displayName": "Bail Bond"
   },
   "options": {
-    "draftAndPublish": true
+    "draftAndPublish": false
   },
   "pluginOptions": {},
   "attributes": {
