@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2025-09-14T15:10:17.476Z"
+    "x-generation-date": "2025-09-14T15:33:46.882Z"
   },
   "x-strapi-config": {
     "plugins": [
@@ -7040,7 +7040,7 @@
               "group_no": {
                 "type": "integer"
               },
-              "date_of_becom_member": {
+              "date_of_become_member": {
                 "type": "string",
                 "format": "date"
               },
@@ -7921,7 +7921,7 @@
                 "type": "string",
                 "enum": [
                   "DRAFT",
-                  "PENDING",
+                  "FORWARDED_FOR_APPROVAL",
                   "IN_PROGRESS",
                   "APPROVED",
                   "REJECTED"
@@ -13361,7 +13361,7 @@
               "group_no": {
                 "type": "integer"
               },
-              "date_of_becom_member": {
+              "date_of_become_member": {
                 "type": "string",
                 "format": "date"
               },
@@ -14242,7 +14242,7 @@
                 "type": "string",
                 "enum": [
                   "DRAFT",
-                  "PENDING",
+                  "FORWARDED_FOR_APPROVAL",
                   "IN_PROGRESS",
                   "APPROVED",
                   "REJECTED"
@@ -16015,7 +16015,7 @@
               "group_no": {
                 "type": "integer"
               },
-              "date_of_becom_member": {
+              "date_of_become_member": {
                 "type": "string",
                 "format": "date"
               },
@@ -17365,7 +17365,7 @@
                 "type": "string",
                 "enum": [
                   "DRAFT",
-                  "PENDING",
+                  "FORWARDED_FOR_APPROVAL",
                   "IN_PROGRESS",
                   "APPROVED",
                   "REJECTED"
@@ -19710,7 +19710,7 @@
                 "group_no": {
                   "type": "integer"
                 },
-                "date_of_becom_member": {
+                "date_of_become_member": {
                   "type": "string",
                   "format": "date"
                 },
@@ -20591,7 +20591,7 @@
                   "type": "string",
                   "enum": [
                     "DRAFT",
-                    "PENDING",
+                    "FORWARDED_FOR_APPROVAL",
                     "IN_PROGRESS",
                     "APPROVED",
                     "REJECTED"
@@ -22321,7 +22321,7 @@
               "group_no": {
                 "type": "integer"
               },
-              "date_of_becom_member": {
+              "date_of_become_member": {
                 "type": "string",
                 "format": "date"
               },
@@ -22558,7 +22558,7 @@
                 "type": "string",
                 "enum": [
                   "DRAFT",
-                  "PENDING",
+                  "FORWARDED_FOR_APPROVAL",
                   "IN_PROGRESS",
                   "APPROVED",
                   "REJECTED"
@@ -22691,7 +22691,7 @@
           "group_no": {
             "type": "integer"
           },
-          "date_of_becom_member": {
+          "date_of_become_member": {
             "type": "string",
             "format": "date"
           },
@@ -24041,7 +24041,7 @@
             "type": "string",
             "enum": [
               "DRAFT",
-              "PENDING",
+              "FORWARDED_FOR_APPROVAL",
               "IN_PROGRESS",
               "APPROVED",
               "REJECTED"
@@ -24499,7 +24499,7 @@
                     "group_no": {
                       "type": "integer"
                     },
-                    "date_of_becom_member": {
+                    "date_of_become_member": {
                       "type": "string",
                       "format": "date"
                     },
@@ -25326,7 +25326,7 @@
                       "type": "string",
                       "enum": [
                         "DRAFT",
-                        "PENDING",
+                        "FORWARDED_FOR_APPROVAL",
                         "IN_PROGRESS",
                         "APPROVED",
                         "REJECTED"

@@ -21,7 +21,7 @@
     "group_no": {
       "type": "integer"
     },
-    "date_of_becom_member": {
+    "date_of_become_member": {
       "type": "date"
     },
     "applicant_photos": {
@@ -225,7 +225,7 @@
       "type": "enumeration",
       "enum": [
         "DRAFT",
-        "PENDING",
+        "FORWARDED_FOR_APPROVAL",
         "IN_PROGRESS",
         "APPROVED",
         "REJECTED"
