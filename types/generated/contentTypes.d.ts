@@ -596,8 +596,8 @@ export interface ApiHolofnamaHolofnama extends Struct.CollectionTypeSchema {
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     holofnama_date: Schema.Attribute.Date;
-    loan_application: Schema.Attribute.Relation<
-      'manyToOne',
+    loan_applications: Schema.Attribute.Relation<
+      'oneToMany',
       'api::loan-application.loan-application'
     >;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
@@ -754,8 +754,8 @@ export interface ApiLoanApplicationLoanApplication
     group_no: Schema.Attribute.Integer;
     guarantors_document: Schema.Attribute.Media<'images', true>;
     has_bank_account: Schema.Attribute.Boolean;
-    holofnamas: Schema.Attribute.Relation<
-      'oneToMany',
+    holofnama: Schema.Attribute.Relation<
+      'manyToOne',
       'api::holofnama.holofnama'
     >;
     installment_amount: Schema.Attribute.Integer;
@@ -774,7 +774,7 @@ export interface ApiLoanApplicationLoanApplication
     loan_amount_requested: Schema.Attribute.Integer;
     loan_duration: Schema.Attribute.Integer;
     loan_duration_unit: Schema.Attribute.Enumeration<
-      ['DAYS', 'WEEK', 'MONTH', 'YEAR']
+      ['DAYS', 'WEEK', 'MONTH', 'YEAR', 'ONCE']
     >;
     loan_no: Schema.Attribute.Integer;
     loan_purpose: Schema.Attribute.Text;

@@ -55,7 +55,7 @@ async function syncAcceptanceWithLoan(loan) {
     await strapi.documents("api::loan-application.loan-application").update({
       documentId: loan.documentId,
       data: { loan_acceptance: result.id },
-    })
+    });
   }
 }
 

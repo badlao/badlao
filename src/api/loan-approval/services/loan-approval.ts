@@ -6,6 +6,7 @@ import { InstallmentDurationType } from "../../loan-application/types/installmen
 import { InstallmentInitialModel } from "../../installment/types/installment-initial-model";
 import { mapToInstallment } from "../../installment/types/installment-mapper";
 import { addDays, addMonths, addWeeks, addYears } from "../../utils/date-utils";
+import holofnama from "../../holofnama/controllers/holofnama";
 
 /**
  * loan-approval service
@@ -14,7 +15,18 @@ export async function approveLoan(id: number, loan_status: string) {
     console.log('Approving loan application...');
 
     const loan = await strapi.db.query('api::loan-application.loan-application').findOne({
-        where: { id }
+        where: { id },
+        populate: {  
+            loan_acceptance: {
+                select: ['installment_start_date']
+            } ,
+            installments: {
+                select: ['id']
+            },
+            holofnama: {
+                select: ['id']
+            }
+        }
     });
 
     if (!loan) {
@@ -41,7 +53,11 @@ export async function approveLoan(id: number, loan_status: string) {
 }
 
 async function addInstallments(loan: any, transaction: any) {
-    const [existing] = await strapi.entityService.findMany(
+    if (loan.installments && loan.installments.length > 0) {
+        console.log('Installments already exist for this loan application. Skipping installment creation.');
+        return;
+    }
+    const [loan_acceptance] = await strapi.entityService.findMany(
                     "api::loan-acceptance.loan-acceptance",
                     {
                     filters: { loan_applications: { id: { $eq: loan.id } } },
@@ -74,14 +90,15 @@ async function addInstallments(loan: any, transaction: any) {
     // const installmentDuration = (withMultipleInstallments == InstallmentDurationType.ONCE) ? loanDuration
     //     : (loanDurationUnit == LoanDurationUnit.DAYS ? calculateInstallmentDurationInDays(loanAmountRequested,installAmount, loanDuration) : 1);
 
-    let nextInstallmentPaymentDate = installmentDurationCalculator(new Date(existing.installment_start_date), installmentDuration);
+    let nextInstallmentPaymentDate = installmentDurationCalculator(new Date(loan_acceptance.installment_start_date), installmentDuration);
 
     const installmentInitialModels = Array.from({ length: totalInstallments }, (_, i) => {
         const remainingLoanAmount = loanAmountRequested - (installAmount * i);
+        const amount_to_pay = (remainingLoanAmount < installAmount) ? remainingLoanAmount : installAmount;
 
         const installment: InstallmentInitialModel = {
             payment_date: nextInstallmentPaymentDate,
-            amount_to_pay: (remainingLoanAmount < installAmount) ? remainingLoanAmount : installAmount,
+            amount_to_pay: amount_to_pay,
             status: InstallmentStatus.UNPAID,
             loanAppId: loan.id,
             amount_due: loanAmountRequested
@@ -104,6 +121,10 @@ function calculateInstallmentDurationInDays(loanAmountRequested: number, install
 }
 
 async function addHolofnama(loan: any, transaction: any) {
+    if (loan.holofnama && loan.holofnama.id) {
+        console.log('Holofnama already exists for this loan application. Skipping Holofnama creation.');
+        return;
+    }
     const holofnamaService = strapi.service('api::holofnama.holofnama');
     const holofnama = await holofnamaService.create({
         data: {
@@ -124,11 +145,24 @@ async function addHolofnama(loan: any, transaction: any) {
             unit_manager_name: null,
             unit_manager_signature: null,
             program_name: null,
-            holofnama_date: null,
-            loan_application: loan.id
+            holofnama_date: null
         },
         transaction
     });
+    
+    await strapi.documents("api::loan-application.loan-application").update({
+      documentId: loan.documentId,
+      data: { holofnama: holofnama.id },
+    });
+    // strapi.service('api::loan-application.loan-application').update({
+    //     where: { id: loan.id },
+    //     data: {
+    //         holofnama: holofnama.id
+    //     },
+    //     transaction
+    // });
+
+    console.log("============== Created Holofnama: ", holofnama);
     return holofnama;
     
 }

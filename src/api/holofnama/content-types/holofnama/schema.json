@@ -42,11 +42,11 @@
     "holofnama_date": {
       "type": "date"
     },
-    "loan_application": {
+    "loan_applications": {
       "type": "relation",
-      "relation": "manyToOne",
+      "relation": "oneToMany",
       "target": "api::loan-application.loan-application",
-      "inversedBy": "holofnamas"
+      "mappedBy": "holofnama"
     }
   }
 }
