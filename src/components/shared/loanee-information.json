@@ -20,21 +20,13 @@
       "type": "string",
       "required": false
     },
-    "repayment_method": {
-      "type": "string",
-      "required": false
-    },
-    "repayment_duration": {
-      "type": "string",
-      "required": false
-    },
     "repayment_duration_unit": {
       "type": "enumeration",
       "enum": [
         "DAYS",
-        "WEEKLY",
-        "MONTHLY",
-        "YEARLY"
+        "WEEK",
+        "MONTH",
+        "YEAR"
       ]
     },
     "recipient_signature": {
@@ -43,6 +35,20 @@
       "allowedTypes": [
         "images"
       ]
+    },
+    "repayment_method": {
+      "type": "enumeration",
+      "enum": [
+        "BANK",
+        "BKASH",
+        "NOGOD",
+        "ROCKET",
+        "CASE",
+        "OTHER"
+      ]
+    },
+    "repayment_duration": {
+      "type": "integer"
     }
   }
 }

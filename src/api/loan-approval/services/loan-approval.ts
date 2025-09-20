@@ -10,7 +10,7 @@ import { addDays, addMonths, addWeeks, addYears } from "../../utils/date-utils";
 /**
  * loan-approval service
  */
-export async function approveLoan(id: number) {
+export async function approveLoan(id: number, loan_status: string) {
     console.log('Approving loan application...');
 
     const loan = await strapi.db.query('api::loan-application.loan-application').findOne({
@@ -26,18 +26,27 @@ export async function approveLoan(id: number) {
         const updatedLoan = await strapi.db.query('api::loan-application.loan-application').update({
             where: { id },
             data: {
-                loan_status: 'Approved'
+                loan_status: loan_status
             }
         });
 
-        addInstallments(loan, transaction);
+        if(loan_status === 'APPROVED')
+            await addInstallments(loan, transaction);
     });
 
 
     return null;
 }
 
-function addInstallments(loan: any, transaction: any) {
+async function addInstallments(loan: any, transaction: any) {
+    const [existing] = await strapi.entityService.findMany(
+                    "api::loan-acceptance.loan-acceptance",
+                    {
+                    filters: { loan_applications: { id: { $eq: loan.id } } },
+                    limit: 1,
+                    }
+                );
+
     const installmentService = strapi.service('api::installment.installment');
     const loanDurationUnit = loan.loan_duration_unit;
     // const withMultipleInstallments = loan.with_multiple_installments;
@@ -63,7 +72,7 @@ function addInstallments(loan: any, transaction: any) {
     // const installmentDuration = (withMultipleInstallments == InstallmentDurationType.ONCE) ? loanDuration
     //     : (loanDurationUnit == LoanDurationUnit.DAYS ? calculateInstallmentDurationInDays(loanAmountRequested,installAmount, loanDuration) : 1);
 
-    let nextInstallmentPaymentDate = installmentDurationCalculator(new Date(loan.updatedAt), installmentDuration);
+    let nextInstallmentPaymentDate = installmentDurationCalculator(new Date(existing.installment_start_date), installmentDuration);
 
     const installmentInitialModels = Array.from({ length: totalInstallments }, (_, i) => {
         const remainingLoanAmount = loanAmountRequested - (installAmount * i);

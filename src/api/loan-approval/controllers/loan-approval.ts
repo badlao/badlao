@@ -8,28 +8,20 @@ export default {
     console.log('Approving loan application...');
     const { id } = ctx.params;
     const user = ctx.state.user;
+    const loan_status = ctx.request.body.loan_status;
+    if (!id) {
+      return ctx.badRequest('Loan application ID is required');
+    }
+    if (!loan_status) {
+      return ctx.badRequest('Loan status is required');
+    }
 
     console.log('Userrrrrrrrrrrrrrrrrrrrr:', user);
     
-    const updatedLoan = await approveLoan(Number(id)).catch(err => {
+    const updatedLoan = await approveLoan(Number(id), loan_status).catch(err => {
       console.error('Error approving loan:', err);
       return ctx.badRequest('Failed to approve loan application');
     });
-
-    // const loan = await strapi.db.query('api::loan-application.loan-application').findOne({
-    //   where: { id }
-    // });
-
-    // if (!loan) {
-    //   return ctx.notFound('Loan application not found');
-    // }
-    // // Update main loan application: set loan_acceptance field
-    // const updatedLoan = await strapi.db.query('api::loan-application.loan-application').update({
-    //   where: { id },
-    //   data: {
-    //     loan_status: 'Approved'
-    //   }
-    // });
 
     ctx.send({ message: 'Loan approved', loan: updatedLoan });
   }

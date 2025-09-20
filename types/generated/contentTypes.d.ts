@@ -686,6 +686,7 @@ export interface ApiLoanAcceptanceLoanAcceptance
     group_id: Schema.Attribute.String;
     group_leader_name: Schema.Attribute.String;
     group_photo: Schema.Attribute.Media<'images' | 'files'>;
+    installment_start_date: Schema.Attribute.Date;
     loan_applications: Schema.Attribute.Relation<
       'oneToMany',
       'api::loan-application.loan-application'
@@ -778,7 +779,14 @@ export interface ApiLoanApplicationLoanApplication
     loan_no: Schema.Attribute.Integer;
     loan_purpose: Schema.Attribute.Text;
     loan_status: Schema.Attribute.Enumeration<
-      ['DRAFT', 'FORWARDED_FOR_APPROVAL', 'IN_PROGRESS', 'APPROVED', 'REJECTED']
+      [
+        'DRAFT',
+        'INITIATE_APPROVAL_PROCESS',
+        'FORWARDED_FOR_APPROVAL',
+        'IN_PROGRESS',
+        'APPROVED',
+        'REJECTED',
+      ]
     >;
     loanee_name: Schema.Attribute.String;
     loanee_nid: Schema.Attribute.String;

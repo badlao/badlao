@@ -73,12 +73,6 @@
         "images"
       ]
     },
-    "loan_applications": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::loan-application.loan-application",
-      "mappedBy": "loan_acceptance"
-    },
     "group_photo": {
       "type": "media",
       "multiple": false,
@@ -86,6 +80,15 @@
         "images",
         "files"
       ]
+    },
+    "loan_applications": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::loan-application.loan-application",
+      "mappedBy": "loan_acceptance"
+    },
+    "installment_start_date": {
+      "type": "date"
     }
   }
 }

@@ -63,11 +63,13 @@ export interface SharedLoaneeInformation extends Struct.ComponentSchema {
     national_id: Schema.Attribute.String & Schema.Attribute.Required;
     recipient_name: Schema.Attribute.String & Schema.Attribute.Required;
     recipient_signature: Schema.Attribute.Media<'images'>;
-    repayment_duration: Schema.Attribute.String;
+    repayment_duration: Schema.Attribute.Integer;
     repayment_duration_unit: Schema.Attribute.Enumeration<
-      ['DAYS', 'WEEKLY', 'MONTHLY', 'YEARLY']
+      ['DAYS', 'WEEK', 'MONTH', 'YEAR']
     >;
-    repayment_method: Schema.Attribute.String;
+    repayment_method: Schema.Attribute.Enumeration<
+      ['BANK', 'BKASH', 'NOGOD', 'ROCKET', 'CASE', 'OTHER']
+    >;
   };
 }
 

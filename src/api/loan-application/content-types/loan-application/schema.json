@@ -225,17 +225,12 @@
       "type": "enumeration",
       "enum": [
         "DRAFT",
+        "INITIATE_APPROVAL_PROCESS",
         "FORWARDED_FOR_APPROVAL",
         "IN_PROGRESS",
         "APPROVED",
         "REJECTED"
       ]
-    },
-    "loan_acceptance": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::loan-acceptance.loan-acceptance",
-      "inversedBy": "loan_applications"
     },
     "installments": {
       "type": "relation",
@@ -254,6 +249,12 @@
       "relation": "oneToMany",
       "target": "api::holofnama.holofnama",
       "mappedBy": "loan_application"
+    },
+    "loan_acceptance": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::loan-acceptance.loan-acceptance",
+      "inversedBy": "loan_applications"
     }
   }
 }
