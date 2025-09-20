@@ -121,17 +121,18 @@
     "loan_duration": {
       "type": "integer"
     },
-    "installment_amount": {
-      "type": "integer"
-    },
     "loan_duration_unit": {
       "type": "enumeration",
       "enum": [
         "DAYS",
         "WEEK",
         "MONTH",
-        "YEAR"
+        "YEAR",
+        "ONCE"
       ]
+    },
+    "installment_amount": {
+      "type": "integer"
     },
     "total_installments": {
       "type": "integer"
@@ -244,11 +245,11 @@
       "target": "api::bail-bond.bail-bond",
       "mappedBy": "loan_application"
     },
-    "holofnamas": {
+    "holofnama": {
       "type": "relation",
-      "relation": "oneToMany",
+      "relation": "manyToOne",
       "target": "api::holofnama.holofnama",
-      "mappedBy": "loan_application"
+      "inversedBy": "loan_applications"
     },
     "loan_acceptance": {
       "type": "relation",

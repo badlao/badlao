@@ -1,7 +1,7 @@
 export enum LoanDurationUnit {
     DAYS = 'DAYS',
-    WEEKLY = 'WEEKLY',
-    MONTHLY = 'MONTHLY',
-    YEARLY = 'YEARLY',
+    WEEKLY = 'WEEK',
+    MONTHLY = 'MONTH',
+    YEARLY = 'YEAR',
     ONCE = 'ONCE'
 }

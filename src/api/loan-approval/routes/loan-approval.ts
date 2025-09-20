@@ -18,7 +18,7 @@ module.exports = {
     {
       method: 'POST',
       path: '/loan-applications/:id/forward-with-status',
-      handler: 'loan-approval.approve',
+      handler: 'loan-approval.forwardLoanStatus',
       config: {
         policies: [],
         
