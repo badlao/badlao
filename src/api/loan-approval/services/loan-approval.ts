@@ -30,8 +30,10 @@ export async function approveLoan(id: number, loan_status: string) {
             }
         });
 
-        if(loan_status === 'APPROVED')
+        if(loan_status === 'APPROVED'){
             await addInstallments(loan, transaction);
+            await addHolofnama(loan, transaction);
+        }
     });
 
 
@@ -99,5 +101,35 @@ function calculateInstallmentDurationInDays(loanAmountRequested: number, install
     const totalInstallment = Math.ceil(loanAmountRequested / installAmount);
 
     return Math.ceil(loanDuration / totalInstallment);
+}
+
+async function addHolofnama(loan: any, transaction: any) {
+    const holofnamaService = strapi.service('api::holofnama.holofnama');
+    const holofnama = await holofnamaService.create({
+        data: {
+            cheque_ack_cert: [
+            {
+                loanee_name: loan.loanee_name,
+                loanee_nid: loan.loanee_nid,
+                loan_amount: loan.loan_amount_requested,
+                loan_recieve_type: null,
+                loan_transfer_type: null,
+                loan_recieve_date: null,
+                loanee_signature:null,
+                transaction_id: null
+            }
+            ],
+            branch_manager_name: null,
+            branch_manager_signature: null,
+            unit_manager_name: null,
+            unit_manager_signature: null,
+            program_name: null,
+            holofnama_date: null,
+            loan_application: loan.id
+        },
+        transaction
+    });
+    return holofnama;
+    
 }
 

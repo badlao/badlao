@@ -24,8 +24,11 @@
     "loan_transfer_type": {
       "type": "enumeration",
       "enum": [
+        "BKASH",
+        "NOGOD",
+        "ROCKET",
         "BANK",
-        "MOBILE_BANKING"
+        "CASH"
       ]
     },
     "loan_recieve_date": {
@@ -37,6 +40,9 @@
       "allowedTypes": [
         "images"
       ]
+    },
+    "transaction_id": {
+      "type": "string"
     }
   },
   "config": {}

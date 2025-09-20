@@ -23,6 +23,6 @@ export default {
       return ctx.badRequest('Failed to approve loan application');
     });
 
-    ctx.send({ message: 'Loan approved', loan: updatedLoan });
+    ctx.send({ message: 'Loan status changed', loan: updatedLoan });
   }
 };

@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2025-09-20T09:26:52.863Z"
+    "x-generation-date": "2025-09-20T10:17:10.110Z"
   },
   "x-strapi-config": {
     "plugins": [
@@ -9634,8 +9634,11 @@
           "loan_transfer_type": {
             "type": "string",
             "enum": [
+              "BKASH",
+              "NOGOD",
+              "ROCKET",
               "BANK",
-              "MOBILE_BANKING"
+              "CASH"
             ]
           },
           "loan_recieve_date": {
@@ -9770,6 +9773,9 @@
                 }
               }
             }
+          },
+          "transaction_id": {
+            "type": "string"
           }
         }
       },

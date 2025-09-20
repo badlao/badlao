@@ -44,11 +44,12 @@ export interface SharedHolofnamaChequeAck extends Struct.ComponentSchema {
     loan_recieve_date: Schema.Attribute.Date;
     loan_recieve_type: Schema.Attribute.Enumeration<['ONLINE', 'OFFLINE']>;
     loan_transfer_type: Schema.Attribute.Enumeration<
-      ['BANK', 'MOBILE_BANKING']
+      ['BKASH', 'NOGOD', 'ROCKET', 'BANK', 'CASH']
     >;
     loanee_name: Schema.Attribute.String;
     loanee_nid: Schema.Attribute.Integer;
     loanee_signature: Schema.Attribute.Media<'images'>;
+    transaction_id: Schema.Attribute.String;
   };
 }
 
