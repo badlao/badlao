@@ -23,7 +23,7 @@ async function syncAcceptanceWithLoan(loan) {
     loanees: [
       {
         recipient_name: loan.applicant_name,
-        national_id: loan.national_id,
+        loanee_nid: loan.loanee_nid,
         loan_amount: loan.loan_amount_requested,
         cheque_no: "", // Or from loan if available
         repayment_duration: loan.loan_duration,

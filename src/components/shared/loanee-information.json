@@ -8,10 +8,6 @@
       "type": "string",
       "required": true
     },
-    "national_id": {
-      "type": "string",
-      "required": true
-    },
     "loan_amount": {
       "type": "decimal",
       "required": true
@@ -49,6 +45,9 @@
     },
     "repayment_duration": {
       "type": "integer"
+    },
+    "loanee_nid": {
+      "type": "biginteger"
     }
   }
 }

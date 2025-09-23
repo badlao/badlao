@@ -61,7 +61,7 @@ export interface SharedLoaneeInformation extends Struct.ComponentSchema {
   attributes: {
     cheque_no: Schema.Attribute.String;
     loan_amount: Schema.Attribute.Decimal & Schema.Attribute.Required;
-    national_id: Schema.Attribute.String & Schema.Attribute.Required;
+    loanee_nid: Schema.Attribute.BigInteger;
     recipient_name: Schema.Attribute.String & Schema.Attribute.Required;
     recipient_signature: Schema.Attribute.Media<'images'>;
     repayment_duration: Schema.Attribute.Integer;

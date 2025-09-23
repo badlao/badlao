@@ -35,6 +35,9 @@
     "applicant_name": {
       "type": "string"
     },
+    "national_id": {
+      "type": "biginteger"
+    },
     "mother_name": {
       "type": "string"
     },
@@ -46,9 +49,6 @@
     },
     "permanent_address": {
       "type": "text"
-    },
-    "national_id": {
-      "type": "string"
     },
     "phone_number": {
       "type": "string"
@@ -109,7 +109,7 @@
       "type": "string"
     },
     "loanee_nid": {
-      "type": "string"
+      "type": "biginteger"
     },
     "with_multiple_installments": {
       "type": "boolean",
@@ -256,6 +256,12 @@
       "relation": "manyToOne",
       "target": "api::loan-acceptance.loan-acceptance",
       "inversedBy": "loan_applications"
+    },
+    "business_valuation": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::business-valuation.business-valuation",
+      "mappedBy": "loan_application"
     }
   }
 }
