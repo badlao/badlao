@@ -82,6 +82,12 @@
     },
     "programName": {
       "type": "string"
+    },
+    "loan_application": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::loan-application.loan-application",
+      "inversedBy": "business_valuation"
     }
   }
 }

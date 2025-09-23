@@ -521,6 +521,10 @@ export interface ApiBusinessValuationBusinessValuation
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    loan_application: Schema.Attribute.Relation<
+      'oneToOne',
+      'api::loan-application.loan-application'
+    >;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -750,6 +754,10 @@ export interface ApiLoanApplicationLoanApplication
     bank_account_title: Schema.Attribute.String;
     bank_branch: Schema.Attribute.String;
     business_type: Schema.Attribute.Enumeration<['NEW', 'OLD']>;
+    business_valuation: Schema.Attribute.Relation<
+      'oneToOne',
+      'api::business-valuation.business-valuation'
+    >;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -799,7 +807,7 @@ export interface ApiLoanApplicationLoanApplication
       ]
     >;
     loanee_name: Schema.Attribute.String;
-    loanee_nid: Schema.Attribute.String;
+    loanee_nid: Schema.Attribute.BigInteger;
     loanee_nid_doc: Schema.Attribute.Media;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
@@ -816,7 +824,7 @@ export interface ApiLoanApplicationLoanApplication
       ['BKASH', 'NAGAD', 'ROCKET', 'OTHER']
     >;
     mother_name: Schema.Attribute.String;
-    national_id: Schema.Attribute.String;
+    national_id: Schema.Attribute.BigInteger;
     permanent_address: Schema.Attribute.Text;
     phone_number: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
