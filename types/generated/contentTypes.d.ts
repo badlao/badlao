@@ -416,11 +416,14 @@ export interface ApiBailBondBailBond extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    full_address: Schema.Attribute.Text;
-    guarantor_nid: Schema.Attribute.Integer;
-    guarantor_signature: Schema.Attribute.Media<
+    first_guarantor_address: Schema.Attribute.Text;
+    first_guarantor_name: Schema.Attribute.String & Schema.Attribute.Required;
+    first_guarantor_nid: Schema.Attribute.Integer;
+    first_guarantor_phone: Schema.Attribute.String;
+    first_guarantor_signature: Schema.Attribute.Media<
       'images' | 'files' | 'videos' | 'audios'
     >;
+    full_address: Schema.Attribute.Text;
     loan_amount_requested: Schema.Attribute.Integer;
     loan_application: Schema.Attribute.Relation<
       'manyToOne',
@@ -436,6 +439,13 @@ export interface ApiBailBondBailBond extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     phone_no: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
+    second_guarantor_address: Schema.Attribute.Text;
+    second_guarantor_name: Schema.Attribute.String & Schema.Attribute.Required;
+    second_guarantor_nid: Schema.Attribute.Integer;
+    second_guarantor_phone: Schema.Attribute.String;
+    second_guarantor_signature: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;

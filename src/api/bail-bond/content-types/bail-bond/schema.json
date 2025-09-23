@@ -21,7 +21,14 @@
     "loan_amount_requested": {
       "type": "integer"
     },
-    "guarantor_signature": {
+    "first_guarantor_name": {
+      "type": "string",
+      "required": true
+    },
+    "first_guarantor_nid": {
+      "type": "integer"
+    },
+    "first_guarantor_signature": {
       "type": "media",
       "multiple": false,
       "allowedTypes": [
@@ -31,8 +38,34 @@
         "audios"
       ]
     },
-    "guarantor_nid": {
+    "first_guarantor_address": {
+      "type": "text"
+    },
+    "first_guarantor_phone": {
+      "type": "string"
+    },
+    "second_guarantor_name": {
+      "type": "string",
+      "required": true
+    },
+    "second_guarantor_nid": {
       "type": "integer"
+    },
+    "second_guarantor_signature": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "second_guarantor_address": {
+      "type": "text"
+    },
+    "second_guarantor_phone": {
+      "type": "string"
     },
     "full_address": {
       "type": "text"

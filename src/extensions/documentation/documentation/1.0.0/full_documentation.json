@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2025-09-20T16:35:32.946Z"
+    "x-generation-date": "2025-09-23T10:02:57.145Z"
   },
   "x-strapi-config": {
     "plugins": [
@@ -6294,7 +6294,9 @@
         "properties": {
           "data": {
             "required": [
-              "loanee_name"
+              "loanee_name",
+              "first_guarantor_name",
+              "second_guarantor_name"
             ],
             "type": "object",
             "properties": {
@@ -6307,7 +6309,13 @@
               "loan_amount_requested": {
                 "type": "integer"
               },
-              "guarantor_signature": {
+              "first_guarantor_name": {
+                "type": "string"
+              },
+              "first_guarantor_nid": {
+                "type": "integer"
+              },
+              "first_guarantor_signature": {
                 "oneOf": [
                   {
                     "type": "integer"
@@ -6318,8 +6326,34 @@
                 ],
                 "example": "string or id"
               },
-              "guarantor_nid": {
+              "first_guarantor_address": {
+                "type": "string"
+              },
+              "first_guarantor_phone": {
+                "type": "string"
+              },
+              "second_guarantor_name": {
+                "type": "string"
+              },
+              "second_guarantor_nid": {
                 "type": "integer"
+              },
+              "second_guarantor_signature": {
+                "oneOf": [
+                  {
+                    "type": "integer"
+                  },
+                  {
+                    "type": "string"
+                  }
+                ],
+                "example": "string or id"
+              },
+              "second_guarantor_address": {
+                "type": "string"
+              },
+              "second_guarantor_phone": {
+                "type": "string"
               },
               "full_address": {
                 "type": "string"
@@ -6397,7 +6431,9 @@
       "BailBond": {
         "type": "object",
         "required": [
-          "loanee_name"
+          "loanee_name",
+          "first_guarantor_name",
+          "second_guarantor_name"
         ],
         "properties": {
           "id": {
@@ -6415,7 +6451,13 @@
           "loan_amount_requested": {
             "type": "integer"
           },
-          "guarantor_signature": {
+          "first_guarantor_name": {
+            "type": "string"
+          },
+          "first_guarantor_nid": {
+            "type": "integer"
+          },
+          "first_guarantor_signature": {
             "type": "object",
             "properties": {
               "id": {
@@ -7013,8 +7055,152 @@
               }
             }
           },
-          "guarantor_nid": {
+          "first_guarantor_address": {
+            "type": "string"
+          },
+          "first_guarantor_phone": {
+            "type": "string"
+          },
+          "second_guarantor_name": {
+            "type": "string"
+          },
+          "second_guarantor_nid": {
             "type": "integer"
+          },
+          "second_guarantor_signature": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "number"
+              },
+              "documentId": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "alternativeText": {
+                "type": "string"
+              },
+              "caption": {
+                "type": "string"
+              },
+              "width": {
+                "type": "integer"
+              },
+              "height": {
+                "type": "integer"
+              },
+              "formats": {},
+              "hash": {
+                "type": "string"
+              },
+              "ext": {
+                "type": "string"
+              },
+              "mime": {
+                "type": "string"
+              },
+              "size": {
+                "type": "number",
+                "format": "float"
+              },
+              "url": {
+                "type": "string"
+              },
+              "previewUrl": {
+                "type": "string"
+              },
+              "provider": {
+                "type": "string"
+              },
+              "provider_metadata": {},
+              "related": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "number"
+                    },
+                    "documentId": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "folder": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "number"
+                  },
+                  "documentId": {
+                    "type": "string"
+                  }
+                }
+              },
+              "folderPath": {
+                "type": "string"
+              },
+              "createdAt": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "updatedAt": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "publishedAt": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "createdBy": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "number"
+                  },
+                  "documentId": {
+                    "type": "string"
+                  }
+                }
+              },
+              "updatedBy": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "number"
+                  },
+                  "documentId": {
+                    "type": "string"
+                  }
+                }
+              },
+              "locale": {
+                "type": "string"
+              },
+              "localizations": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "number"
+                    },
+                    "documentId": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "second_guarantor_address": {
+            "type": "string"
+          },
+          "second_guarantor_phone": {
+            "type": "string"
           },
           "full_address": {
             "type": "string"
@@ -8204,7 +8390,13 @@
                     "loan_amount_requested": {
                       "type": "integer"
                     },
-                    "guarantor_signature": {
+                    "first_guarantor_name": {
+                      "type": "string"
+                    },
+                    "first_guarantor_nid": {
+                      "type": "integer"
+                    },
+                    "first_guarantor_signature": {
                       "type": "object",
                       "properties": {
                         "id": {
@@ -8333,8 +8525,152 @@
                         }
                       }
                     },
-                    "guarantor_nid": {
+                    "first_guarantor_address": {
+                      "type": "string"
+                    },
+                    "first_guarantor_phone": {
+                      "type": "string"
+                    },
+                    "second_guarantor_name": {
+                      "type": "string"
+                    },
+                    "second_guarantor_nid": {
                       "type": "integer"
+                    },
+                    "second_guarantor_signature": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "number"
+                        },
+                        "documentId": {
+                          "type": "string"
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "alternativeText": {
+                          "type": "string"
+                        },
+                        "caption": {
+                          "type": "string"
+                        },
+                        "width": {
+                          "type": "integer"
+                        },
+                        "height": {
+                          "type": "integer"
+                        },
+                        "formats": {},
+                        "hash": {
+                          "type": "string"
+                        },
+                        "ext": {
+                          "type": "string"
+                        },
+                        "mime": {
+                          "type": "string"
+                        },
+                        "size": {
+                          "type": "number",
+                          "format": "float"
+                        },
+                        "url": {
+                          "type": "string"
+                        },
+                        "previewUrl": {
+                          "type": "string"
+                        },
+                        "provider": {
+                          "type": "string"
+                        },
+                        "provider_metadata": {},
+                        "related": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "number"
+                              },
+                              "documentId": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        },
+                        "folder": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "number"
+                            },
+                            "documentId": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "folderPath": {
+                          "type": "string"
+                        },
+                        "createdAt": {
+                          "type": "string",
+                          "format": "date-time"
+                        },
+                        "updatedAt": {
+                          "type": "string",
+                          "format": "date-time"
+                        },
+                        "publishedAt": {
+                          "type": "string",
+                          "format": "date-time"
+                        },
+                        "createdBy": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "number"
+                            },
+                            "documentId": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "updatedBy": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "number"
+                            },
+                            "documentId": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "locale": {
+                          "type": "string"
+                        },
+                        "localizations": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "number"
+                              },
+                              "documentId": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "second_guarantor_address": {
+                      "type": "string"
+                    },
+                    "second_guarantor_phone": {
+                      "type": "string"
                     },
                     "full_address": {
                       "type": "string"
@@ -14550,7 +14886,13 @@
                       "loan_amount_requested": {
                         "type": "integer"
                       },
-                      "guarantor_signature": {
+                      "first_guarantor_name": {
+                        "type": "string"
+                      },
+                      "first_guarantor_nid": {
+                        "type": "integer"
+                      },
+                      "first_guarantor_signature": {
                         "type": "object",
                         "properties": {
                           "id": {
@@ -14679,8 +15021,152 @@
                           }
                         }
                       },
-                      "guarantor_nid": {
+                      "first_guarantor_address": {
+                        "type": "string"
+                      },
+                      "first_guarantor_phone": {
+                        "type": "string"
+                      },
+                      "second_guarantor_name": {
+                        "type": "string"
+                      },
+                      "second_guarantor_nid": {
                         "type": "integer"
+                      },
+                      "second_guarantor_signature": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "number"
+                          },
+                          "documentId": {
+                            "type": "string"
+                          },
+                          "name": {
+                            "type": "string"
+                          },
+                          "alternativeText": {
+                            "type": "string"
+                          },
+                          "caption": {
+                            "type": "string"
+                          },
+                          "width": {
+                            "type": "integer"
+                          },
+                          "height": {
+                            "type": "integer"
+                          },
+                          "formats": {},
+                          "hash": {
+                            "type": "string"
+                          },
+                          "ext": {
+                            "type": "string"
+                          },
+                          "mime": {
+                            "type": "string"
+                          },
+                          "size": {
+                            "type": "number",
+                            "format": "float"
+                          },
+                          "url": {
+                            "type": "string"
+                          },
+                          "previewUrl": {
+                            "type": "string"
+                          },
+                          "provider": {
+                            "type": "string"
+                          },
+                          "provider_metadata": {},
+                          "related": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "number"
+                                },
+                                "documentId": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          },
+                          "folder": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "number"
+                              },
+                              "documentId": {
+                                "type": "string"
+                              }
+                            }
+                          },
+                          "folderPath": {
+                            "type": "string"
+                          },
+                          "createdAt": {
+                            "type": "string",
+                            "format": "date-time"
+                          },
+                          "updatedAt": {
+                            "type": "string",
+                            "format": "date-time"
+                          },
+                          "publishedAt": {
+                            "type": "string",
+                            "format": "date-time"
+                          },
+                          "createdBy": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "number"
+                              },
+                              "documentId": {
+                                "type": "string"
+                              }
+                            }
+                          },
+                          "updatedBy": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "number"
+                              },
+                              "documentId": {
+                                "type": "string"
+                              }
+                            }
+                          },
+                          "locale": {
+                            "type": "string"
+                          },
+                          "localizations": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "number"
+                                },
+                                "documentId": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "second_guarantor_address": {
+                        "type": "string"
+                      },
+                      "second_guarantor_phone": {
+                        "type": "string"
                       },
                       "full_address": {
                         "type": "string"
@@ -17680,7 +18166,13 @@
                     "loan_amount_requested": {
                       "type": "integer"
                     },
-                    "guarantor_signature": {
+                    "first_guarantor_name": {
+                      "type": "string"
+                    },
+                    "first_guarantor_nid": {
+                      "type": "integer"
+                    },
+                    "first_guarantor_signature": {
                       "type": "object",
                       "properties": {
                         "id": {
@@ -17809,8 +18301,152 @@
                         }
                       }
                     },
-                    "guarantor_nid": {
+                    "first_guarantor_address": {
+                      "type": "string"
+                    },
+                    "first_guarantor_phone": {
+                      "type": "string"
+                    },
+                    "second_guarantor_name": {
+                      "type": "string"
+                    },
+                    "second_guarantor_nid": {
                       "type": "integer"
+                    },
+                    "second_guarantor_signature": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "number"
+                        },
+                        "documentId": {
+                          "type": "string"
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "alternativeText": {
+                          "type": "string"
+                        },
+                        "caption": {
+                          "type": "string"
+                        },
+                        "width": {
+                          "type": "integer"
+                        },
+                        "height": {
+                          "type": "integer"
+                        },
+                        "formats": {},
+                        "hash": {
+                          "type": "string"
+                        },
+                        "ext": {
+                          "type": "string"
+                        },
+                        "mime": {
+                          "type": "string"
+                        },
+                        "size": {
+                          "type": "number",
+                          "format": "float"
+                        },
+                        "url": {
+                          "type": "string"
+                        },
+                        "previewUrl": {
+                          "type": "string"
+                        },
+                        "provider": {
+                          "type": "string"
+                        },
+                        "provider_metadata": {},
+                        "related": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "number"
+                              },
+                              "documentId": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        },
+                        "folder": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "number"
+                            },
+                            "documentId": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "folderPath": {
+                          "type": "string"
+                        },
+                        "createdAt": {
+                          "type": "string",
+                          "format": "date-time"
+                        },
+                        "updatedAt": {
+                          "type": "string",
+                          "format": "date-time"
+                        },
+                        "publishedAt": {
+                          "type": "string",
+                          "format": "date-time"
+                        },
+                        "createdBy": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "number"
+                            },
+                            "documentId": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "updatedBy": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "number"
+                            },
+                            "documentId": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "locale": {
+                          "type": "string"
+                        },
+                        "localizations": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "number"
+                              },
+                              "documentId": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "second_guarantor_address": {
+                      "type": "string"
+                    },
+                    "second_guarantor_phone": {
+                      "type": "string"
                     },
                     "full_address": {
                       "type": "string"
@@ -21045,7 +21681,13 @@
                       "loan_amount_requested": {
                         "type": "integer"
                       },
-                      "guarantor_signature": {
+                      "first_guarantor_name": {
+                        "type": "string"
+                      },
+                      "first_guarantor_nid": {
+                        "type": "integer"
+                      },
+                      "first_guarantor_signature": {
                         "type": "object",
                         "properties": {
                           "id": {
@@ -21174,8 +21816,152 @@
                           }
                         }
                       },
-                      "guarantor_nid": {
+                      "first_guarantor_address": {
+                        "type": "string"
+                      },
+                      "first_guarantor_phone": {
+                        "type": "string"
+                      },
+                      "second_guarantor_name": {
+                        "type": "string"
+                      },
+                      "second_guarantor_nid": {
                         "type": "integer"
+                      },
+                      "second_guarantor_signature": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "number"
+                          },
+                          "documentId": {
+                            "type": "string"
+                          },
+                          "name": {
+                            "type": "string"
+                          },
+                          "alternativeText": {
+                            "type": "string"
+                          },
+                          "caption": {
+                            "type": "string"
+                          },
+                          "width": {
+                            "type": "integer"
+                          },
+                          "height": {
+                            "type": "integer"
+                          },
+                          "formats": {},
+                          "hash": {
+                            "type": "string"
+                          },
+                          "ext": {
+                            "type": "string"
+                          },
+                          "mime": {
+                            "type": "string"
+                          },
+                          "size": {
+                            "type": "number",
+                            "format": "float"
+                          },
+                          "url": {
+                            "type": "string"
+                          },
+                          "previewUrl": {
+                            "type": "string"
+                          },
+                          "provider": {
+                            "type": "string"
+                          },
+                          "provider_metadata": {},
+                          "related": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "number"
+                                },
+                                "documentId": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          },
+                          "folder": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "number"
+                              },
+                              "documentId": {
+                                "type": "string"
+                              }
+                            }
+                          },
+                          "folderPath": {
+                            "type": "string"
+                          },
+                          "createdAt": {
+                            "type": "string",
+                            "format": "date-time"
+                          },
+                          "updatedAt": {
+                            "type": "string",
+                            "format": "date-time"
+                          },
+                          "publishedAt": {
+                            "type": "string",
+                            "format": "date-time"
+                          },
+                          "createdBy": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "number"
+                              },
+                              "documentId": {
+                                "type": "string"
+                              }
+                            }
+                          },
+                          "updatedBy": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "number"
+                              },
+                              "documentId": {
+                                "type": "string"
+                              }
+                            }
+                          },
+                          "locale": {
+                            "type": "string"
+                          },
+                          "localizations": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "number"
+                                },
+                                "documentId": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "second_guarantor_address": {
+                        "type": "string"
+                      },
+                      "second_guarantor_phone": {
+                        "type": "string"
                       },
                       "full_address": {
                         "type": "string"
@@ -25025,7 +25811,13 @@
                           "loan_amount_requested": {
                             "type": "integer"
                           },
-                          "guarantor_signature": {
+                          "first_guarantor_name": {
+                            "type": "string"
+                          },
+                          "first_guarantor_nid": {
+                            "type": "integer"
+                          },
+                          "first_guarantor_signature": {
                             "type": "object",
                             "properties": {
                               "id": {
@@ -25154,8 +25946,152 @@
                               }
                             }
                           },
-                          "guarantor_nid": {
+                          "first_guarantor_address": {
+                            "type": "string"
+                          },
+                          "first_guarantor_phone": {
+                            "type": "string"
+                          },
+                          "second_guarantor_name": {
+                            "type": "string"
+                          },
+                          "second_guarantor_nid": {
                             "type": "integer"
+                          },
+                          "second_guarantor_signature": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "number"
+                              },
+                              "documentId": {
+                                "type": "string"
+                              },
+                              "name": {
+                                "type": "string"
+                              },
+                              "alternativeText": {
+                                "type": "string"
+                              },
+                              "caption": {
+                                "type": "string"
+                              },
+                              "width": {
+                                "type": "integer"
+                              },
+                              "height": {
+                                "type": "integer"
+                              },
+                              "formats": {},
+                              "hash": {
+                                "type": "string"
+                              },
+                              "ext": {
+                                "type": "string"
+                              },
+                              "mime": {
+                                "type": "string"
+                              },
+                              "size": {
+                                "type": "number",
+                                "format": "float"
+                              },
+                              "url": {
+                                "type": "string"
+                              },
+                              "previewUrl": {
+                                "type": "string"
+                              },
+                              "provider": {
+                                "type": "string"
+                              },
+                              "provider_metadata": {},
+                              "related": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "id": {
+                                      "type": "number"
+                                    },
+                                    "documentId": {
+                                      "type": "string"
+                                    }
+                                  }
+                                }
+                              },
+                              "folder": {
+                                "type": "object",
+                                "properties": {
+                                  "id": {
+                                    "type": "number"
+                                  },
+                                  "documentId": {
+                                    "type": "string"
+                                  }
+                                }
+                              },
+                              "folderPath": {
+                                "type": "string"
+                              },
+                              "createdAt": {
+                                "type": "string",
+                                "format": "date-time"
+                              },
+                              "updatedAt": {
+                                "type": "string",
+                                "format": "date-time"
+                              },
+                              "publishedAt": {
+                                "type": "string",
+                                "format": "date-time"
+                              },
+                              "createdBy": {
+                                "type": "object",
+                                "properties": {
+                                  "id": {
+                                    "type": "number"
+                                  },
+                                  "documentId": {
+                                    "type": "string"
+                                  }
+                                }
+                              },
+                              "updatedBy": {
+                                "type": "object",
+                                "properties": {
+                                  "id": {
+                                    "type": "number"
+                                  },
+                                  "documentId": {
+                                    "type": "string"
+                                  }
+                                }
+                              },
+                              "locale": {
+                                "type": "string"
+                              },
+                              "localizations": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "id": {
+                                      "type": "number"
+                                    },
+                                    "documentId": {
+                                      "type": "string"
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          "second_guarantor_address": {
+                            "type": "string"
+                          },
+                          "second_guarantor_phone": {
+                            "type": "string"
                           },
                           "full_address": {
                             "type": "string"
