@@ -24,18 +24,16 @@
     "amount_due": {
       "type": "integer"
     },
-    "remarks": {
-      "type": "text"
-    },
     "payment_status": {
       "type": "enumeration",
       "enum": [
-        "paid",
-        "unpaid",
-        "partial",
-        "overdue",
-        "late",
-        "invalid"
+        "PAID",
+        "UNPAID",
+        "PARTIAL",
+        "OVERDUE",
+        "LATE",
+        "INVALID",
+        "ADJUSTED"
       ]
     },
     "loan_application": {
@@ -61,13 +59,13 @@
         "files"
       ]
     },
-    "comment": {
-      "type": "text"
-    },
     "bank": {
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::bank.bank"
+    },
+    "remarks": {
+      "type": "text"
     }
   }
 }

@@ -646,7 +646,6 @@ export interface ApiInstallmentInstallment extends Struct.CollectionTypeSchema {
     amount_paid: Schema.Attribute.Integer;
     amount_to_pay: Schema.Attribute.Integer;
     bank: Schema.Attribute.Relation<'oneToOne', 'api::bank.bank'>;
-    comment: Schema.Attribute.Text;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -663,7 +662,7 @@ export interface ApiInstallmentInstallment extends Struct.CollectionTypeSchema {
     payment_date: Schema.Attribute.Date;
     payment_doc: Schema.Attribute.Media<'images' | 'files'>;
     payment_status: Schema.Attribute.Enumeration<
-      ['paid', 'unpaid', 'partial', 'overdue', 'late', 'invalid']
+      ['PAID', 'UNPAID', 'PARTIAL', 'OVERDUE', 'LATE', 'INVALID', 'ADJUSTED']
     >;
     payment_type: Schema.Attribute.Enumeration<
       ['BKASH', 'NOGOD', 'CASH', 'BANK']
