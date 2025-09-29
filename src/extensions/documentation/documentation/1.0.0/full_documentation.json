@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2025-09-29T09:17:15.262Z"
+    "x-generation-date": "2025-09-27T06:51:17.475Z"
   },
   "x-strapi-config": {
     "plugins": [
@@ -8143,16 +8143,18 @@
                     "amount_due": {
                       "type": "integer"
                     },
+                    "remarks": {
+                      "type": "string"
+                    },
                     "payment_status": {
                       "type": "string",
                       "enum": [
-                        "PAID",
-                        "UNPAID",
-                        "PARTIAL",
-                        "OVERDUE",
-                        "LATE",
-                        "INVALID",
-                        "ADJUSTED"
+                        "paid",
+                        "unpaid",
+                        "partial",
+                        "overdue",
+                        "late",
+                        "invalid"
                       ]
                     },
                     "loan_application": {
@@ -8304,6 +8306,9 @@
                         }
                       }
                     },
+                    "comment": {
+                      "type": "string"
+                    },
                     "bank": {
                       "type": "object",
                       "properties": {
@@ -8314,9 +8319,6 @@
                           "type": "string"
                         }
                       }
-                    },
-                    "remarks": {
-                      "type": "string"
                     },
                     "createdAt": {
                       "type": "string",
@@ -13099,16 +13101,18 @@
                     "amount_due": {
                       "type": "integer"
                     },
+                    "remarks": {
+                      "type": "string"
+                    },
                     "payment_status": {
                       "type": "string",
                       "enum": [
-                        "PAID",
-                        "UNPAID",
-                        "PARTIAL",
-                        "OVERDUE",
-                        "LATE",
-                        "INVALID",
-                        "ADJUSTED"
+                        "paid",
+                        "unpaid",
+                        "partial",
+                        "overdue",
+                        "late",
+                        "invalid"
                       ]
                     },
                     "loan_application": {
@@ -13260,6 +13264,9 @@
                         }
                       }
                     },
+                    "comment": {
+                      "type": "string"
+                    },
                     "bank": {
                       "type": "object",
                       "properties": {
@@ -13270,9 +13277,6 @@
                           "type": "string"
                         }
                       }
-                    },
-                    "remarks": {
-                      "type": "string"
                     },
                     "createdAt": {
                       "type": "string",
@@ -17637,16 +17641,18 @@
                       "amount_due": {
                         "type": "integer"
                       },
+                      "remarks": {
+                        "type": "string"
+                      },
                       "payment_status": {
                         "type": "string",
                         "enum": [
-                          "PAID",
-                          "UNPAID",
-                          "PARTIAL",
-                          "OVERDUE",
-                          "LATE",
-                          "INVALID",
-                          "ADJUSTED"
+                          "paid",
+                          "unpaid",
+                          "partial",
+                          "overdue",
+                          "late",
+                          "invalid"
                         ]
                       },
                       "loan_application": {
@@ -17798,6 +17804,9 @@
                           }
                         }
                       },
+                      "comment": {
+                        "type": "string"
+                      },
                       "bank": {
                         "type": "object",
                         "properties": {
@@ -17808,9 +17817,6 @@
                             "type": "string"
                           }
                         }
-                      },
-                      "remarks": {
-                        "type": "string"
                       },
                       "createdAt": {
                         "type": "string",
@@ -19750,16 +19756,18 @@
               "amount_due": {
                 "type": "integer"
               },
+              "remarks": {
+                "type": "string"
+              },
               "payment_status": {
                 "type": "string",
                 "enum": [
-                  "PAID",
-                  "UNPAID",
-                  "PARTIAL",
-                  "OVERDUE",
-                  "LATE",
-                  "INVALID",
-                  "ADJUSTED"
+                  "paid",
+                  "unpaid",
+                  "partial",
+                  "overdue",
+                  "late",
+                  "invalid"
                 ]
               },
               "loan_application": {
@@ -19793,6 +19801,9 @@
                 ],
                 "example": "string or id"
               },
+              "comment": {
+                "type": "string"
+              },
               "bank": {
                 "oneOf": [
                   {
@@ -19803,9 +19814,6 @@
                   }
                 ],
                 "example": "string or id"
-              },
-              "remarks": {
-                "type": "string"
               },
               "locale": {
                 "type": "string"
@@ -19885,16 +19893,18 @@
           "amount_due": {
             "type": "integer"
           },
+          "remarks": {
+            "type": "string"
+          },
           "payment_status": {
             "type": "string",
             "enum": [
-              "PAID",
-              "UNPAID",
-              "PARTIAL",
-              "OVERDUE",
-              "LATE",
-              "INVALID",
-              "ADJUSTED"
+              "paid",
+              "unpaid",
+              "partial",
+              "overdue",
+              "late",
+              "invalid"
             ]
           },
           "loan_application": {
@@ -21301,16 +21311,18 @@
                     "amount_due": {
                       "type": "integer"
                     },
+                    "remarks": {
+                      "type": "string"
+                    },
                     "payment_status": {
                       "type": "string",
                       "enum": [
-                        "PAID",
-                        "UNPAID",
-                        "PARTIAL",
-                        "OVERDUE",
-                        "LATE",
-                        "INVALID",
-                        "ADJUSTED"
+                        "paid",
+                        "unpaid",
+                        "partial",
+                        "overdue",
+                        "late",
+                        "invalid"
                       ]
                     },
                     "loan_application": {
@@ -21462,6 +21474,9 @@
                         }
                       }
                     },
+                    "comment": {
+                      "type": "string"
+                    },
                     "bank": {
                       "type": "object",
                       "properties": {
@@ -21472,9 +21487,6 @@
                           "type": "string"
                         }
                       }
-                    },
-                    "remarks": {
-                      "type": "string"
                     },
                     "createdAt": {
                       "type": "string",
@@ -23465,6 +23477,9 @@
               }
             }
           },
+          "comment": {
+            "type": "string"
+          },
           "bank": {
             "type": "object",
             "properties": {
@@ -23475,9 +23490,6 @@
                 "type": "string"
               }
             }
-          },
-          "remarks": {
-            "type": "string"
           },
           "createdAt": {
             "type": "string",
@@ -25204,16 +25216,18 @@
                       "amount_due": {
                         "type": "integer"
                       },
+                      "remarks": {
+                        "type": "string"
+                      },
                       "payment_status": {
                         "type": "string",
                         "enum": [
-                          "PAID",
-                          "UNPAID",
-                          "PARTIAL",
-                          "OVERDUE",
-                          "LATE",
-                          "INVALID",
-                          "ADJUSTED"
+                          "paid",
+                          "unpaid",
+                          "partial",
+                          "overdue",
+                          "late",
+                          "invalid"
                         ]
                       },
                       "loan_application": {
@@ -25365,6 +25379,9 @@
                           }
                         }
                       },
+                      "comment": {
+                        "type": "string"
+                      },
                       "bank": {
                         "type": "object",
                         "properties": {
@@ -25375,9 +25392,6 @@
                             "type": "string"
                           }
                         }
-                      },
-                      "remarks": {
-                        "type": "string"
                       },
                       "createdAt": {
                         "type": "string",
@@ -29087,16 +29101,18 @@
                 "amount_due": {
                   "type": "integer"
                 },
+                "remarks": {
+                  "type": "string"
+                },
                 "payment_status": {
                   "type": "string",
                   "enum": [
-                    "PAID",
-                    "UNPAID",
-                    "PARTIAL",
-                    "OVERDUE",
-                    "LATE",
-                    "INVALID",
-                    "ADJUSTED"
+                    "paid",
+                    "unpaid",
+                    "partial",
+                    "overdue",
+                    "late",
+                    "invalid"
                   ]
                 },
                 "loan_application": {
@@ -31905,6 +31921,9 @@
                     }
                   }
                 },
+                "comment": {
+                  "type": "string"
+                },
                 "bank": {
                   "type": "object",
                   "properties": {
@@ -31915,9 +31934,6 @@
                       "type": "string"
                     }
                   }
-                },
-                "remarks": {
-                  "type": "string"
                 },
                 "createdAt": {
                   "type": "string",
