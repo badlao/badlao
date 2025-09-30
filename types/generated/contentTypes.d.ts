@@ -417,7 +417,7 @@ export interface ApiBailBondBailBond extends Struct.CollectionTypeSchema {
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     first_guarantor_address: Schema.Attribute.Text;
-    first_guarantor_name: Schema.Attribute.String & Schema.Attribute.Required;
+    first_guarantor_name: Schema.Attribute.String;
     first_guarantor_nid: Schema.Attribute.Integer;
     first_guarantor_phone: Schema.Attribute.String;
     first_guarantor_signature: Schema.Attribute.Media<
@@ -440,7 +440,7 @@ export interface ApiBailBondBailBond extends Struct.CollectionTypeSchema {
     phone_no: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
     second_guarantor_address: Schema.Attribute.Text;
-    second_guarantor_name: Schema.Attribute.String & Schema.Attribute.Required;
+    second_guarantor_name: Schema.Attribute.String;
     second_guarantor_nid: Schema.Attribute.Integer;
     second_guarantor_phone: Schema.Attribute.String;
     second_guarantor_signature: Schema.Attribute.Media<

@@ -23,7 +23,7 @@
     },
     "first_guarantor_name": {
       "type": "string",
-      "required": true
+      "required": false
     },
     "first_guarantor_nid": {
       "type": "integer"
@@ -46,7 +46,7 @@
     },
     "second_guarantor_name": {
       "type": "string",
-      "required": true
+      "required": false
     },
     "second_guarantor_nid": {
       "type": "integer"
