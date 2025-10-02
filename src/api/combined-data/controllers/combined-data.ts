@@ -244,6 +244,10 @@ export default ({ strapi }: { strapi: Core.Strapi }) => ({
         "Company Name",
         "Guarantor 1",
         "Guarantor 2",
+        "Has Loan Acceptance",
+        "Has Business Valuation",
+        "Has Holofnama",
+        "Has Bail Bond",
       ];
       csvRows.push(headers.join(","));
 
@@ -264,6 +268,10 @@ export default ({ strapi }: { strapi: Core.Strapi }) => ({
           `"${item.business?.companyName || ""}"`,
           `"${item.guarantors?.[0]?.name || ""}"`,
           `"${item.guarantors?.[1]?.name || ""}"`,
+          item.flags?.hasLoanAcceptance || false,
+          item.flags?.hasBusinessValuation || false,
+          item.flags?.hasHolofnama || false,
+          item.flags?.hasBailBond || false,
         ];
         csvRows.push(row.join(","));
       });

@@ -90,6 +90,13 @@ export interface HolofnamaInfo {
   chequeAckCert?: any[];
 }
 
+export interface DomainFlags {
+  hasLoanAcceptance: boolean;
+  hasBusinessValuation: boolean;
+  hasHolofnama: boolean;
+  hasBailBond: boolean;
+}
+
 export interface CombinedLoanData {
   // Core identifiers
   id: number;
@@ -124,6 +131,9 @@ export interface CombinedLoanData {
 
   // Holofnama specific
   holofnama?: HolofnamaInfo;
+
+  // Domain flags
+  flags: DomainFlags;
 
   // Relations
   relations: {

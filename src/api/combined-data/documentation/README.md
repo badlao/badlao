@@ -7,20 +7,35 @@ The Combined Data API provides a unified interface to access data from all loan-
 **Domains Covered:**
 
 - **Loan Applications** (Primary table)
-- Loan Acceptance
-- Business Valuation
-- Holofnama
-- Bail Bond
+- **Loan Acceptance** (Fully integrated)
+- **Business Valuation**
+- **Holofnama**
+- **Bail Bond**
 
 ## Key Features
 
 - **LEFT JOIN Approach**: Loan applications are the primary table; other domain data is joined when available
+- **Domain Flags**: Each record includes flags indicating which related domains have data
+- **Loan Acceptance Integration**: Fully integrated loan acceptance domain with proper relationships
 - **Unified Data Structure**: Combines data from multiple domains into a consistent format
 - **Deduplication**: Removes repetitive columns and information
 - **Advanced Filtering**: Filter by multiple criteria across domains
 - **Pagination**: Efficient data loading with pagination support
-- **Export**: CSV export functionality
+- **Export**: CSV export functionality with domain flags
 - **Summary Statistics**: Get overview statistics across all domains
+
+## Domain Flags
+
+Each record now includes a `flags` property that indicates which related domains have data:
+
+```typescript
+interface DomainFlags {
+  hasLoanAcceptance: boolean; // True if loan acceptance record exists
+  hasBusinessValuation: boolean; // True if business valuation exists
+  hasHolofnama: boolean; // True if holofnama documentation exists
+  hasBailBond: boolean; // True if bail bond records exist
+}
+```
 
 ## How It Works
 
@@ -68,36 +83,32 @@ Retrieves paginated combined data from all or specified domains.
   "data": [
     {
       "id": 123,
-      "domain": "loan-application",
-      "applicant": {
-        "id": 123,
-        "name": "John Doe",
-        "nationalId": "1234567890",
-        "phone": "+8801234567890",
-        "address": "123 Main St, Dhaka",
-        "age": 35,
-        "gender": "male",
-        "educationLevel": "graduate"
+      "loan_amount_requested": 50000,
+      "national_id": "1234567890",
+      "business_name": "Tech Solutions Ltd",
+      "applicant_name": "John Doe",
+      "loan_status": "APPROVED",
+      "loan_program": "Rural Development Program",
+      "application_date": "2024-01-15T10:30:00.000Z",
+
+      "flags": {
+        "hasLoanAcceptance": true,
+        "hasBusinessValuation": true,
+        "hasHolofnama": false,
+        "hasBailBond": false
       },
-      "loan": {
-        "id": 123,
-        "amount": 50000,
-        "status": "APPROVED",
-        "purpose": "Business expansion",
-        "applicationDate": "2024-01-15"
+
+      "loan_acceptance": {
+        "acceptance_status": "ACCEPTED",
+        "acceptance_date": "2024-01-20T14:30:00.000Z",
+        "disbursement_amount": 45000
       },
-      "banking": {
-        "mobileBankingType": "BKASH",
-        "mobileBankingAccNo": "01234567890"
+
+      "business_valuation": {
+        "valuation_amount": 75000,
+        "valuation_date": "2024-01-18T09:00:00.000Z"
       },
-      "program": {
-        "programName": "Rural Development Program",
-        "district": "Dhaka"
-      },
-      "relations": {
-        "loanApplicationId": 123,
-        "businessValuationId": 456
-      },
+
       "createdAt": "2024-01-15T10:30:00.000Z",
       "updatedAt": "2024-01-15T10:30:00.000Z"
     }
@@ -194,62 +205,170 @@ Retrieves all records for a specific program.
 GET /api/combined-data/export
 ```
 
-Exports filtered data to CSV format. Supports all the same query parameters as the main endpoint.
+Exports filtered data to CSV format with domain flags included as separate columns. Supports all the same query parameters as the main endpoint.
+
+#### CSV Format
+
+The exported CSV includes:
+
+- All loan application fields
+- Domain flag columns: "Has Loan Acceptance", "Has Business Valuation", "Has Holofnama", "Has Bail Bond"
+- Related domain data when available
+
+**Example CSV Headers:**
+
+```
+ID,Loan Amount Requested,National ID,Business Name,Applicant Name,...,Has Loan Acceptance,Has Business Valuation,Has Holofnama,Has Bail Bond
+```
+
+#### Usage Examples
+
+```javascript
+// Export all data with domain flags
+window.open("/api/combined-data/export");
+
+// Export approved loans only
+window.open("/api/combined-data/export?status=APPROVED");
+
+// Export loans from specific district
+window.open("/api/combined-data/export?district=Dhaka");
+```
 
 ## Data Structure
 
-### PersonInfo
+### Combined Data Response Format
 
-```typescript
+Each record in the combined data includes a `flags` property that indicates which related domains have data:
+
+```json
 {
-  id: number;
-  name: string;
-  nationalId?: string | number;
-  phone?: string;
-  address?: string;
-  age?: number;
-  gender?: 'male' | 'female' | 'other';
-  educationLevel?: string;
-  photos?: any[];
-  signature?: any;
-  nidDoc?: any;
+  "id": 123,
+  "loan_amount_requested": 50000,
+  "national_id": "1234567890",
+  "business_name": "Tech Solutions Ltd",
+  "applicant_name": "John Doe",
+  "loan_status": "APPROVED",
+  "loan_program": "Rural Development Program",
+  "application_date": "2024-01-15T10:30:00.000Z",
+
+  "flags": {
+    "hasLoanAcceptance": true,
+    "hasBusinessValuation": true,
+    "hasHolofnama": false,
+    "hasBailBond": false
+  },
+
+  "loan_acceptance": {
+    "acceptance_status": "ACCEPTED",
+    "acceptance_date": "2024-01-20T14:30:00.000Z",
+    "disbursement_amount": 45000
+  },
+
+  "business_valuation": {
+    "valuation_amount": 75000,
+    "valuation_date": "2024-01-18T09:00:00.000Z"
+  }
 }
 ```
 
-### LoanInfo
+### TypeScript Interfaces
 
 ```typescript
-{
+interface DomainFlags {
+  hasLoanAcceptance: boolean;
+  hasBusinessValuation: boolean;
+  hasHolofnama: boolean;
+  hasBailBond: boolean;
+}
+
+interface CombinedLoanData {
   id: number;
-  formNo?: number;
-  amount: number;
-  status?: string;
-  purpose?: string;
-  applicationDate?: string;
-  businessType?: 'NEW' | 'OLD';
-  // ... other loan fields
+  loan_amount_requested: number;
+  national_id: string;
+  business_name: string;
+  applicant_name: string;
+
+  // Domain flags (always present)
+  flags: DomainFlags;
+
+  // Loan domain data (always present)
+  loan_status: string;
+  loan_program: string;
+  application_date: Date;
+
+  // Related domain data (present when relationships exist)
+  loan_acceptance?: {
+    acceptance_status: string;
+    acceptance_date: Date;
+    disbursement_amount: number;
+  };
+
+  business_valuation?: {
+    valuation_amount: number;
+    valuation_date: Date;
+  };
+
+  holofnama?: {
+    document_number: string;
+    issue_date: Date;
+  };
+
+  bail_bonds?: Array<{
+    bond_amount: number;
+    bond_date: Date;
+  }>;
 }
 ```
 
 ## Usage Examples
 
-### Basic Usage
+### Basic Usage with Domain Flags
 
 ```javascript
-// Get first page of all data
+// Get first page of all data with domain flags
 fetch("/api/combined-data")
   .then((response) => response.json())
-  .then((data) => console.log(data));
+  .then((data) => {
+    data.data.forEach((record) => {
+      console.log(`Record ${record.id}:`);
+      console.log(`- Has Loan Acceptance: ${record.flags.hasLoanAcceptance}`);
+      console.log(
+        `- Has Business Valuation: ${record.flags.hasBusinessValuation}`
+      );
+      console.log(`- Has Holofnama: ${record.flags.hasHolofnama}`);
+      console.log(`- Has Bail Bond: ${record.flags.hasBailBond}`);
+    });
+  });
 
-// Get approved loans only
+// Filter records that have loan acceptance
+fetch("/api/combined-data")
+  .then((response) => response.json())
+  .then((data) => {
+    const recordsWithAcceptance = data.data.filter(
+      (record) => record.flags.hasLoanAcceptance
+    );
+    console.log("Records with loan acceptance:", recordsWithAcceptance);
+  });
+```
+
+### Advanced Filtering with Domain Data
+
+```javascript
+// Get approved loans with business valuation
 fetch("/api/combined-data?status=APPROVED")
   .then((response) => response.json())
-  .then((data) => console.log(data));
+  .then((data) => {
+    const approvedWithValuation = data.data.filter(
+      (record) => record.flags.hasBusinessValuation
+    );
+    console.log(
+      "Approved loans with business valuation:",
+      approvedWithValuation
+    );
+  });
 
 // Get loan applications with amount between 10k-50k
-fetch(
-  "/api/combined-data?domain=loan-application&loanAmountMin=10000&loanAmountMax=50000"
-)
+fetch("/api/combined-data?loanAmountMin=10000&loanAmountMax=50000")
   .then((response) => response.json())
   .then((data) => console.log(data));
 ```
@@ -290,11 +409,41 @@ window.open(`/api/combined-data/export?${exportParams}`);
 
 ## Best Practices
 
-1. **Use LEFT JOIN Approach**: The API automatically fetches loan applications with their related data - this is the most efficient way to get complete information
-2. **Pagination**: Always use pagination for large datasets to avoid loading too much data at once
-3. **Filtering**: Apply specific filters to get only the data you need
-4. **Error Handling**: Always handle errors appropriately in your client code
-5. **Authentication**: Enable authentication in production environments
+1. **Use Domain Flags**: Check the `flags` property to determine which related data is available before accessing nested objects
+2. **Use LEFT JOIN Approach**: The API automatically fetches loan applications with their related data - this is the most efficient way to get complete information
+3. **Pagination**: Always use pagination for large datasets to avoid loading too much data at once
+4. **Filtering**: Apply specific filters to get only the data you need
+5. **Error Handling**: Always handle errors appropriately in your client code
+6. **Authentication**: Enable authentication in production environments
+
+### Working with Domain Flags
+
+```javascript
+// Safe way to access related data using flags
+function processLoanData(record) {
+  console.log(`Processing loan ${record.id}`);
+
+  if (record.flags.hasLoanAcceptance) {
+    console.log(
+      `Acceptance Status: ${record.loan_acceptance.acceptance_status}`
+    );
+  }
+
+  if (record.flags.hasBusinessValuation) {
+    console.log(
+      `Business Value: ${record.business_valuation.valuation_amount}`
+    );
+  }
+
+  if (record.flags.hasHolofnama) {
+    console.log(`Document Number: ${record.holofnama.document_number}`);
+  }
+
+  if (record.flags.hasBailBond) {
+    console.log(`Bail Bonds Count: ${record.bail_bonds.length}`);
+  }
+}
+```
 
 ## Error Handling
 
@@ -319,10 +468,28 @@ Error responses include a message explaining the issue:
 
 ## Data Structure Benefits
 
+- **Domain Flags**: Quickly determine which related data is available without checking for null/undefined values
 - **Always Shows Loan Applications**: If you have loan application data, it will always appear
-- **Related Data Included**: Business valuations, holofnama, bail bonds are automatically included when they exist
+- **Related Data Included**: Loan acceptance, business valuations, holofnama, bail bonds are automatically included when they exist
 - **No Missing Information**: The LEFT JOIN approach ensures no loan applications are lost
 - **Smart Organization**: Related data is properly nested and deduplicated
+- **Safe Data Access**: Use flags to safely access nested objects without errors
+- **CSV Export Ready**: Domain flags are included in CSV exports for easy analysis
+
+## Migration Notes
+
+If you're migrating from the previous API version:
+
+1. **Response Structure Changed**: The new format includes `flags` property and flattened loan data
+2. **Domain Flags Added**: Use `record.flags.hasLoanAcceptance` instead of checking `record.loan_acceptance !== null`
+3. **Loan Acceptance Integration**: Loan acceptance data is now fully integrated and available in the response
+4. **CSV Export Enhanced**: CSV now includes domain flag columns for better data analysis
+
+---
+
+**API Version**: 2.0  
+**Last Updated**: January 2025  
+**Domain Coverage**: Loan Applications, Loan Acceptance, Business Valuation, Holofnama, Bail Bond
 
 ## Security
 

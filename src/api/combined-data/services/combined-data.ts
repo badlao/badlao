@@ -361,6 +361,12 @@ export default ({ strapi }: { strapi: Core.Strapi }) => ({
       loan,
       installment,
       banking,
+      flags: {
+        hasLoanAcceptance: false,
+        hasBusinessValuation: false,
+        hasHolofnama: false,
+        hasBailBond: false,
+      },
       relations: {
         loanApplicationId: data.id,
         loanAcceptanceId: data.loan_acceptance?.id,
@@ -413,6 +419,12 @@ export default ({ strapi }: { strapi: Core.Strapi }) => ({
       loan,
       installment,
       program,
+      flags: {
+        hasLoanAcceptance: true,
+        hasBusinessValuation: false,
+        hasHolofnama: false,
+        hasBailBond: false,
+      },
       relations: {
         loanAcceptanceId: data.id,
         loanApplicationIds: data.loan_applications?.map((la) => la.id) || [],
@@ -462,6 +474,12 @@ export default ({ strapi }: { strapi: Core.Strapi }) => ({
       loan,
       business,
       program,
+      flags: {
+        hasLoanAcceptance: false,
+        hasBusinessValuation: true,
+        hasHolofnama: false,
+        hasBailBond: false,
+      },
       relations: {
         businessValuationId: data.id,
         loanApplicationId: data.loan_application?.id,
@@ -505,6 +523,12 @@ export default ({ strapi }: { strapi: Core.Strapi }) => ({
       loan,
       holofnama,
       program,
+      flags: {
+        hasLoanAcceptance: false,
+        hasBusinessValuation: false,
+        hasHolofnama: true,
+        hasBailBond: false,
+      },
       relations: {
         holofnamaId: data.id,
         loanApplicationIds: data.loan_applications?.map((la) => la.id) || [],
@@ -554,6 +578,12 @@ export default ({ strapi }: { strapi: Core.Strapi }) => ({
       applicant,
       loan,
       guarantors,
+      flags: {
+        hasLoanAcceptance: false,
+        hasBusinessValuation: false,
+        hasHolofnama: false,
+        hasBailBond: true,
+      },
       relations: {
         bailBondIds: [data.id],
         loanApplicationId: data.loan_application?.id,
@@ -952,6 +982,12 @@ export default ({ strapi }: { strapi: Core.Strapi }) => ({
       business,
       program,
       holofnama,
+      flags: {
+        hasLoanAcceptance: !!data.loan_acceptance,
+        hasBusinessValuation: !!data.business_valuation,
+        hasHolofnama: !!data.holofnama,
+        hasBailBond: !!(data.bail_bonds && data.bail_bonds.length > 0),
+      },
       relations: {
         loanApplicationId: data.id,
         loanAcceptanceId: data.loan_acceptance?.id,
