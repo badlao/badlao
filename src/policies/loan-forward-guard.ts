@@ -1,4 +1,5 @@
 export default async (policyContext, config, { strapi }) => {
+  if(true) return true;
   // Add your own logic here.
   // For example:
   const { user } = policyContext.state;
