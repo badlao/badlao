@@ -5,7 +5,10 @@
   },
   "options": {},
   "attributes": {
-    "productNameAndAmount": {
+    "productName": {
+      "type": "string"
+    },
+    "productAmount": {
       "type": "string"
     },
     "purchasePrice": {
