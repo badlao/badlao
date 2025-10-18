@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2025-10-02T17:28:55.410Z"
+    "x-generation-date": "2025-10-18T09:41:22.336Z"
   },
   "x-strapi-config": {
     "plugins": [
@@ -9775,6 +9775,12 @@
                   "businessDescription": {
                     "type": "string"
                   },
+                  "businessMonthlyIncome": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/SharedBusinessMonthlyIncomeComponent"
+                    }
+                  },
                   "requiredMaterialsForBusinessExtension": {
                     "type": "array",
                     "items": {
@@ -10698,7 +10704,10 @@
           "id": {
             "type": "number"
           },
-          "productNameAndAmount": {
+          "productName": {
+            "type": "string"
+          },
+          "productAmount": {
             "type": "string"
           },
           "purchasePrice": {
@@ -10719,6 +10728,20 @@
             "type": "integer"
           },
           "quantity": {
+            "type": "integer"
+          }
+        }
+      },
+      "SharedBusinessMonthlyIncomeComponent": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "sourceOfIncome": {
+            "type": "string"
+          },
+          "monthlyIncome": {
             "type": "integer"
           }
         }
@@ -11262,6 +11285,12 @@
               "businessDescription": {
                 "type": "string"
               },
+              "businessMonthlyIncome": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/SharedBusinessMonthlyIncomeComponent"
+                }
+              },
               "requiredMaterialsForBusinessExtension": {
                 "type": "array",
                 "items": {
@@ -11417,6 +11446,12 @@
           },
           "businessDescription": {
             "type": "string"
+          },
+          "businessMonthlyIncome": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SharedBusinessMonthlyIncomeComponent"
+            }
           },
           "requiredMaterialsForBusinessExtension": {
             "type": "array",
@@ -14730,6 +14765,12 @@
                   },
                   "businessDescription": {
                     "type": "string"
+                  },
+                  "businessMonthlyIncome": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/SharedBusinessMonthlyIncomeComponent"
+                    }
                   },
                   "requiredMaterialsForBusinessExtension": {
                     "type": "array",
@@ -19269,6 +19310,12 @@
                     "businessDescription": {
                       "type": "string"
                     },
+                    "businessMonthlyIncome": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/SharedBusinessMonthlyIncomeComponent"
+                      }
+                    },
                     "requiredMaterialsForBusinessExtension": {
                       "type": "array",
                       "items": {
@@ -22932,6 +22979,12 @@
                   },
                   "businessDescription": {
                     "type": "string"
+                  },
+                  "businessMonthlyIncome": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/SharedBusinessMonthlyIncomeComponent"
+                    }
                   },
                   "requiredMaterialsForBusinessExtension": {
                     "type": "array",
@@ -26835,6 +26888,12 @@
                     },
                     "businessDescription": {
                       "type": "string"
+                    },
+                    "businessMonthlyIncome": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/SharedBusinessMonthlyIncomeComponent"
+                      }
                     },
                     "requiredMaterialsForBusinessExtension": {
                       "type": "array",
@@ -31372,6 +31431,12 @@
                         },
                         "businessDescription": {
                           "type": "string"
+                        },
+                        "businessMonthlyIncome": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/SharedBusinessMonthlyIncomeComponent"
+                          }
                         },
                         "requiredMaterialsForBusinessExtension": {
                           "type": "array",

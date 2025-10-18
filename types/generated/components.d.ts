@@ -29,7 +29,8 @@ export interface SharedContinuedInvestment extends Struct.ComponentSchema {
     displayName: 'Continued Investment';
   };
   attributes: {
-    productNameAndAmount: Schema.Attribute.String;
+    productAmount: Schema.Attribute.String;
+    productName: Schema.Attribute.String;
     purchasePrice: Schema.Attribute.Integer;
   };
 }

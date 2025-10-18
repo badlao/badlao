@@ -505,6 +505,10 @@ export interface ApiBusinessValuationBusinessValuation
       'shared.business-expense',
       true
     >;
+    businessMonthlyIncome: Schema.Attribute.Component<
+      'shared.business-monthly-income',
+      true
+    >;
     businessPossibleIncome: Schema.Attribute.Component<
       'shared.possible-income',
       true

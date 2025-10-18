@@ -50,6 +50,11 @@
     "businessDescription": {
       "type": "text"
     },
+    "businessMonthlyIncome": {
+      "type": "component",
+      "component": "shared.business-monthly-income",
+      "repeatable": true
+    },
     "requiredMaterialsForBusinessExtension": {
       "type": "component",
       "component": "shared.required-materials",
