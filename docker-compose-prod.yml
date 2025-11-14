@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  strapi-prod:
+    image: node:20
+    container_name: strapi-prod
+    working_dir: /srv/app
+    command: bash -c "npm ci && npm run build && npm run start"
+    environment:
+      NODE_ENV: production
+      HOST: 0.0.0.0
+      PORT: 1338
+    env_file:
+      - .env.production   # put your DB_URL, APP_KEYS, API_TOKEN_SALT, ADMIN_JWT_SECRET etc. here
+    volumes:
+      - ./:/srv/app       # your Strapi project on the host
+    ports:
+      - "1338:1338"
+    restart: unless-stopped
