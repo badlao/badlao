@@ -19,7 +19,7 @@ module.exports = {
 
     const { data } = event.params;
     const { loan_application, skipDueCalculation } = data;
-    console.log('✅ Lifecycle beforeCreate triggered data: ', data);
+    console.log('Lifecycle beforeCreate triggered data: ', data);
 
     if (skipDueCalculation) {
       console.log('Skipping due calculation as per request.');
