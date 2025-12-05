@@ -1,0 +1,22 @@
+FROM node:20
+
+# Workdir inside container
+WORKDIR /srv/app
+
+# Install dependencies (use cache)
+COPY package*.json ./
+RUN npm install
+
+# Copy the rest of the app
+COPY . .
+
+# Dev environment
+ENV NODE_ENV=development
+ENV HOST=0.0.0.0
+ENV PORT=1339
+
+# Expose dev port
+EXPOSE 1339
+
+# Start Strapi in develop mode
+CMD ["npm", "run", "develop"]

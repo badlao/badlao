@@ -1,11 +1,27 @@
-version: '3.8'
+version: "3.8"
 
 services:
-  strapi:
-    image: node:20
-    working_dir: /srv/app
-    command: bash -c "npm install && npm run develop"
-    volumes:
-      - ./:/srv/app
-    network_mode: host
+  strapi-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    container_name: strapi-dev
 
+    # Load all secrets & config from .env (NOT committed to git)
+    env_file:
+      - .env
+
+    # Strapi app directory inside the container
+    working_dir: /srv/app
+
+    # Mount source code for development
+    volumes:
+      - ./:/srv/app           # your project code
+      - /srv/app/node_modules # keep node_modules inside container
+
+    # Expose dev port (Strapi listens on PORT from .env = 1339)
+    ports:
+      - "1339:1339"
+
+    # Optional: keep restarting if it crashes while dev is testing
+    restart: unless-stopped
