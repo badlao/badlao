@@ -1,0 +1,40 @@
+name: Deploy Staging
+
+on:
+  push:
+    branches:
+      - staging
+
+jobs:
+  deploy-staging:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+
+      - name: SSH to VM & Deploy STAGING
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.IP }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          port: ${{ secrets.PORT }}
+          script: |
+            echo ">>> Switching to staging project directory"
+            cd /home/ubuntu/badlao-deployment/staging/badlao || exit 1
+
+            echo ">>> Switching to root user"
+            sudo su <<'EOF'
+
+            echo ">>> Pulling latest code from STAGING branch"
+            git pull origin staging || exit 1
+
+            echo ">>> Bringing down existing STAGING containers"
+            docker compose -f docker-compose-staging.yml down || exit 1
+
+            echo ">>> Rebuilding & starting STAGING containers"
+            docker compose -f docker-compose-staging.yml up --build -d || exit 1
+
+            echo ">>> STAGING deployment completed!"
+            EOF
