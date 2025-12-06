@@ -1,30 +1,24 @@
-version: '3.8'
+version: "3.8"
 
 services:
-  # db:
-  #   image: postgres
-  #   restart: unless-stopped
-  #   environment:
-  #     POSTGRES_USER: postgres
-  #     POSTGRES_PASSWORD: 123456
-  #     POSTGRES_DB: postgres
-  #   volumes:
-  #     - ./db-data:/var/lib/postgresql/data
-  #   # ports:
-  #   #   - "5432:5432"
-  #   network_mode: host
+  strapi-staging:
+    build:
+      context: .
+      dockerfile: Dockerfile.staging
+    container_name: strapi-staging
 
-  strapi:
-    image: node:20
+    # Load staging environment variables
+    env_file:
+      - .env
+
     working_dir: /srv/app
-    command: bash -c "npm install && npm run develop"
-    volumes:
-      - ./:/srv/app
-    # ports:
-    #   - "1337:1337"
-    # depends_on:
-    #   - db
-    network_mode: host
 
-# volumes:
-#   db-data:
+    # No bind mounts in staging → clean image-based deployment
+    # Add volumes later if you want persistent uploads
+    # volumes:
+    #   - ./public/uploads:/srv/app/public/uploads
+
+    ports:
+      - "1341:1341"   # staging port (no conflicts)
+
+    restart: unless-stopped

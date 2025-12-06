@@ -1,0 +1,32 @@
+# ============================
+# 1) Build stage
+# ============================
+FROM node:20 AS builder
+
+WORKDIR /srv/app
+
+COPY package*.json ./
+RUN npm install
+
+COPY . .
+
+ENV NODE_ENV=production
+
+RUN npm run build
+
+
+# ============================
+# 2) Runtime stage
+# ============================
+FROM node:20
+
+WORKDIR /srv/app
+
+COPY --from=builder /srv/app /srv/app
+
+ENV NODE_ENV=production
+
+# Must match staging port
+EXPOSE 1341
+
+CMD ["npm", "run", "start"]
