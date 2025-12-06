@@ -1,19 +1,26 @@
-version: '3.8'
+version: "3.8"
 
 services:
   strapi-prod:
-    image: node:20
+    build:
+      context: .
+      dockerfile: Dockerfile.prod
     container_name: strapi-prod
-    working_dir: /srv/app
-    command: bash -c "npm ci && npm run build && npm run start"
-    environment:
-      NODE_ENV: production
-      HOST: 0.0.0.0
-      PORT: 1338
+
+    # Load all prod env vars (this file should NOT be committed)
     env_file:
-      - .env.production   # put your DB_URL, APP_KEYS, API_TOKEN_SALT, ADMIN_JWT_SECRET etc. here
-    volumes:
-      - ./:/srv/app       # your Strapi project on the host
+      - .env
+
+    # Strapi app working dir
+    working_dir: /srv/app
+
+    # In prod we usually don't mount source code;
+    # the code is baked into the image.
+    # If you want persistent uploads, you can later add:
+    # volumes:
+    #   - ./public/uploads:/srv/app/public/uploads
+
     ports:
-      - "1338:1338"
+      - "1340:1340"   # host:container, matches PORT in .env
+
     restart: unless-stopped
