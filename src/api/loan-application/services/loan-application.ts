@@ -54,13 +54,17 @@ export default factories.createCoreService(
           throw new Error("Loan application not found");
         }
 
-        if (!loanApplication.business_valuation) {
-          throw new Error(
-            "Business valuation not found for this loan application"
-          );
-        }
+        // if (!loanApplication.business_valuation) {
+        //   throw new Error(
+        //     "Business valuation not found for this loan application"
+        //   );
+        // }
 
-        const businessValuation = loanApplication.business_valuation;
+        const businessValuation = loanApplication.business_valuation || {
+          permanentBusinessAsset: [],
+          continuedInvestment: [],
+          businessPossibleIncome: [],
+        };
 
         // Calculate totalPermanentBusinessAsset
         // Sum of (assetNumber * assetPrice)
