@@ -6,21 +6,16 @@ services:
       context: .
       dockerfile: Dockerfile.prod
     container_name: strapi-prod
-
-    # Load all prod env vars (this file should NOT be committed)
     env_file:
       - .env
-
-    # Strapi app working dir
     working_dir: /srv/app
-
-    # In prod we usually don't mount source code;
-    # the code is baked into the image.
-    # If you want persistent uploads, you can later add:
-    # volumes:
-    #   - ./public/uploads:/srv/app/public/uploads
-
     ports:
-      - "1340:1340"   # host:container, matches PORT in .env
-
+      - "1340:1340"
     restart: unless-stopped
+    networks:
+      - backend
+
+networks:
+  backend:
+    external: true
+    name: badlao_backend
