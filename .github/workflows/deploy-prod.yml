@@ -3,7 +3,7 @@ name: Deploy Prod
 on:
   push:
     branches:
-      - prod
+      - master
 
 jobs:
   deploy-prod:
@@ -26,15 +26,20 @@ jobs:
 
             echo ">>> Switching to root user"
             sudo su <<'EOF'
+            set -e
 
-            echo ">>> Pulling latest code from PROD branch"
-            git pull origin prod || exit 1
+            echo ">>> Pulling latest code from master branch"
+            cd /home/ubuntu/badlao-deployment/prod/badlao
+            git pull origin master
+
+            echo ">>> Ensure shared docker network exists"
+            docker network inspect badlao_backend >/dev/null 2>&1 || docker network create badlao_backend
 
             echo ">>> Bringing down existing PROD containers"
-            docker compose -f docker-compose-prod.yml down || exit 1
+            docker compose -f docker-compose-prod.yml down
 
             echo ">>> Rebuilding & starting PROD containers"
-            docker compose -f docker-compose-prod.yml up --build -d || exit 1
+            docker compose -f docker-compose-prod.yml up -d --build
 
             echo ">>> PROD deployment completed!"
             EOF
