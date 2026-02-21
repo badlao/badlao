@@ -10,7 +10,7 @@ services:
       - .env
     working_dir: /srv/app
     ports:
-      - "1340:1340"
+      - "127.0.0.1:1340:1340"
     restart: unless-stopped
     networks:
       - backend
