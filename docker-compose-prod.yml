@@ -5,9 +5,9 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.prod
-    container_name: strapi-prod
+    container_name: badlao-strapi-prod
     env_file:
-      - .env
+      - .env.prod
     working_dir: /srv/app
     ports:
       - "127.0.0.1:1340:1340"
