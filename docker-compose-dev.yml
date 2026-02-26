@@ -5,23 +5,17 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.dev
-    container_name: strapi-dev
-
-    # Load all secrets & config from .env (NOT committed to git)
+    container_name: badlao-strapi-dev
     env_file:
-      - .env
-
-    # Strapi app directory inside the container
+      - .env.dev
     working_dir: /srv/app
-
-    # Mount source code for development
-    volumes:
-      - ./:/srv/app           # your project code
-      - /srv/app/node_modules # keep node_modules inside container
-
-    # Expose dev port (Strapi listens on PORT from .env = 1339)
     ports:
-      - "1339:1339"
-
-    # Optional: keep restarting if it crashes while dev is testing
+      - "127.0.0.1:1339:1339"
     restart: unless-stopped
+    networks:
+      - backend
+
+networks:
+  backend:
+    external: true
+    name: badlao_backend
