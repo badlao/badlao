@@ -29,8 +29,49 @@ export interface SharedContinuedInvestment extends Struct.ComponentSchema {
     displayName: 'Continued Investment';
   };
   attributes: {
-    productNameAndAmount: Schema.Attribute.String;
+    productAmount: Schema.Attribute.String;
+    productName: Schema.Attribute.String;
     purchasePrice: Schema.Attribute.Integer;
+  };
+}
+
+export interface SharedHolofnamaChequeAck extends Struct.ComponentSchema {
+  collectionName: 'components_shared_holofnama_cheque_acks';
+  info: {
+    displayName: 'holofnama_cheque_ack';
+  };
+  attributes: {
+    loan_amount: Schema.Attribute.Integer;
+    loan_recieve_date: Schema.Attribute.Date;
+    loan_recieve_type: Schema.Attribute.Enumeration<['ONLINE', 'OFFLINE']>;
+    loan_transfer_type: Schema.Attribute.Enumeration<
+      ['BKASH', 'NOGOD', 'ROCKET', 'BANK', 'CASH']
+    >;
+    loanee_name: Schema.Attribute.String;
+    loanee_nid: Schema.Attribute.Integer;
+    loanee_signature: Schema.Attribute.Media<'images'>;
+    transaction_id: Schema.Attribute.String;
+  };
+}
+
+export interface SharedLoaneeInformation extends Struct.ComponentSchema {
+  collectionName: 'components_shared_loanee_informations';
+  info: {
+    displayName: 'Loanee Information';
+  };
+  attributes: {
+    cheque_no: Schema.Attribute.String;
+    loan_amount: Schema.Attribute.Decimal & Schema.Attribute.Required;
+    loanee_nid: Schema.Attribute.BigInteger;
+    recipient_name: Schema.Attribute.String & Schema.Attribute.Required;
+    recipient_signature: Schema.Attribute.Media<'images'>;
+    repayment_duration: Schema.Attribute.Integer;
+    repayment_duration_unit: Schema.Attribute.Enumeration<
+      ['DAYS', 'WEEK', 'MONTH', 'YEAR']
+    >;
+    repayment_method: Schema.Attribute.Enumeration<
+      ['BANK', 'BKASH', 'NOGOD', 'ROCKET', 'CASE', 'OTHER']
+    >;
   };
 }
 
@@ -145,19 +186,28 @@ export interface SharedSocialEvaluation extends Struct.ComponentSchema {
     education_cost: Schema.Attribute.Integer;
     female_members: Schema.Attribute.Integer;
     financial_behavior_rating: Schema.Attribute.Enumeration<
-      ['good', 'average', 'bad']
+      ['GOOD', 'AVERAGE', 'BAD']
     >;
     food_cost: Schema.Attribute.Integer;
     has_chronic_disease: Schema.Attribute.Boolean;
     has_legal_or_social_problem: Schema.Attribute.Boolean;
     has_other_loan: Schema.Attribute.Boolean;
     house_rent: Schema.Attribute.Integer;
-    house_type: Schema.Attribute.Enumeration<['own', 'rented']>;
-    main_income_source: Schema.Attribute.Enumeration<['job', 'business']>;
+    house_total_expense: Schema.Attribute.Integer;
+    house_type: Schema.Attribute.Enumeration<['OWN', 'RENTED']>;
+    is_other_org_defaulter: Schema.Attribute.Boolean;
+    legal_social_problem_desc: Schema.Attribute.Text;
+    main_income_source: Schema.Attribute.Enumeration<
+      ['JOB', 'BUSINESS', 'OTHER']
+    >;
     male_members: Schema.Attribute.Integer;
     medical_cost: Schema.Attribute.Integer;
     monthly_income: Schema.Attribute.Integer;
     other_cost: Schema.Attribute.Integer;
+    other_org_exit_date: Schema.Attribute.Date;
+    other_org_monthly_installment: Schema.Attribute.Integer;
+    other_org_total_liability: Schema.Attribute.Integer;
+    personal_social_behaviour: Schema.Attribute.Text;
     total_expense: Schema.Attribute.Integer;
     total_family_members: Schema.Attribute.Integer;
     utility_bill: Schema.Attribute.Integer;
@@ -170,6 +220,8 @@ declare module '@strapi/strapi' {
       'shared.business-expense': SharedBusinessExpense;
       'shared.business-monthly-income': SharedBusinessMonthlyIncome;
       'shared.continued-investment': SharedContinuedInvestment;
+      'shared.holofnama-cheque-ack': SharedHolofnamaChequeAck;
+      'shared.loanee-information': SharedLoaneeInformation;
       'shared.media': SharedMedia;
       'shared.permanent-business-asset': SharedPermanentBusinessAsset;
       'shared.possible-income': SharedPossibleIncome;

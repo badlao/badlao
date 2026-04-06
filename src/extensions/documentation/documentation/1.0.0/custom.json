@@ -1,6 +1,6 @@
 {
   "paths": {
-    "/api/loan-applications/{id}/approve": {
+    "/api/loan-applications/{id}/forward-with-status": {
       "post": {
         "tags": ["Loan Application"],
         "summary": "Approve a loan application",

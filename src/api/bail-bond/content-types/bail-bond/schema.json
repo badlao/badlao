@@ -1,0 +1,83 @@
+{
+  "kind": "collectionType",
+  "collectionName": "bail_bonds",
+  "info": {
+    "singularName": "bail-bond",
+    "pluralName": "bail-bonds",
+    "displayName": "Bail Bond"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "loanee_name": {
+      "type": "string",
+      "required": true
+    },
+    "loanee_nid": {
+      "type": "integer"
+    },
+    "loan_amount_requested": {
+      "type": "integer"
+    },
+    "first_guarantor_name": {
+      "type": "string",
+      "required": false
+    },
+    "first_guarantor_nid": {
+      "type": "integer"
+    },
+    "first_guarantor_signature": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "first_guarantor_address": {
+      "type": "text"
+    },
+    "first_guarantor_phone": {
+      "type": "string"
+    },
+    "second_guarantor_name": {
+      "type": "string",
+      "required": false
+    },
+    "second_guarantor_nid": {
+      "type": "integer"
+    },
+    "second_guarantor_signature": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "second_guarantor_address": {
+      "type": "text"
+    },
+    "second_guarantor_phone": {
+      "type": "string"
+    },
+    "full_address": {
+      "type": "text"
+    },
+    "phone_no": {
+      "type": "string"
+    },
+    "loan_application": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::loan-application.loan-application",
+      "inversedBy": "bail_bonds"
+    }
+  }
+}

@@ -1,0 +1,43 @@
+# ============================
+# 1) Build stage
+# ============================
+FROM node:20 AS builder
+
+# Create app directory
+WORKDIR /srv/app
+
+# Install dependencies first (better layer caching)
+COPY package*.json ./
+RUN npm install
+
+# Copy all source
+COPY . .
+
+# Set env to production for build
+ENV NODE_ENV=production
+
+# Build Strapi admin panel
+# (Assumes package.json has: "build": "strapi build")
+RUN npm run build
+
+
+# ============================
+# 2) Runtime stage
+# ============================
+FROM node:20
+
+WORKDIR /srv/app
+
+# Copy only what we need from builder
+COPY --from=builder /srv/app /srv/app
+
+# Ensure production environment
+ENV NODE_ENV=production
+
+# Strapi reads HOST / PORT / DATABASE_* from environment (.env via docker-compose)
+# Expose the port used inside the container (must match PORT in .env)
+EXPOSE 1340
+
+# Start Strapi in production mode
+# (Assumes package.json has: "start": "strapi start")
+CMD ["npm", "run", "start"]

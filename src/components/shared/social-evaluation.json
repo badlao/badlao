@@ -9,8 +9,8 @@
     "house_type": {
       "type": "enumeration",
       "enum": [
-        "own",
-        "rented"
+        "OWN",
+        "RENTED"
       ]
     },
     "house_rent": {
@@ -31,8 +31,9 @@
     "main_income_source": {
       "type": "enumeration",
       "enum": [
-        "job",
-        "business"
+        "JOB",
+        "BUSINESS",
+        "OTHER"
       ]
     },
     "earners_in_family": {
@@ -59,6 +60,9 @@
     "total_expense": {
       "type": "integer"
     },
+    "house_total_expense": {
+      "type": "integer"
+    },
     "has_chronic_disease": {
       "type": "boolean"
     },
@@ -68,13 +72,31 @@
     "has_legal_or_social_problem": {
       "type": "boolean"
     },
+    "legal_social_problem_desc": {
+      "type": "text"
+    },
     "financial_behavior_rating": {
       "type": "enumeration",
       "enum": [
-        "good",
-        "average",
-        "bad"
+        "GOOD",
+        "AVERAGE",
+        "BAD"
       ]
+    },
+    "personal_social_behaviour": {
+      "type": "text"
+    },
+    "other_org_total_liability": {
+      "type": "integer"
+    },
+    "other_org_monthly_installment": {
+      "type": "integer"
+    },
+    "other_org_exit_date": {
+      "type": "date"
+    },
+    "is_other_org_defaulter": {
+      "type": "boolean"
     }
   },
   "config": {}

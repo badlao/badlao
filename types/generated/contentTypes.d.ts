@@ -402,71 +402,83 @@ export interface ApiAboutAbout extends Struct.SingleTypeSchema {
   };
 }
 
-export interface ApiArticleArticle extends Struct.CollectionTypeSchema {
-  collectionName: 'articles';
+export interface ApiBailBondBailBond extends Struct.CollectionTypeSchema {
+  collectionName: 'bail_bonds';
   info: {
-    description: 'Create your blog content';
-    displayName: 'Article';
-    pluralName: 'articles';
-    singularName: 'article';
+    displayName: 'Bail Bond';
+    pluralName: 'bail-bonds';
+    singularName: 'bail-bond';
   };
   options: {
-    draftAndPublish: true;
+    draftAndPublish: false;
   };
   attributes: {
-    author: Schema.Attribute.Relation<'manyToOne', 'api::author.author'>;
-    blocks: Schema.Attribute.DynamicZone<
-      ['shared.media', 'shared.quote', 'shared.rich-text', 'shared.slider']
-    >;
-    category: Schema.Attribute.Relation<'manyToOne', 'api::category.category'>;
-    cover: Schema.Attribute.Media<'images' | 'files' | 'videos'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    description: Schema.Attribute.Text &
-      Schema.Attribute.SetMinMaxLength<{
-        maxLength: 80;
-      }>;
+    first_guarantor_address: Schema.Attribute.Text;
+    first_guarantor_name: Schema.Attribute.String;
+    first_guarantor_nid: Schema.Attribute.Integer;
+    first_guarantor_phone: Schema.Attribute.String;
+    first_guarantor_signature: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
+    full_address: Schema.Attribute.Text;
+    loan_amount_requested: Schema.Attribute.Integer;
+    loan_application: Schema.Attribute.Relation<
+      'manyToOne',
+      'api::loan-application.loan-application'
+    >;
+    loanee_name: Schema.Attribute.String & Schema.Attribute.Required;
+    loanee_nid: Schema.Attribute.Integer;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
-      'api::article.article'
+      'api::bail-bond.bail-bond'
     > &
       Schema.Attribute.Private;
+    phone_no: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
-    slug: Schema.Attribute.UID<'title'>;
-    title: Schema.Attribute.String;
+    second_guarantor_address: Schema.Attribute.Text;
+    second_guarantor_name: Schema.Attribute.String;
+    second_guarantor_nid: Schema.Attribute.Integer;
+    second_guarantor_phone: Schema.Attribute.String;
+    second_guarantor_signature: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
   };
 }
 
-export interface ApiAuthorAuthor extends Struct.CollectionTypeSchema {
-  collectionName: 'authors';
+export interface ApiBankBank extends Struct.CollectionTypeSchema {
+  collectionName: 'banks';
   info: {
-    description: 'Create authors for your content';
-    displayName: 'Author';
-    pluralName: 'authors';
-    singularName: 'author';
+    displayName: 'Bank';
+    pluralName: 'banks';
+    singularName: 'bank';
   };
   options: {
     draftAndPublish: false;
   };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
   attributes: {
-    articles: Schema.Attribute.Relation<'oneToMany', 'api::article.article'>;
-    avatar: Schema.Attribute.Media<'images' | 'files' | 'videos'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    email: Schema.Attribute.String;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::author.author'
-    > &
-      Schema.Attribute.Private;
-    name: Schema.Attribute.String;
+    locale: Schema.Attribute.String;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::bank.bank'>;
+    name: Schema.Attribute.String &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -483,7 +495,7 @@ export interface ApiBusinessValuationBusinessValuation
     singularName: 'business-valuation';
   };
   options: {
-    draftAndPublish: true;
+    draftAndPublish: false;
   };
   attributes: {
     applicantName: Schema.Attribute.String;
@@ -491,6 +503,10 @@ export interface ApiBusinessValuationBusinessValuation
     businessDescription: Schema.Attribute.Text;
     businessExpense: Schema.Attribute.Component<
       'shared.business-expense',
+      true
+    >;
+    businessMonthlyIncome: Schema.Attribute.Component<
+      'shared.business-monthly-income',
       true
     >;
     businessPossibleIncome: Schema.Attribute.Component<
@@ -509,6 +525,10 @@ export interface ApiBusinessValuationBusinessValuation
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    loan_application: Schema.Attribute.Relation<
+      'oneToOne',
+      'api::loan-application.loan-application'
+    >;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -535,38 +555,6 @@ export interface ApiBusinessValuationBusinessValuation
     unitManagerSignature: Schema.Attribute.Media<
       'images' | 'files' | 'videos' | 'audios'
     >;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-  };
-}
-
-export interface ApiCategoryCategory extends Struct.CollectionTypeSchema {
-  collectionName: 'categories';
-  info: {
-    description: 'Organize your content into categories';
-    displayName: 'Category';
-    pluralName: 'categories';
-    singularName: 'category';
-  };
-  options: {
-    draftAndPublish: false;
-  };
-  attributes: {
-    articles: Schema.Attribute.Relation<'oneToMany', 'api::article.article'>;
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    description: Schema.Attribute.Text;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::category.category'
-    > &
-      Schema.Attribute.Private;
-    name: Schema.Attribute.String;
-    publishedAt: Schema.Attribute.DateTime;
-    slug: Schema.Attribute.UID;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -605,6 +593,47 @@ export interface ApiGlobalGlobal extends Struct.SingleTypeSchema {
   };
 }
 
+export interface ApiHolofnamaHolofnama extends Struct.CollectionTypeSchema {
+  collectionName: 'holofnamas';
+  info: {
+    displayName: 'Holofnama';
+    pluralName: 'holofnamas';
+    singularName: 'holofnama';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    branch_manager_name: Schema.Attribute.String;
+    branch_manager_signature: Schema.Attribute.Media<'images'>;
+    cheque_ack_cert: Schema.Attribute.Component<
+      'shared.holofnama-cheque-ack',
+      true
+    >;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    holofnama_date: Schema.Attribute.Date;
+    loan_applications: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::loan-application.loan-application'
+    >;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::holofnama.holofnama'
+    > &
+      Schema.Attribute.Private;
+    program_name: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    unit_manager_name: Schema.Attribute.String;
+    unit_manager_signature: Schema.Attribute.Media<'images'>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiInstallmentInstallment extends Struct.CollectionTypeSchema {
   collectionName: 'installments';
   info: {
@@ -619,6 +648,8 @@ export interface ApiInstallmentInstallment extends Struct.CollectionTypeSchema {
   attributes: {
     amount_due: Schema.Attribute.Integer;
     amount_paid: Schema.Attribute.Integer;
+    amount_to_pay: Schema.Attribute.Integer;
+    bank: Schema.Attribute.Relation<'oneToOne', 'api::bank.bank'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -633,8 +664,12 @@ export interface ApiInstallmentInstallment extends Struct.CollectionTypeSchema {
     > &
       Schema.Attribute.Private;
     payment_date: Schema.Attribute.Date;
+    payment_doc: Schema.Attribute.Media<'images' | 'files'>;
     payment_status: Schema.Attribute.Enumeration<
-      ['paid', 'pending', 'late', 'skipped']
+      ['PAID', 'UNPAID', 'PARTIAL', 'OVERDUE', 'LATE', 'INVALID', 'ADJUSTED']
+    >;
+    payment_type: Schema.Attribute.Enumeration<
+      ['BKASH', 'NOGOD', 'CASH', 'BANK']
     >;
     publishedAt: Schema.Attribute.DateTime;
     remarks: Schema.Attribute.Text;
@@ -653,12 +688,11 @@ export interface ApiLoanAcceptanceLoanAcceptance
     singularName: 'loan-acceptance';
   };
   options: {
-    draftAndPublish: true;
+    draftAndPublish: false;
   };
   attributes: {
     accounts_officer_signature: Schema.Attribute.Media<'images'>;
     approval_meeting_date: Schema.Attribute.Date;
-    cheque_no: Schema.Attribute.String;
     committee_chair_name: Schema.Attribute.String;
     coordinator_signature: Schema.Attribute.Media<'images'>;
     createdAt: Schema.Attribute.DateTime;
@@ -668,27 +702,24 @@ export interface ApiLoanAcceptanceLoanAcceptance
     education_level: Schema.Attribute.String;
     group_id: Schema.Attribute.String;
     group_leader_name: Schema.Attribute.String;
-    loan_amount: Schema.Attribute.Decimal;
-    loan_application: Schema.Attribute.Relation<
-      'oneToOne',
+    group_photo: Schema.Attribute.Media<'images' | 'files'>;
+    installment_start_date: Schema.Attribute.Date;
+    loan_applications: Schema.Attribute.Relation<
+      'oneToMany',
       'api::loan-application.loan-application'
     >;
-    loan_approval_no: Schema.Attribute.String;
+    loanees: Schema.Attribute.Component<'shared.loanee-information', true>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
       'api::loan-acceptance.loan-acceptance'
     > &
       Schema.Attribute.Private;
-    national_id: Schema.Attribute.String;
     previous_loan_amount: Schema.Attribute.Decimal;
     program_manager_signature: Schema.Attribute.Media<'images'>;
     program_name: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
-    recipient_name: Schema.Attribute.String;
     repayable_loan_amount: Schema.Attribute.Decimal;
-    repayment_duration_days: Schema.Attribute.Integer;
-    repayment_method: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -705,49 +736,82 @@ export interface ApiLoanApplicationLoanApplication
     singularName: 'loan-application';
   };
   options: {
-    draftAndPublish: true;
+    draftAndPublish: false;
   };
   attributes: {
     age: Schema.Attribute.Integer;
     applicant_name: Schema.Attribute.String;
-    applicant_photo: Schema.Attribute.Media;
+    applicant_nid_doc: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
+    applicant_photos: Schema.Attribute.Media<'images', true>;
+    applicant_signature: Schema.Attribute.Media<'images' | 'files'>;
     application_date: Schema.Attribute.Date;
     approved_by: Schema.Attribute.Relation<'oneToOne', 'admin::user'>;
+    bail_bonds: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::bail-bond.bail-bond'
+    >;
+    bank: Schema.Attribute.Relation<'oneToOne', 'api::bank.bank'>;
     bank_account_number: Schema.Attribute.String;
     bank_account_title: Schema.Attribute.String;
     bank_branch: Schema.Attribute.String;
-    bank_name: Schema.Attribute.String;
-    bkash_account_number: Schema.Attribute.String;
-    business_type: Schema.Attribute.Enumeration<['new', 'old']>;
+    business_type: Schema.Attribute.Enumeration<['NEW', 'OLD']>;
+    business_valuation: Schema.Attribute.Relation<
+      'oneToOne',
+      'api::business-valuation.business-valuation'
+    >;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     current_address: Schema.Attribute.Text;
+    date_of_become_member: Schema.Attribute.Date;
     education_level: Schema.Attribute.Enumeration<
       ['primary', 'secondary', 'hsc', 'graduate', 'postgraduate', 'none']
     >;
     father_or_spouse_name: Schema.Attribute.String;
+    form_no: Schema.Attribute.Integer;
     gender: Schema.Attribute.Enumeration<['male', 'female', 'other']>;
-    guarantor_document: Schema.Attribute.Media;
+    group_no: Schema.Attribute.Integer;
+    guarantors_document: Schema.Attribute.Media<'images', true>;
     has_bank_account: Schema.Attribute.Boolean;
-    has_bkash_account: Schema.Attribute.Boolean;
+    holofnama: Schema.Attribute.Relation<
+      'manyToOne',
+      'api::holofnama.holofnama'
+    >;
     installment_amount: Schema.Attribute.Integer;
-    installment_type: Schema.Attribute.Enumeration<['weekly', 'monthly']>;
+    installment_duration: Schema.Attribute.Integer;
+    installment_duration_unit: Schema.Attribute.Enumeration<
+      ['DAYS', 'WEEKLY', 'MONTHLY', 'YEARLY']
+    >;
     installments: Schema.Attribute.Relation<
       'oneToMany',
       'api::installment.installment'
     >;
     loan_acceptance: Schema.Attribute.Relation<
-      'oneToOne',
+      'manyToOne',
       'api::loan-acceptance.loan-acceptance'
     >;
     loan_amount_requested: Schema.Attribute.Integer;
-    loan_duration_days: Schema.Attribute.Integer;
-    loan_generation: Schema.Attribute.Integer;
+    loan_duration: Schema.Attribute.Integer;
+    loan_duration_unit: Schema.Attribute.Enumeration<
+      ['DAYS', 'WEEK', 'MONTH', 'YEAR', 'ONCE']
+    >;
+    loan_no: Schema.Attribute.Integer;
     loan_purpose: Schema.Attribute.Text;
     loan_status: Schema.Attribute.Enumeration<
-      ['Draft', 'Pending', 'In Progress', 'Approved']
+      [
+        'DRAFT',
+        'INITIATE_APPROVAL_PROCESS',
+        'FORWARDED_FOR_APPROVAL',
+        'IN_PROGRESS',
+        'APPROVED',
+        'REJECTED',
+      ]
     >;
+    loanee_name: Schema.Attribute.String;
+    loanee_nid: Schema.Attribute.BigInteger;
+    loanee_nid_doc: Schema.Attribute.Media;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -757,8 +821,13 @@ export interface ApiLoanApplicationLoanApplication
     marital_status: Schema.Attribute.Enumeration<
       ['single', 'married', 'widow']
     >;
+    member_no: Schema.Attribute.Integer;
+    mobile_banking_acc_no: Schema.Attribute.String;
+    mobile_banking_type: Schema.Attribute.Enumeration<
+      ['BKASH', 'NAGAD', 'ROCKET', 'OTHER']
+    >;
     mother_name: Schema.Attribute.String;
-    national_id: Schema.Attribute.String;
+    national_id: Schema.Attribute.BigInteger;
     permanent_address: Schema.Attribute.Text;
     phone_number: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
@@ -766,15 +835,15 @@ export interface ApiLoanApplicationLoanApplication
       'shared.social-evaluation',
       false
     >;
+    total_installments: Schema.Attribute.Integer;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    user_name: Schema.Attribute.String;
-    user_nid: Schema.Attribute.String;
-    user_nid_photo: Schema.Attribute.Media;
     user_of_loan: Schema.Attribute.Enumeration<
-      ['self', 'spouse', 'child', 'other']
+      ['SELF', 'SPOUSE', 'CHILD', 'OTHER']
     >;
+    with_multiple_installments: Schema.Attribute.Boolean &
+      Schema.Attribute.DefaultTo<false>;
   };
 }
 
@@ -1312,11 +1381,11 @@ declare module '@strapi/strapi' {
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
       'api::about.about': ApiAboutAbout;
-      'api::article.article': ApiArticleArticle;
-      'api::author.author': ApiAuthorAuthor;
+      'api::bail-bond.bail-bond': ApiBailBondBailBond;
+      'api::bank.bank': ApiBankBank;
       'api::business-valuation.business-valuation': ApiBusinessValuationBusinessValuation;
-      'api::category.category': ApiCategoryCategory;
       'api::global.global': ApiGlobalGlobal;
+      'api::holofnama.holofnama': ApiHolofnamaHolofnama;
       'api::installment.installment': ApiInstallmentInstallment;
       'api::loan-acceptance.loan-acceptance': ApiLoanAcceptanceLoanAcceptance;
       'api::loan-application.loan-application': ApiLoanApplicationLoanApplication;

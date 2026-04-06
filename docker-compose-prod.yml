@@ -1,0 +1,21 @@
+version: "3.8"
+
+services:
+  strapi-prod:
+    build:
+      context: .
+      dockerfile: Dockerfile.prod
+    container_name: badlao-strapi-prod
+    env_file:
+      - .env.prod
+    working_dir: /srv/app
+    ports:
+      - "127.0.0.1:1340:1340"
+    restart: unless-stopped
+    networks:
+      - backend
+
+networks:
+  backend:
+    external: true
+    name: badlao_backend

@@ -1,0 +1,40 @@
+name: Deploy Dev
+
+on:
+  push:
+    branches:
+      - dev
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+
+      - name: SSH to VM & Deploy
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.IP }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          port: ${{ secrets.PORT }}
+          script: |
+            echo ">>> Switching to project directory"
+            cd /home/ubuntu/badlao-deployment/dev/badlao || exit 1
+
+            echo ">>> Switching to root"
+            sudo su <<'EOF'
+
+            echo ">>> Pulling latest code from DEV branch"
+            git pull origin dev || exit 1
+
+            echo ">>> Bringing down existing containers"
+            docker compose -f docker-compose-dev.yml down || exit 1
+
+            echo ">>> Rebuilding & starting containers"
+            docker compose -f docker-compose-dev.yml up --build -d || exit 1
+
+            echo ">>> Deployment completed!"
+            EOF
