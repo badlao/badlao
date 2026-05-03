@@ -103,27 +103,27 @@ export default factories.createCoreService(
         const netBusinessIncome = totalPreviousBusinessIncome - totalBusinessExpense;
 
         //loan application's social evaluation analyze
-        const monthlyIncoome = parseFloat(loanApplication.social_evaluation.monthly_income.toFixed(2));
-        const monthlyExpense = parseFloat(loanApplication.social_evaluation.total_expense.toFixed(2));
+        const monthlyIncoome = parseFloat(loanApplication?.social_evaluation?.monthly_income?.toFixed(2) ?? "");
+        const monthlyExpense = parseFloat(loanApplication?.social_evaluation?.total_expense?.toFixed(2) ?? "0");
         const netMonthlyIncome = monthlyIncoome - monthlyExpense;
         const recommendation = getRecommendation(netMonthlyIncome, netBusinessIncome);
 
         return {
           totalPermanentBusinessAsset: parseFloat(
-            totalPermanentBusinessAsset.toFixed(2)
+            totalPermanentBusinessAsset?.toFixed(2) ?? "0"
           ),
           totalContinuedInvestment: parseFloat(
-            totalContinuedInvestment.toFixed(2)
+            totalContinuedInvestment?.toFixed(2) ?? "0"
           ),
           totalPreviousBusinessIncome: parseFloat(
-            totalPreviousBusinessIncome.toFixed(2)
+            totalPreviousBusinessIncome?.toFixed(2) ?? "0"
           ),
-          totalBusinessExpense: parseFloat(totalBusinessExpense.toFixed(2)),
+          totalBusinessExpense: parseFloat(totalBusinessExpense?.toFixed(2) ?? "0"),
           netBusinessIncome: netBusinessIncome,
           monthlyIncoome: monthlyIncoome,
-          monthlyExpense: parseFloat(loanApplication.social_evaluation.total_expense.toFixed(2)),
+          monthlyExpense: parseFloat(loanApplication?.social_evaluation?.total_expense?.toFixed(2) ?? "0"),
           netMonthlyIncome: netMonthlyIncome,
-          financialBehaviourRating: loanApplication.social_evaluation.financial_behavior_rating,
+          financialBehaviourRating: loanApplication?.social_evaluation?.financial_behavior_rating,
           recommendation: recommendation,
         };
       } catch (error) {
