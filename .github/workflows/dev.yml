@@ -1,12 +1,14 @@
-name: Deploy Dev
+name: Deploy Dev and Upload Trivy Report
 
 on:
   push:
     branches:
       - dev
+  workflow_dispatch:
 
 jobs:
   deploy:
+    name: Deploy Dev
     runs-on: ubuntu-latest
 
     steps:
@@ -24,17 +26,49 @@ jobs:
             echo ">>> Switching to project directory"
             cd /home/ubuntu/badlao-deployment/dev/badlao || exit 1
 
-            echo ">>> Switching to root"
-            sudo su <<'EOF'
-
             echo ">>> Pulling latest code from DEV branch"
-            git pull origin dev || exit 1
+            sudo git pull origin dev || exit 1
 
             echo ">>> Bringing down existing containers"
-            docker compose -f docker-compose-dev.yml down || exit 1
+            sudo docker compose -f docker-compose-dev.yml down || exit 1
 
             echo ">>> Rebuilding & starting containers"
-            docker compose -f docker-compose-dev.yml up --build -d || exit 1
+            sudo docker compose -f docker-compose-dev.yml up --build -d || exit 1
 
             echo ">>> Deployment completed!"
-            EOF
+
+  trivy-scan:
+    name: Trivy Scan and Upload to VulnBoard
+    runs-on: ubuntu-latest
+    needs: deploy
+
+    env:
+      VULNBOARD_API_URL: https://vulnboard.dev/api/v1
+      PROJECT_SLUG: badlao-dev
+
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+
+      - name: Run Trivy JSON scan
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: fs
+          format: json
+          output: trivy-report.json
+
+      - name: Upload report to VulnBoard
+        env:
+          VULNBOARD_KEY: ${{ secrets.VULNBOARD_KEY }}
+          VULNBOARD_SECRET: ${{ secrets.VULNBOARD_SECRET }}
+        run: |
+          curl -f -X POST "$VULNBOARD_API_URL/ingest/reports" \
+            -H "X-VulnBoard-Key: $VULNBOARD_KEY" \
+            -H "X-VulnBoard-Secret: $VULNBOARD_SECRET" \
+            -F "project_slug=$PROJECT_SLUG" \
+            -F "scanner=trivy" \
+            -F "report_format=json" \
+            -F "source=github-actions" \
+            -F "branch=$GITHUB_REF_NAME" \
+            -F "commit_sha=$GITHUB_SHA" \
+            -F "report_file=@trivy-report.json"
